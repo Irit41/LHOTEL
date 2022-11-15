@@ -39,15 +39,12 @@ export default function Home({ navigation }) {
     React.useCallback(() => {
       setPassword("");
       setId("");
-      
-      roomsReservation.AmountOfPeople =0
+
+      roomsReservation.AmountOfPeople = 0;
 
       if (!info) myContext.setEmployeeDB({});
-      
     }, [navigation])
   );
-  
-
 
   const LogIn = async () => {
     /// פונקציה אסינכרונית אשר מביאה לנו את פרטי העובד על פי ת.ז וסיסמה
@@ -89,6 +86,26 @@ export default function Home({ navigation }) {
   const renderCurrentSelection = () => {
     return (
       <View style={styles.loginContainer}>
+        <TouchableOpacity
+         onPress={() => {
+          doAnimation(closeState, 1, 250), setInfo(false);
+        }}
+          style={{
+            borderRadius: 50,
+            borderColor: "#000",
+            backgroundColor:'#CDCDCD',
+            borderWidth:1,
+            width: 55,
+            height: 55,
+            marginBottom: 15,
+            justifyContent:'center',
+         
+     
+          }}
+        >
+          <Image style={styles.Save} source={images.back} />
+        </TouchableOpacity>
+
         <View style={styles.items}>{loading ? null : <Spinner />}</View>
         <TextInput
           label="Employee ID"
@@ -125,19 +142,9 @@ export default function Home({ navigation }) {
             LOGIN
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text
-            style={styles.underLineText}
-            onPress={() => {
-              doAnimation(closeState, 1, 250), setInfo(false);
-            }}
-          >
-            I'm not a worker
-          </Text>
-        </TouchableOpacity>
+        
       </View>
     );
-   
   };
 
   const doAnimation = (btn, val, timer) => {
@@ -161,7 +168,6 @@ export default function Home({ navigation }) {
         >
           <Text style={styles.header}>LHOTEL</Text>
         </ImageBackground>
-
       </Animated.View>
       <Animated.View
         style={{
@@ -187,8 +193,7 @@ export default function Home({ navigation }) {
             <View style={styles.ButtonContainer}>
               <TouchableOpacity
                 onPress={() => {
-          
-                   navigation.navigate("Drawer"),
+                  navigation.navigate("Drawer"),
                     doAnimation(closeState, 1, 500);
                 }}
                 style={{
@@ -228,7 +233,7 @@ export default function Home({ navigation }) {
                   </Text>
                 </LinearGradient>
               </TouchableOpacity>
-         
+
               <TouchableOpacity
                 onPress={() => {
                   doAnimation(closeState, 8, 500), setInfo(true);
@@ -250,7 +255,7 @@ export default function Home({ navigation }) {
                       shadowOpacity: 0.3,
                       shadowRadius: 5,
                       elevation: 5,
-                    
+
                       width: 150,
                       padding: 20,
                       textAlign: "center",
@@ -269,7 +274,6 @@ export default function Home({ navigation }) {
                   </Text>
                 </LinearGradient>
               </TouchableOpacity>
-             
             </View>
           </View>
         )}
@@ -285,7 +289,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 55,
     position: "absolute",
-   
+
     zIndex: 1,
     fontWeight: "bold",
     bottom: -10,
@@ -379,8 +383,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   loginContainer: {
-    paddingHorizontal: 24,
-    paddingVertical: 70,
+   padding:25,
     justifyContent: "center",
   },
   underLineText: {
@@ -401,5 +404,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 20,
+  },
+  Save: {
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+    alignSelf:'center'
   },
 });

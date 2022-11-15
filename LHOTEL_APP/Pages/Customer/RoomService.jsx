@@ -19,6 +19,7 @@ import Products from "./Products";
 import { ScrollView } from "react-native-virtualized-view";
 import { useFocusEffect } from "@react-navigation/native";
 import AppContext from "../../AppContext";
+import { BlueButton } from "../../styles";
 
 const RequestType = [
   { label: "Room Cleaning", value: "Room Cleaning" },
@@ -81,7 +82,7 @@ export default function RoomService({ navigation }) {
         TaskStatus: "Open",
         Description: "",
       });
-    }, [])
+    }, [navigation])
   );
 
 
@@ -249,10 +250,10 @@ export default function RoomService({ navigation }) {
               </View>
 
              
-                <TouchableOpacity>
-                  <Text style={styles.button} onPress={() => SaveOrder()}>
-                    ORDER
-                  </Text>
+                <TouchableOpacity style={{marginVertical:40,marginHorizontal:10}} onPress={() => SaveOrder()}>
+                {/* <BlueButton text={"ORDER"} /> */}
+                <BlueButton text={"ORDER"} />
+               
                 </TouchableOpacity>
             
             </View>
