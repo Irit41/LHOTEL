@@ -1,0 +1,67 @@
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\DAL.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\DAL.pdb
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\BCrypt.Net-Next.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Buffers.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Memory.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Numerics.Vectors.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\BCrypt.Net-Next.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Buffers.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Memory.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Numerics.Vectors.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\obj\Release\DAL.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELServer-1\DAL\obj\Release\DAL.pdb
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\DAL.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\DAL.pdb
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Buffers.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Memory.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Buffers.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Memory.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\obj\Release\DAL.dll
+C:\Users\maor1\OneDrive\שולחן העבודה\LHOTELClientside - NEW\LHOTELServer\DAL\obj\Release\DAL.pdb
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\DAL.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\DAL.pdb
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Buffers.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Memory.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Buffers.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Memory.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\obj\Release\DAL.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\THE_LHOTEL\LHOTELServer\DAL\obj\Release\DAL.pdb
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\DAL.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\DAL.pdb
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Buffers.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Memory.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\BCrypt.Net-Next.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Buffers.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Memory.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Numerics.Vectors.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\obj\Release\DAL.dll
+C:\Users\iritt\OneDrive\שולחן העבודה\LHOTEL_APP\LHOTEL\LHOTELServer\DAL\obj\Release\DAL.pdb
