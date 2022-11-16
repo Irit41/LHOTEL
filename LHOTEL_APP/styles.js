@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState, useContext } from "react";
+import { Dimensions } from "react-native";
 
 import AppContext from "./AppContext";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -22,6 +23,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Dialog from "react-native-dialog";
 // import { TextInput } from "react-native-paper";
 import moment from "moment";
+export const windowHeight = Dimensions.get("window").height;
+export const windowWidth = Dimensions.get("window").width;
 
 export const BlueButton = ({ text }) => (
     <LinearGradient

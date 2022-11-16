@@ -1,29 +1,29 @@
 import React, { useContext } from "react";
 import Home from "../Home";
 import Drawer from "./Drawer";
-import Tasks from "../Workers/Tasks";
+import Tasks from "../Worker/Tasks";
 import Registration from "../Customer/Registration";
 import ConfirmationPage from "../Customer/ConfirmationPage";
 import CustomerHome from "../Customer/CustomerHome";
-import WorkerMenu from "../Workers/WorkerMenu";
+import WorkerMenu from "../Worker/WorkerMenu";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import EditTasks from "../Workers/EditTasks";
-import NewTask from "../Workers/NewTask";
-import Shift from "../Workers/Shift";
-import AddCharge from "../Workers/AddCharge";
-import CheckIn from "../Workers/CheckIn";
-import CheckOut from "../Workers/CheckOut";
-import EmployeesManagement from "../Workers/EmployeesManagement";
-import UpdateDetails from "../Workers/UpdateDetails";
-import ExistingReservation from "../Workers/ExistingReservartion";
-import ShortCheckIn from "../Workers/ShortCheckIn";
-import NewReservation from "../Workers/NewReservation";
-import AddEmployee from "../Workers/AddEmployee";
+import EditTasks from "../Worker/EditTasks";
+import NewTask from "../Worker/NewTask";
+import Shift from "../Worker/Shift";
+import AddCharge from "../Worker/AddCharge";
+import CheckIn from "../Worker/CheckIn";
+import CheckOut from "../Worker/CheckOut";
+import EmployeesManagement from "../Worker/EmployeesManagement";
+import UpdateDetails from "../Worker/UpdateDetails";
+import ExistingReservation from "../Worker/ExistingReservartion";
+import ShortCheckIn from "../Worker/ShortCheckIn";
+import NewReservation from "../Worker/NewReservation";
+import AddEmployee from "../Worker/AddEmployee";
 import Credit from "../Credit";
 import Products from "../Customer/Products";
 import AppContext from "../../AppContext";
-import Reports from "../Workers/Reports";
+import Reports ,{ReportView}from "../Worker/Reports";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const Stack = createNativeStackNavigator();
@@ -163,9 +163,13 @@ export default function Router() {
             headerMode: "none",
             headerStyle: {
               backgroundColor: "#000",
-       
             },
           }}
+        />
+        <Stack.Screen
+          name="ReportView"
+          component={ReportView}
+          options={{ headerShown: myContext.isIos }}
         />
       </Stack.Navigator>
     </NavigationContainer>
