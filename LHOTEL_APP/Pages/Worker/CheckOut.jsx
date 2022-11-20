@@ -33,13 +33,13 @@ export default function CheckOut() {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
-        setKeyboardVisible(true); 
+        setKeyboardVisible(true);
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        setKeyboardVisible(false); 
+        setKeyboardVisible(false);
       }
     );
 
@@ -60,9 +60,8 @@ export default function CheckOut() {
     );
     let rooms = await result.json();
     if (rooms !== null) {
-      
       let roomsData = BilldReservationItemsData(rooms);
-     
+      //  console.log(rooms);c
       setReservationItems(roomsData);
       SetDBReservationItems(roomsData);
       return;
@@ -70,7 +69,6 @@ export default function CheckOut() {
     FetchData();
   };
   const renderItem = ({ item }) => (
-   
     <>
       <Divider
         style={{
@@ -95,35 +93,38 @@ export default function CheckOut() {
   );
 
   const BilldReservationItemsData = (data) => {
-    // console.log(data);
-
     let temp = [];
     for (let index = 0; index < data.length; index++) {
       let object = temp.filter(
         (per) => per.CustomerID === data[index].CustomerID
       );
+
       if (object.length === 0) {
         temp.push(data[index]);
       } else {
         if (object[0].RoomNumber.length === undefined) {
           let rooms = [object[0].RoomNumber, data[index]["RoomNumber"]];
+
           object[0].RoomNumber = rooms;
         } else {
-          // console.log(data[index].RoomNumber);
           object[0].RoomNumber.push(data[index].RoomNumber);
         }
+        if (
+          object[0].EntryDate.toString() !== data[index]["EntryDate"].toString()
+        )
+          object[0].AmountOfPeople += data[index]["AmountOfPeople"];
       }
     }
+    // console.log(temp);
     return temp;
   };
 
   const SerchReservation = (value) => {
-  
     setSearch(value);
     let occupiedReservation = reservationItems.filter(
       (reservation) => reservation.CustomerID == value
     );
-   
+
     if (occupiedReservation.length > 0) {
       setReservationItems(occupiedReservation);
     } else {
@@ -133,7 +134,7 @@ export default function CheckOut() {
 
   const CheckOutCard = ({ item, index }) => {
     return (
-      <View >
+      <View>
         <View style={styles.Details}>
           <Text style={{ fontSize: 16 }}>
             {moment(item.BillDate).format("DD.MM.YYYY")}
@@ -190,8 +191,6 @@ export default function CheckOut() {
                 numColumns={3}
               />
             )}
-
-          
           </View>
 
           <View style={styles.BTNContainer}>
@@ -222,11 +221,26 @@ export default function CheckOut() {
     let rooms = await result.json();
     if (rooms) {
       alert("You have successfully checked out !!!");
+      myContext.SetBill({
+        CustomerID: "",
+        BillNumber: 0,
+        BillDate: "",
+        AmountOfPeople: 0,
+        Breakfast: false,
+        NumberOfNights: 0,
+        CustomerType: 1,
+        EntryDate: moment().toDate(),
+        ExitDate: moment().add(1, "days").toDate(),
+        FirstName: "",
+        LastName: "",
+        Mail: "",
+        PhoneNumber: "",
+        rooms: [],
+      });
       FetchData();
       return;
     }
   };
-
 
   return (
     <View style={styles.container}>
@@ -252,8 +266,12 @@ export default function CheckOut() {
         </View>
 
         <View style={styles.SearchbarContainer}>
-          
-          <View style={{ paddingHorizontal:  5 ,paddingTop: isKeyboardVisible? 40:5}}>
+          <View
+            style={{
+              paddingHorizontal: 5,
+              paddingTop: isKeyboardVisible ? 40 : 5,
+            }}
+          >
             <FlatList
               data={reservationItems}
               renderItem={CheckOutCard}
@@ -269,10 +287,7 @@ export default function CheckOut() {
 
 const styles = StyleSheet.create({
   topview: {
-
-
     flex: 1,
-  
   },
   welcomemessage: {
     color: "#888",
@@ -280,9 +295,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   searchbar: {
-
     backgroundColor: "#CDCDCD",
-    
+
     alignSelf: "center",
     width: "95%",
     borderRadius: 50,
@@ -361,16 +375,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-   
   },
   containerTaskDedtails: {
     borderColor: "black",
     borderWidth: 1,
- 
   },
 
   Details: {
-   
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

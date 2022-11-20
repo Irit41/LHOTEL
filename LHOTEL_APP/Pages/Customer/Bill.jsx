@@ -135,7 +135,7 @@ export default function Bill() {
   };
  
   const ResitCard = () => {
-  
+  // console.log(tableData);
     let listRooms = tableData.map((room, index) =>
       room.ProductCode === 8 ? (
         <View

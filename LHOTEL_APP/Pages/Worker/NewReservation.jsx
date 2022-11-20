@@ -63,14 +63,14 @@ export default function NewReservation({ navigation }) {
      
       setIDCheck("");
       
-      return () => {
+      // return () => {
         
     //     setFlagEntry(false);
     //     setFlagExit(false);
     //  SetIsEntryModalOpened(false);
     //  SetIsExitModalOpened(false);
       
-      };
+      // };
     }, [navigation])
   );
 

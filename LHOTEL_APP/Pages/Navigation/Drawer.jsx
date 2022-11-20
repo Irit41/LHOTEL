@@ -29,7 +29,8 @@ export default function Drawer() {
   useFocusEffect(
     React.useCallback(() => {
       FetchCustomerReservationFromDB()
-     }, [isUserConnected])
+      console.log(myContext.bill);
+     }, [isUserConnected && isAtHotel])
   );
 
   const FetchCustomerReservationFromDB = async () => {
