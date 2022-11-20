@@ -18,9 +18,10 @@ namespace DAL.Classes
     {
 
         public int Code { get; set; }
+        public string Category { get; set; }
         public string Product { get; set; }
              public int Amount { get; set; }
-        public string Category { get; set; }
+      
     }
     public class IncomeVsExpense
     {

@@ -53,9 +53,10 @@ namespace DAL
                     reports.Add(new ProductReport()
                     {
                         Code = (int)reader["Code"],
+                        Category = (string)reader["Category"],
                         Product = (string)reader["Product"],
                         Amount = (int)reader["Amount"],
-                        Category = (string)reader["Category"]
+                        
 
                     });
                 }
@@ -116,9 +117,10 @@ namespace DAL
                     productReport = new ProductReport()
                     {
                         Code = (int)reader["Code"],
+                        Category = (string)reader["Category"],
                         Product = (string)reader["Product"],
                         Amount = (int)reader["Amount"],
-                        Category = (string)reader["Category"],
+                       
                     };
                 }
             }

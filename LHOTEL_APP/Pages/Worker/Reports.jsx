@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
   FlatList,
   ImageBackground,
-  LogBox
+  LogBox,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
-import ignoreWarnings from 'ignore-warnings';
+import ignoreWarnings from "ignore-warnings";
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-virtualized-view";
-import { windowHeight } from "../../styles";
+import { GrayButton, windowHeight } from "../../styles";
 
 import {
   Table,
@@ -28,6 +28,7 @@ import { ActivityIndicator } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { TextInput } from "react-native-paper";
 import { images } from "../../images";
+import { areArraysEqual } from "@mui/base";
 
 const RequestType = [
   {
@@ -41,14 +42,12 @@ const RequestType = [
   { label: "Number of tasks per month", value: "NumberOfTasksPerMonth" },
   { label: "Product purchase by name", value: "ProductPurchaseByName" },
   { label: "Income and expenses", value: "IncomeAndExpenses" },
-  
 ];
 
-export default function Reports({navigation}) {
+export default function Reports({ navigation }) {
   const [loading, SetLoading] = useState(true);
 
   const [tableData, SetTableData] = useState([]);
-  const [product, SetProduct] = useState("");
   const [dropdown, setDropdown] = useState(null);
   // const [request, SetRequest] = useState(false);
   const [isMainViewed, SetIsMainViewed] = useState(true);
@@ -58,38 +57,6 @@ export default function Reports({navigation}) {
       <ActivityIndicator size="large" />
     </View>
   );
-
-  
-
-  const GetTableProductPurchaseByName = async () => {
-    try {
-      SetLoading(false);
-      const requestOptions = {
-        method: "PUT",
-        body: JSON.stringify({
-          name: product,
-        }),
-        headers: { "Content-Type": "application/json" },
-      };
-      let result = await fetch(
-        "http://proj13.ruppin-tech.co.il/ProductPurchaseByName",
-        requestOptions
-      );
-      let temp = await result.json();
-      // console.log(temp);
-      if (temp !== null) {
-        SetTableData([temp]);
-        SetLoading(true);
-        return;
-      } else {
-        SetTableData([]);
-        SetLoading(true);
-      }
-    } catch (error) {
-      alert(error);
-    }
-    SetLoading(true);
-  };
 
   const CreateTableData = () => {
     return (
@@ -123,8 +90,11 @@ export default function Reports({navigation}) {
     return (
       <TouchableOpacity
         key={index}
-        onPress={() => navigation.navigate('ReportView', {
-        report: item.value})}
+        onPress={() =>
+          navigation.navigate("ReportView", {
+            report: item,
+          })
+        }
         style={{
           backgroundColor: "#CDCDCD",
           padding: 20,
@@ -156,7 +126,7 @@ export default function Reports({navigation}) {
       </TouchableOpacity>
     );
   };
-  
+
   return (
     <View style={{ paddingVertical: 26 }}>
       <ImageBackground
@@ -164,18 +134,15 @@ export default function Reports({navigation}) {
         source={images.hotelback}
         blurRadius={90}
       >
-     
-          <Text style={styles.HeadLine}>Reports</Text>
+        <Text style={styles.HeadLine}>Reports</Text>
 
-<FlatList
-  data={RequestType}
-  renderItem={ReportsMenu}
-  keyExtarctor={(item, index) => index.toString()}
-  numColumns={1}
-  nestedScrollEnable={true}
-/>
-    
-        
+        <FlatList
+          data={RequestType}
+          renderItem={ReportsMenu}
+          keyExtarctor={(item, index) => index.toString()}
+          numColumns={1}
+          nestedScrollEnable={true}
+        />
 
         {/* <View style={{ padding: 10 }}>
         <Dropdown
@@ -228,18 +195,22 @@ export default function Reports({navigation}) {
     </View>
   );
 }
-export const ReportView = ({ route,navigation }) => {
-  LogBox.ignoreLogs(['Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.']);
+export const ReportView = ({ route, navigation }) => {
+  LogBox.ignoreLogs([
+    "Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.",
+  ]);
   let { report } = route.params;
   const [request, SetRequest] = useState(false);
   const [loading, SetLoading] = useState(true);
+  const [isReportViewed, SetIsReportViewed] = useState(false);
+  const [product, SetProduct] = useState("");
 
   const [tableData, SetTableData] = useState([]);
   useFocusEffect(
     React.useCallback(() => {
       SetLoading(false);
-      
-      if (report !== undefined && report !== "ProductPurchaseByName") {
+
+      if (report !== undefined && report.value !== "ProductPurchaseByName") {
         GetTableFromDB();
       }
       SetLoading(true);
@@ -252,12 +223,28 @@ export const ReportView = ({ route,navigation }) => {
         headers: { "Content-Type": "application/json" },
       };
       let result = await fetch(
-        `http://proj13.ruppin-tech.co.il/${report}`,
+        `http://proj13.ruppin-tech.co.il/${report.value}`,
         requestOptions
       );
       let temp = await result.json();
       if (temp !== null) {
+        if (
+          report.value === "AmountOfProductsPurchased" ||
+          report.value === "ProductPurchaseByName"
+        ) {
+          let arr = [];
+          temp.map((item) =>
+            arr.push({
+              Amount: item.Amount,
+              Product: item.Product,
+              Category: item.Category,
+              Code: item.Code,
+            })
+          );
+          temp = arr;
+        }
         SetTableData(temp);
+
         SetLoading(true);
         return;
       }
@@ -266,29 +253,169 @@ export const ReportView = ({ route,navigation }) => {
     }
     SetLoading(true);
   };
+  const GetTableProductPurchaseByName = async () => {
+    if (product === "") {
+      alert("Please type a product name");
+      return;
+    }
+
+    try {
+      SetLoading(false);
+      const requestOptions = {
+        method: "PUT",
+        body: JSON.stringify({
+          name: product,
+        }),
+        headers: { "Content-Type": "application/json" },
+      };
+      let result = await fetch(
+        "http://proj13.ruppin-tech.co.il/ProductPurchaseByName",
+        requestOptions
+      );
+      let temp = await result.json();
+      console.log(temp);
+      if (temp !== null) {
+        let dataObj = {
+          Amount: temp.Amount,
+          Product: temp.Product,
+          Category: temp.Category,
+          Code: temp.Code,
+        };
+
+        SetTableData([dataObj]);
+        SetLoading(true);
+        SetIsReportViewed(!isReportViewed);
+        return;
+      } else {
+        SetTableData([]);
+        SetLoading(true);
+      }
+    } catch (error) {
+      alert(error);
+    }
+    SetLoading(true);
+  };
   return (
-
-
-
-
-
-    
     <View>
-    <View style={styles.tableContainer}>
-      <Table borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff"}}>
-        <Row
-          data={tableData.map((per) => Object.keys(per))[0]}
-          style={styles.head}
-          textStyle={styles.text}
-        />
-        <Rows
-      // style={styles.text}
-        textStyle={styles.cellText}
-          data={tableData.map((per) => Object.values(per))}
-        />
-      </Table>
+      {report.value === "ProductPurchaseByName" && !isReportViewed ? (
+        <ImageBackground
+          style={{ height: windowHeight + 50 }}
+          source={images.hotelback}
+          blurRadius={90}
+        >
+          <View
+            style={{
+              backgroundColor: "#CDCDCD",
+              padding: 20,
+              marginVertical: 8,
+              marginHorizontal: 16,
+              borderRadius: 35,
+              shadowColor: "#000",
+              width: "95%",
+              alignSelf: "center",
+              marginTop: "40%",
+
+              height: 350,
+              shadowOffset: { width: 3, height: 3 },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
+            }}
+          >
+            <Text style={styles.tableHeaderText}>Enter the product name</Text>
+            <TextInput
+              style={{ margin: 10, paddingLeft: 3, marginHorizontal: 10 }}
+              onChangeText={(product) => SetProduct(product)}
+            ></TextInput>
+
+            <TouchableOpacity
+              style={{
+                // backgroundColor: "rgba(35,100,168, 0.4)",
+                // paddingVertical: 10,
+                marginHorizontal: 40,
+                borderWidth: 0.4,
+                borderRadius: 10,
+
+                borderColor: "#000",
+                marginTop: 10,
+                // alignSelf: "center",
+                fontWeight: "500",
+              }}
+              onPress={GetTableProductPurchaseByName}
+            >
+              <GrayButton text={"Search"} />
+              {/* <Text style={{ fontSize: 20 }}>Search</Text> */}
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      ) : (
+        <View style={{ marginTop: "15%", padding: 10 }}>
+          {report.value === "ProductPurchaseByName" ? (
+            <TouchableOpacity
+              onPress={() => SetIsReportViewed(!isReportViewed)}
+              style={{
+                borderRadius: 50,
+                borderColor: "#000",
+                backgroundColor: "#CDCDCD",
+                left: 10,
+                width: 45,
+                height: 45,
+                // marginBottom: 15,
+                justifyContent: "center",
+              }}
+            >
+              <Image style={styles.Save} source={images.back} />
+            </TouchableOpacity>
+          ) : null}
+
+          <Text
+            style={{ fontSize: 25, alignSelf: "center", marginVertical: 35 }}
+          >
+            {report.label}
+          </Text>
+
+          <ScrollView>
+            <Table borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}>
+              <Row
+                data={tableData.map((item) => Object.keys(item))[0]}
+                style={styles.head}
+                textStyle={styles.text}
+              />
+              <Rows
+                // style={styles.text}
+                textStyle={styles.cellText}
+                data={tableData.map((item) => Object.values(item))}
+              />
+            </Table>
+          </ScrollView>
+        </View>
+      )}
+
+      {/* {request === "ProductPurchaseByName" ? (
+        <View>
+          <Text style={styles.tableHeader}>Enter the product name</Text>
+          <TextInput
+            style={{ margin: 10, paddingLeft: 3, marginHorizontal: 10 }}
+            onChangeText={(product) => SetProduct(product)}
+          ></TextInput>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: "rgba(35,100,168, 0.4)",
+              paddingVertical: 10,
+              paddingHorizontal: 40,
+              borderRadius: 5,
+              width: 150,
+              marginTop: 10,
+              alignSelf: "center",
+              fontWeight: "500",
+            }}
+            onPress={GetTableProductPurchaseByName}
+          >
+            <Text style={{ fontSize: 20 }}>Search</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null} */}
     </View>
-  </View>
   );
 };
 const styles = StyleSheet.create({
@@ -304,13 +431,19 @@ const styles = StyleSheet.create({
   },
   tableContainer: {
     padding: 10,
-    marginTop:100,
-    
+    marginTop: 100,
   },
   tableHeader: {
     fontWeight: "bold",
     fontSize: 17,
     marginTop: 10,
+    padding: 5,
+  },
+  tableHeaderText: {
+    fontWeight: "bold",
+    fontSize: 22,
+    marginTop: 30,
+    paddingVertical: 15,
     padding: 5,
   },
   container: {
@@ -330,17 +463,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f8ff",
   },
   text: {
-   fontWeight:'500',
-    fontSize:18,
-    right:8,
-
+    fontWeight: "500",
+    fontSize: 18,
+    right: 8,
   },
   cellText: {
-    padding:10,
-    alignSelf:'center',
+    padding: 10,
+    alignSelf: "center",
     // margin: 6,
-    fontSize:16,
-   
+    fontSize: 16,
   },
   button: {
     width: 50,
@@ -350,5 +481,11 @@ const styles = StyleSheet.create({
   save: {
     width: 50,
     height: 50,
+  },
+  Save: {
+    // borderRadius: 50,
+    width: 25,
+    height: 25,
+    alignSelf: "center",
   },
 });

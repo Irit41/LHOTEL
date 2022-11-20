@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useContext ,useEffect} from "react";
+import React, { useState, useContext ,useReducer,useEffect} from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import { ActivityIndicator } from "react-native";
 import TasksCard from "./TasksCard";
@@ -24,19 +24,21 @@ export default function Tasks(props) {
   const [tasksDisplay, SetTasksDisplay] = useState([]);
   const [taskToMarkAsDone, SetTaskToMarkAsDone] = useState([]);
   const [loading, SetLoading] = useState(false);
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     GetEmployees();
+  //     if (myEmployee.Description === "Manager") GetAllTasksFromDB();
+  //     else GetTasksByID();
+  //   }, [props])
+  // );
+  // props
+  useEffect(() => {
+    GetEmployees();
+    if (myEmployee.Description === "Manager") GetAllTasksFromDB();
+    else GetTasksByID();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      GetEmployees();
-      if (myEmployee.Description === "Manager") GetAllTasksFromDB();
-      else GetTasksByID();
-    }, [props])
-  );
-
-  // useEffect(() => {
-  //   GetEmployees();
-
-  // }, [])
+  }, [props])
   
   // console.log(tasks);
   const GetEmployees = async () => {
@@ -81,6 +83,7 @@ export default function Tasks(props) {
       if (temp !== null) {
         SetTasks(temp);
         HandelRequest(temp);
+        // forceUpdate();
 
         SetLoading(true);
       }
@@ -106,7 +109,10 @@ export default function Tasks(props) {
 
         SetTasks(temp);
         HandelRequest(temp);
+        // forceUpdate();
         SetLoading(true);
+   
+
       }
     } catch (error) {
       alert(error);
