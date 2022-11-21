@@ -33,38 +33,40 @@ export default function Tasks(props) {
   //   }, [props])
   // );
   // props
+ 
   useEffect(() => {
-    GetEmployees();
+    // GetEmployees();
     if (myEmployee.Description === "Manager") GetAllTasksFromDB();
     else GetTasksByID();
 
-  }, [props])
+  }, [props.route.name || navigation])
   
-  // console.log(tasks);
-  const GetEmployees = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    let result = await fetch(
-      "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
-      requestOptions
-    );
-    let employees = await result.json();
+  // // console.log(tasks);
+  // const GetEmployees = async () => {
+  //   const requestOptions = {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   };
+  //   let result = await fetch(
+  //     "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
+  //     requestOptions
+  //   );
+  //   let employees = await result.json();
 
-    if (employees !== null) {
-      let array =[ { label: "Select employee", value: null }]
-      myContext.SetEmployees(employees);
-      employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
+  //   if (employees !== null) {
+  //     let array =[ { label: "Select employee", value: null }]
+  //     myContext.SetEmployees(employees);
+  //     employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
 
-      myContext.SetRoomServiceEmpView(array);
+  //     myContext.SetRoomServiceEmpView(array);
 
-      // SetLoading(true);
-      return;
-    }
-    GetEmployees();
+  //     // SetLoading(true);
+  //     return;
+  //   }
+  //   GetEmployees();
 
-  };
+  // };
+
   const GetTasksByID = async () => {
     try {
       const requestOptions = {
@@ -74,6 +76,7 @@ export default function Tasks(props) {
         }),
         headers: { "Content-Type": "application/json" },
       };
+      console.log(requestOptions.body);
       let result = await fetch(
         "http://proj13.ruppin-tech.co.il/GetTaskById",
         requestOptions
@@ -83,7 +86,7 @@ export default function Tasks(props) {
       if (temp !== null) {
         SetTasks(temp);
         HandelRequest(temp);
-        // forceUpdate();
+    
 
         SetLoading(true);
       }
@@ -119,7 +122,7 @@ export default function Tasks(props) {
       SetLoading(true);
     }
   };
-
+// console.log(tasks);
   const EditTaskDetails = (taskcode) => {
     let taskDetails = tasks.filter((task) => task.TaskCode === taskcode)[0];
     props.navigation.navigate("EditTasks", { taskDetails: taskDetails });

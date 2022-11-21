@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext,useReducer,useEffect} from "react";
 import AppContext from "../../AppContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { TextInput } from "react-native-paper";
@@ -32,6 +32,7 @@ export default function NewTask({ route, navigation }) {
   const [flagEndTime, setFlagEndTime] = useState(false);
   const [employees, SetEmployees] = useState([]);
   const [startTime, SetstartTime] = useState("");
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const [taskStatus, SetTaskStatus] = useState(false);
   const [task, SetTask] = useState({
@@ -46,7 +47,11 @@ export default function NewTask({ route, navigation }) {
     TaskStatus: "Open",
     Description: "",
   });
+  // useEffect(() => {
+  //   GetEmployees();
+   
 
+  // }, [myContext.employee])
   // const GetEmployees = async () => {
   //   const requestOptions = {
   //     method: "GET",
@@ -71,6 +76,8 @@ export default function NewTask({ route, navigation }) {
   // };
   useFocusEffect(
     React.useCallback(() => {
+      GetEmployees();
+   
       SetTask({
         TaskCode: null,
         EmployeeID: -1,
@@ -112,6 +119,9 @@ export default function NewTask({ route, navigation }) {
     SetTaskStatus(!taskStatus);
     task.TaskStatus = !taskStatus ? "Open" : "Close";
   };
+
+
+  
   // ,task.EmployeeID = employees[Name]
   const CheckValues = () => {
     return (
@@ -120,7 +130,32 @@ export default function NewTask({ route, navigation }) {
       task.TaskName !== ""
     );
   };
+  // console.log(tasks);
+  const GetEmployees = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    let result = await fetch(
+      "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
+      requestOptions
+    );
+    let employees = await result.json();
 
+    if (employees !== null) {
+      let array =[ { label: "Select employee", value: null }]
+      myContext.SetEmployees(employees);
+      employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
+
+      myContext.SetRoomServiceEmpView(array);
+
+      // SetLoading(true);
+      return;
+    }
+    GetEmployees();
+
+  };
+  // console.log(myContext.roomServiceEmpView);
   const AddNewTask = async () => {
    if (task.EmployeeName !== null)
     task.EmployeeID =
@@ -129,7 +164,7 @@ export default function NewTask({ route, navigation }) {
           (obj) => obj.EmployeeName === task.EmployeeName
         )
       ].EmployeeID;
-console.log(task);
+// console.log(task);
     try {
       if (!CheckValues()) {
         alert("The fields are not filled correctly");
@@ -146,7 +181,7 @@ console.log(task);
       );
       if (result) {
         alert("Task details successfully saved");
-        navigation.goBack();
+        navigation.navigate("WorkerMenu");
       }
     } catch (error) {
       alert(error);
@@ -272,7 +307,7 @@ console.log(task);
           marginTop: 20,
         }}
       >
-        <TouchableOpacity style={styles.button} onPress={AddNewTask}>
+        <TouchableOpacity style={styles.button} onPress={()=>AddNewTask()}>
           <Text style={{ fontSize: 20 }}>SAVE</Text>
           <Image style={styles.save} source={images.save} />
         </TouchableOpacity>

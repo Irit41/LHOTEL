@@ -344,7 +344,7 @@ create table Purchases_Documentation
 	Product_Code int
 )
 go
---exec Room_Resit 888
+--exec Room_Resit 206055899
 
 --Task_Code int identity(1,1) NOT NULL,
 --	Employee_ID int,
@@ -1338,12 +1338,11 @@ go
 
 
 
-
-create proc GetTask_ById
+alter proc GetTask_ById
 @id int
 as
 begin tran
-	SELECT dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID, dbo.Tasks_Types.Task_Name,
+	SELECT dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID,dbo.Employees_Tasks.Employee_Name, dbo.Tasks_Types.Task_Name,
 	dbo.Employees_Tasks.Room_Number, dbo.Employees_Tasks.Start_Date,
 	CONVERT(VARCHAR(5), dbo.Employees_Tasks.Start_Time, 108) AS Start_Time,
 	CONVERT(VARCHAR(5), dbo.Employees_Tasks.End_Time, 108) AS End_Time,
@@ -1353,7 +1352,7 @@ FROM     dbo.Tasks_Types INNER JOIN
 
 where  dbo.Employees_Tasks.Employee_ID = @id
 
-GROUP BY dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID, dbo.Tasks_Types.Task_Name, dbo.Employees_Tasks.Room_Number, dbo.Employees_Tasks.Start_Date, dbo.Employees_Tasks.Start_Time, 
+GROUP BY dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID,dbo.Employees_Tasks.Employee_Name,  dbo.Tasks_Types.Task_Name, dbo.Employees_Tasks.Room_Number, dbo.Employees_Tasks.Start_Date, dbo.Employees_Tasks.Start_Time, 
                   dbo.Employees_Tasks.End_Time, dbo.Employees_Tasks.Task_Status, dbo.Employees_Tasks.Description
 	if (@@error !=0)
 	begin
@@ -1364,7 +1363,7 @@ GROUP BY dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID, dbo.Tas
 commit tran
 go
 --exec GetAllTasks
--- exec GetTask_ById -1
+-- exec GetTask_ById 444
 
 
 
@@ -1409,10 +1408,11 @@ go
 
 
 
+exec AddNewTask 333,'ccc',6,'Room Service','2022-11-21','09:51','','Open','Pizza'
 
 
 --exec AddNewTask null,2,'Refill mini bar','19:00',null,'Open',''	
---select * from [dbo].[Employees_Tasks]
+--select * from [dbo].[Employees]_Tasks]
 --select * from Shifts
 --exec ClockIn 333,'11:00' 
 --exec GetAllShifts
@@ -1488,7 +1488,7 @@ go
 --select * from Shifts
 --exec AlterTask 92,-1,13,'Room Service','12:10','12:10','Open',''
 --select * from [dbo].[Employees_Tasks]
-	
+	delete from Shifts where Employee_ID =333
 
 create proc DeleteTask
 @Tasks_Code int
@@ -1532,7 +1532,7 @@ go
 --exec CloseTask 25, '14:00'
 --select * from [dbo].[Employees_Tasks]
 
-
+exec AddNewTask 333,'ccc',6,'Room Service','2022-11-21','09:51','','Open','Pizza'
 
 -- פרוצדורות חשבון ללקוח
 ---------------------------------------------------
@@ -1962,7 +1962,11 @@ select * from  AvailableRooms()
 --exec SaveRoomReservation 111111112,'mmm','12/29',912,'4580111133335555',111,1,1,1,'2022-08-22','2022-08-24',5,1
 --select * from [dbo].[Customers]
 --select * from Bill
---select * from [dbo].[Customers_Rooms]
+--
+
+
+
+
 --select * from [dbo].[Bill_Details]
 --exec DeleteReservation 666
 --exec AddNewBill_Detail 111111112,21,'Coca cola',9,'Cash'
@@ -2074,6 +2078,7 @@ as
 			 from inserted
 	end
 go
+--select * from [dbo].[Bill_Details] where Customer_ID = 206055899
 
 
 
@@ -2116,12 +2121,12 @@ create proc CheckIn_With_Existing_User
 @Counter_Double int,
 @Counter_Suite int,
 @Entry_Date date,
-@Exit_Date date,
+@Exit_Date date,SaveRoomReservation
 @Amount_Of_People int,
 @Breakfast Bit
 as
 	begin tran	
-		exec SaveRoomReservation @id ,@Card_Holder_Name ,@Credit_Card_Date ,@Three_Digit 
+		exec  @id ,@Card_Holder_Name ,@Credit_Card_Date ,@Three_Digit 
 		,@Credit_Card_Number ,@Employee_ID ,@Counter_Single ,@Counter_Double ,@Counter_Suite 
 		,@Entry_Date ,@Exit_Date ,@Amount_Of_People ,@Breakfast
 		exec CheckIn @id , @Entry_Date
@@ -2220,7 +2225,7 @@ go
 --select * from [dbo].[Customers_Rooms]
 --exec Room_Resit 111111117
 
-
+exec GetTask_ById 444
 
 create proc CheckOut      
 @id int,
@@ -2329,7 +2334,7 @@ go
    -- "Amount":9,
    -- "PaymentMethod":"Cash"
   
---select * from [dbo].[Bill_Details]
+--select * from [dbo].[Bill_Details] where Customer_ID = 206055899
 --select * from [dbo].[Customers_Rooms]
 --exec CheckOut 666 , '2022-08-24'
 --exec Room_Resit 206055899
@@ -2449,7 +2454,7 @@ go
 
 
 
-
+exec AddNewTask 333,'ccc',6,'Room Service','2022-11-21','09:51','','Open','Pizza'
 
 --exec AddNewTask 333,2,'Room Cleaning','13:00',null,'Close',''	
 --exec AddRoomServiceRequest null,5,'Refill mini bar','16:00',null,'Open',''	

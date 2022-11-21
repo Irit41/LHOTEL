@@ -186,6 +186,7 @@ export default function EditTasks({ route, navigation }) {
       default:
         break;
     }
+    
   
   };
 
