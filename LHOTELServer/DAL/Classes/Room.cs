@@ -22,12 +22,14 @@ namespace DAL
         
         public int BillNumber { set; get; }
         public int CustomerID { set; get; }
-        public DateTime BillDate { set; get; }
+        public string FirstName { set; get; }
+        public string LastName { set; get; }
+       public DateTime BillDate { set; get; }
         public int CustomerType { set; get; }
         public DateTime EntryDate { set; get; }
         public DateTime ExitDate { set; get; }
         public int AmountOfPeople { set; get; }
         public bool Breakfast { set; get; }
-        public string RoomStatus { set; get; }
+        //public string RoomStatus { set; get; }
     }
 }

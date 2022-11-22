@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useContext ,useReducer,useEffect} from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import { ActivityIndicator } from "react-native";
 import TasksCard from "./TasksCard";
@@ -24,48 +24,13 @@ export default function Tasks(props) {
   const [tasksDisplay, SetTasksDisplay] = useState([]);
   const [taskToMarkAsDone, SetTaskToMarkAsDone] = useState([]);
   const [loading, SetLoading] = useState(false);
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     GetEmployees();
-  //     if (myEmployee.Description === "Manager") GetAllTasksFromDB();
-  //     else GetTasksByID();
-  //   }, [props])
-  // );
-  // props
- 
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+
   useEffect(() => {
     // GetEmployees();
     if (myEmployee.Description === "Manager") GetAllTasksFromDB();
     else GetTasksByID();
-
-  }, [props.route.name || navigation])
-  
-  // // console.log(tasks);
-  // const GetEmployees = async () => {
-  //   const requestOptions = {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   };
-  //   let result = await fetch(
-  //     "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
-  //     requestOptions
-  //   );
-  //   let employees = await result.json();
-
-  //   if (employees !== null) {
-  //     let array =[ { label: "Select employee", value: null }]
-  //     myContext.SetEmployees(employees);
-  //     employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
-
-  //     myContext.SetRoomServiceEmpView(array);
-
-  //     // SetLoading(true);
-  //     return;
-  //   }
-  //   GetEmployees();
-
-  // };
+  }, [props.route.name]);
 
   const GetTasksByID = async () => {
     try {
@@ -82,11 +47,10 @@ export default function Tasks(props) {
         requestOptions
       );
       let temp = await result.json();
-     
+
       if (temp !== null) {
         SetTasks(temp);
         HandelRequest(temp);
-    
 
         SetLoading(true);
       }
@@ -109,20 +73,17 @@ export default function Tasks(props) {
       let temp = await result.json();
       //  console.log(temp);
       if (temp !== null) {
-
         SetTasks(temp);
         HandelRequest(temp);
         // forceUpdate();
         SetLoading(true);
-   
-
       }
     } catch (error) {
       alert(error);
       SetLoading(true);
     }
   };
-// console.log(tasks);
+  // console.log(tasks);
   const EditTaskDetails = (taskcode) => {
     let taskDetails = tasks.filter((task) => task.TaskCode === taskcode)[0];
     props.navigation.navigate("EditTasks", { taskDetails: taskDetails });
@@ -145,7 +106,7 @@ export default function Tasks(props) {
       case "Open Tasks":
         listTemp = allTasks.filter((task) => task.TaskStatus === "Open");
         break;
-     
+
       default:
         return;
     }
@@ -167,30 +128,6 @@ export default function Tasks(props) {
     );
     SetTaskToMarkAsDone(newArrayTasks);
   };
-
-  // const DeleteTask = async (taskCode) => {
-  //   try {
-  //     SetLoading(false);
-  //     const requestOptions = {
-  //       method: "DELETE",
-  //       body: JSON.stringify({
-  //         task_code: taskCode,
-  //       }),
-  //       headers: { "Content-Type": "application/json" },
-  //     };
-  //     // console.log(requestOptions.body);
-  //     let result = await fetch("http://proj13.ruppin-tech.co.il/DeleteTask", requestOptions);
-  //     let temp = await result.json();
-  //     // console.log(temp);
-  //     if (temp) {
-  //       SetLoading(true);
-  //       GetAllTasksFromDB();
-  //     }
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  //   SetLoading(true);
-  // };
 
   const CloseTask = async () => {
     try {
@@ -235,7 +172,7 @@ export default function Tasks(props) {
   };
 
   const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={[Styles.container, Styles.horizontal]}>
       <ActivityIndicator size="large" />
     </View>
   );
@@ -255,30 +192,27 @@ export default function Tasks(props) {
       EditTaskDetails={EditTaskDetails}
       MarkTaskAsDone={MarkTaskAsDone}
       RemoveFromCheck={RemoveFromCheck}
-      // DeleteTask={DeleteTask}
     />
   ));
- 
 
   return (
     <View>
       {tasksDisplay.length > 5 ? (
         <Searchbar
-          style={styles.searchbar}
+          style={Styles.searchbar}
           placeholder="search by name ..."
-       
           value={"search"}
         />
       ) : null}
 
       <ScrollView style={{ marginBottom: tasksDisplay.length > 5 ? 90 : 0 }}>
-        <View style={styles.items}>{loading ? tasksList : <Spinner />}</View>
+        <View style={Styles.items}>{loading ? tasksList : <Spinner />}</View>
       </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   HeadLine: {
     fontSize: 40,
     fontWeight: "bold",
@@ -346,4 +280,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-

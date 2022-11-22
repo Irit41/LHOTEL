@@ -17,15 +17,16 @@ namespace DAL
             {
 
                 SqlDataReader reader = SqlClass.ExcNQReturnReder(@"exec GetBookedRooms");
-             
+
 
 
                 while (reader.Read())
                 {
-           
+
                     BookedRooms.Add(new BookedRoom()
                     {
-
+                        FirstName = (string)reader["First_Name"],
+                        LastName = (string)reader["Last_Name"],
                         RoomNumber = (int)reader["Room_Number"],
                         BillNumber = (int)reader["Bill_Number"],
                         CustomerID = (int)reader["Customer_ID"],
@@ -58,7 +59,7 @@ namespace DAL
             try
             {
                 SqlDataReader reader = SqlClass.ExcNQReturnReder($@"exec GetReservedRoomsByCustomerId {id}");
-                
+
 
 
                 while (reader.Read())
@@ -88,7 +89,7 @@ namespace DAL
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-          
+
             }
             finally
             {

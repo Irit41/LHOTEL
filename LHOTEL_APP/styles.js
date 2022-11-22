@@ -30,7 +30,7 @@ export const BlueButton = ({ text }) => (
     <LinearGradient
         style={[
             {
-             
+
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 10,
@@ -55,7 +55,7 @@ export const GrayButton = ({ text }) => (
     <LinearGradient
         style={[
             {
-              
+
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 10,
@@ -70,6 +70,34 @@ export const GrayButton = ({ text }) => (
     </LinearGradient>
 
 );
+
+export const DatesPattern = ({ EntryDate, ExitDate }) => (
+    <View>
+        <Text style={{ fontSize: 20}}>
+            <Image style={{
+                width: 25,
+                height: 25,
+            }} source={images.calendar} />
+            {" " +
+                moment(new Date(EntryDate))
+                    .format("DD.MM.YYYY")
+                    .split(".")[0] +
+                " - " +
+                moment(new Date(ExitDate)).format(
+                    "DD.MM.YYYY"
+                )}{" "}
+            (
+            {moment(ExitDate).diff(
+                moment(EntryDate),
+                "days"
+            )}{" "}
+            nights)
+        </Text>
+    </View>
+
+
+);
+
 
 
 

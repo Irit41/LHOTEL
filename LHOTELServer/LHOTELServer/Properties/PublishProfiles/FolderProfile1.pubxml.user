@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\iritt\OneDrive\שולחן העבודה\LHOTELHandOnFolder\LHOTEL\LHOTELServer\LHOTELServer\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-11-20T17:33:18.4006520Z;</History>
+    <History>True|2022-11-22T15:00:31.7879032Z;True|2022-11-22T16:53:21.2152598+02:00;True|2022-11-20T19:33:18.4006520+02:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -81,22 +81,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2022 12:08:59</publishTime>
     </File>
     <File Include="bin/BLL.dll">
-      <publishTime>11/20/2022 19:33:07</publishTime>
+      <publishTime>11/22/2022 16:34:09</publishTime>
     </File>
     <File Include="bin/BLL.pdb">
-      <publishTime>11/20/2022 19:33:07</publishTime>
+      <publishTime>11/22/2022 16:34:09</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>11/20/2022 19:33:06</publishTime>
+      <publishTime>11/22/2022 16:34:08</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>11/20/2022 19:33:06</publishTime>
+      <publishTime>11/22/2022 16:34:08</publishTime>
     </File>
     <File Include="bin/LHOTELServer.dll">
-      <publishTime>11/20/2022 19:33:08</publishTime>
+      <publishTime>11/22/2022 17:00:29</publishTime>
     </File>
     <File Include="bin/LHOTELServer.pdb">
-      <publishTime>11/20/2022 19:33:08</publishTime>
+      <publishTime>11/22/2022 17:00:29</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>11/15/2022 12:09:00</publishTime>

@@ -18,6 +18,7 @@ import { Searchbar } from "react-native-paper";
 import AppContext from "../../AppContext";
 
 import { TextInput } from "react-native-paper";
+import { DatesPattern } from "../../styles";
 const numColumns = 2;
 
 export default function CheckOut() {
@@ -134,36 +135,49 @@ export default function CheckOut() {
 
   const CheckOutCard = ({ item, index }) => {
     return (
-      <View>
-        <View style={styles.Details}>
+      <View style={{marginBottom:20}}>
+        <View style={Styles.Details}>
           <Text style={{ fontSize: 16 }}>
             {moment(item.BillDate).format("DD.MM.YYYY")}
           </Text>
           <Text style={{ fontSize: 16 }}>No : {item.BillNumber}</Text>
         </View>
-        <View style={styles.containerTaskDedtails}>
+        <View style={Styles.containerTaskDedtails}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
+              padding:5,
             }}
           >
             <Icon name="person" size={18} style={{ padding: 4 }}>
               {" "}
               {item.AmountOfPeople}
             </Icon>
-            <Text style={{ padding: 10, fontSize: 18 }}>
+            <DatesPattern  EntryDate ={item.EntryDate} ExitDate ={item.ExitDate}/>
+
+           
+          </View>
+          <View style={{marginVertical: 10}}>
+  <Text style={{ padding: 10, fontSize: 18,}}>
+              Name : {item.FirstName +" "+ item.LastName}
+            </Text>
+          <Text style={{ padding: 10, fontSize: 18 }}>
               ID : {item.CustomerID}
             </Text>
           </View>
-
-          <Text style={{ padding: 10, alignSelf: "flex-end", fontSize: 18 }}>
+        
+        
+            {/* <View style={Styles.Details}>
+            <Text style={{ padding: 10, alignSelf: "flex-end", fontSize: 18 }}>
             FROM : {moment(item.EntryDate).format("DD.MM.YYYY")}
           </Text>
           <Text style={{ padding: 10, alignSelf: "flex-end", fontSize: 18 }}>
             TO : {moment(item.ExitDate).format("DD.MM.YYYY")}
           </Text>
+            </View> */}
+
           <View
             style={{
               flexDirection: "row",
@@ -185,6 +199,7 @@ export default function CheckOut() {
               </Text>
             ) : (
               <FlatList
+              style={{marginVertical:20}}
                 data={item.RoomNumber}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
@@ -193,9 +208,9 @@ export default function CheckOut() {
             )}
           </View>
 
-          <View style={styles.BTNContainer}>
+          <View style={Styles.BTNContainer}>
             <TouchableOpacity
-              style={styles.LogoutBtn}
+              style={Styles.LogoutBtn}
               onPress={() => Checkout(item.CustomerID, item.ExitDate)}
             >
               <Text style={{ color: "black" }}>Check out</Text>
@@ -243,7 +258,7 @@ export default function CheckOut() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={Styles.container}>
       <StatusBar translucent={true} backgroundColor={"transparent"} />
       <ImageBackground
         source={images.hotelback}
@@ -253,11 +268,11 @@ export default function CheckOut() {
           justifyContent: "flex-end",
         }}
       >
-        <View style={styles.topview}>
-          <Text style={styles.HeadLine}>CHECK OUT</Text>
+        <View style={Styles.topview}>
+          <Text style={Styles.HeadLine}>CHECK OUT</Text>
 
           <Searchbar
-            style={styles.searchbar}
+            style={Styles.searchbar}
             placeholder="Search"
             onChangeText={SerchReservation}
             value={search}
@@ -265,7 +280,7 @@ export default function CheckOut() {
           />
         </View>
 
-        <View style={styles.SearchbarContainer}>
+        <View style={Styles.SearchbarContainer}>
           <View
             style={{
               paddingHorizontal: 5,
@@ -285,7 +300,7 @@ export default function CheckOut() {
   );
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   topview: {
     flex: 1,
   },
@@ -379,6 +394,7 @@ const styles = StyleSheet.create({
   containerTaskDedtails: {
     borderColor: "black",
     borderWidth: 1,
+
   },
 
   Details: {

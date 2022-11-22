@@ -8,7 +8,7 @@ import { Divider, Text } from "react-native-paper";
 import moment from "moment";
 import Icon from "react-native-vector-icons/Ionicons";
 import AppContext from "../../AppContext";
-import { GrayButton,BlueButton } from "../../styles";
+import { GrayButton,BlueButton, DatePattern } from "../../styles";
 
 
 
@@ -109,7 +109,7 @@ export default function ShortCheckIn({ navigation }) {
           </Text>
         </View>
         <View style={{ paddingTop: 10, alignSelf: "flex-end" }}>
-          <Text style={{ fontSize: 20, fontWeight: "600" }}>
+          {/* <Text style={{ fontSize: 20, fontWeight: "600" }}>
             <Image style={styles.icon} source={images.calendar} />
             {" " +
               moment(new Date(roomsReservation.EntryDate))
@@ -125,7 +125,8 @@ export default function ShortCheckIn({ navigation }) {
               "days"
             )}{" "}
             nights)
-          </Text>
+          </Text> */}
+          <DatePattern  EntryDate ={roomsReservation.EntryDate}ExitDate ={roomsReservation.ExitDate}/>
           <Text
             style={{
               color: "#888",

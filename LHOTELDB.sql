@@ -1815,7 +1815,8 @@ go
 
 --  מביא את החדרים שתאריך היציאה שלהם גדול מהתאריך של היום
 --  מצביא על חדרים תפוסים
-create proc GetTakenRooms
+
+create proc GetBookedRooms
 as
 
 begin tran	
@@ -1829,8 +1830,8 @@ begin tran
 	end
 commit tran
 go
--- exec GetTakenRooms
 
+exec GetBookedRooms
 
 
    
@@ -2291,7 +2292,7 @@ begin tran
 commit tran
 go
 -- exec GetBill_DetailsByNumber 1
-
+exec GetBookedRooms
 
 
 create proc AddNewBill_Detail
