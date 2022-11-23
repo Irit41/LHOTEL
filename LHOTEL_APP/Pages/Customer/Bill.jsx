@@ -17,6 +17,7 @@ import { images } from "../../images";
 import BillHistoryCard from "./BillHistoryCard";
 import { ScrollView } from "react-native-virtualized-view";
 import { useFocusEffect } from "@react-navigation/native";
+import { DatesPattern } from "../../styles";
 
 export default function Bill() {
   const [tableData, SetTableData] = useState(null);
@@ -54,7 +55,7 @@ export default function Bill() {
         requestOptions
       );
       let temp = await result.json();
-      console.log(temp);
+      // console.log(temp);
       SetTableData(temp);
       temp!== null && temp.length !== 0 
         ? SetIsDataExists(!isDataExists)
@@ -170,37 +171,37 @@ export default function Bill() {
         </View>
       ) : null
     );
-
+console.log(tableData);
     let sumTotal = tableData.reduce(function (prev, current) {
       return current.PricePerNight * current.NumberOfNights + prev;
     }, 0);
-
+   
     return (
       <View style={styles.CardStyle}>
         <View style={{ padding: 10 }}>
          
-          <View>
-            <Text style={styles.topCardText}>
-              Customer ID : {tableData[0].CustomerID}
-            </Text>
-            <Text style={styles.topCardText}>
-              Dates : {moment(tableData[0].EntryDate).format("DD/MM/YYYY")} -{" "}
-              {moment(tableData[0].ExitDate).format("DD/MM/YYYY")}
-            </Text>
-            <Text style={styles.topCardText}>
-              Number Of Nights : {tableData[0].NumberOfNights}
-            </Text>
-          </View>
+          
+            
+            <DatesPattern img={false} EntryDate ={tableData[0].EntryDate} ExitDate ={tableData[0].ExitDate}/>
+
+           
+{
+  tableData[0].Breakfest? <Text style={{paddingTop:15,fontSize:17}}>* Includes breakfast  </Text>:null
+}
+          
         </View>
         <View>
           <Text style={styles.listCardStyle}>Rooms</Text>
           {listRooms}
         </View>
-
-        <Text style={styles.listCardStyle}>Products</Text>
+{
+  listProducts.length>1&& listRooms.length<2?  <Text style={styles.listCardStyle}>Products</Text>:null
+}
+        {/* <Text style={styles.listCardStyle}>Products</Text> */}
         <View style={{ padding: 10 }}>
           {listProducts}
           <Text style={{ fontSize: 25 }}>Sum Total: {sumTotal} $</Text>
+        
         </View>
 
         <View></View>
@@ -421,7 +422,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#09143C",
     fontSize: 25,
     color: "#fff",
-    marginVertical: 20,
+    marginBottom: 20,
+    marginTop:10,
     textAlign: "center",
   },
   header: {

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { Dimensions } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import AppContext from "./AppContext";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -70,14 +71,21 @@ export const GrayButton = ({ text }) => (
     </LinearGradient>
 
 );
-
-export const DatesPattern = ({ EntryDate, ExitDate }) => (
+export const Spinner = () => (
+    
+      <ActivityIndicator size="large" color={"#09143C"} />
+  
+  ); 
+export const DatesPattern = ({img, EntryDate, ExitDate }) => (
     <View>
-        <Text style={{ fontSize: 20}}>
-            <Image style={{
-                width: 25,
-                height: 25,
-            }} source={images.calendar} />
+        <Text style={{fontSize: img ? 20:17}}>
+            {
+                img? <Image style={{
+                    width: 25,
+                    height: 25,
+                }} source={images.calendar} />:null
+            }
+           
             {" " +
                 moment(new Date(EntryDate))
                     .format("DD.MM.YYYY")

@@ -10,12 +10,11 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { TextInput } from "react-native-paper";
 import { Dropdown } from "react-native-element-dropdown";
 import ProductsCards from "./ProductsCards";
 import { LinearGradient } from "expo-linear-gradient";
-import { useFocusEffect } from "@react-navigation/native";
 
 import { images } from "../../images";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -55,17 +54,27 @@ export default function AddCharge({ navigation }) {
     }
     Cal_Sum();
   };
-  useFocusEffect(
-    React.useCallback(() => {
+  useEffect(() => {
       SetRoom_Number(-1);
-      SetId(-1);
+      // SetId(-1);
       SetPayment("");
 
       SetSumTotal(0);
       SetProductsToAdd([]);
       SetGoodsCount(0);
-    }, [flag])
-  );
+    }, [!flag]);
+  
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     SetRoom_Number(-1);
+  //     SetId(-1);
+  //     SetPayment("");
+
+  //     SetSumTotal(0);
+  //     SetProductsToAdd([]);
+  //     SetGoodsCount(0);
+  //   }, [flag])
+  // );
   const Cal_Sum = () => {
     let sum = 0;
     let goodsCounter = 0;
@@ -121,7 +130,7 @@ export default function AddCharge({ navigation }) {
       useNativeDriver: false,
     }).start();
   };
-
+console.log(id);
   const AddChargeToDB = async () => {
     try {
       let counter = 0;
@@ -160,7 +169,11 @@ export default function AddCharge({ navigation }) {
     }
   };
 
-  const CheckInput = () => {
+  const isValidInputs = () => {
+    console.log("id"+id);
+    console.log("room_Number"+room_Number);
+    console.log("productsToAdd.length"+productsToAdd.length);
+    console.log("payment"+payment);
     if (
       id !== -1 &&
       room_Number !== -1 &&
@@ -172,7 +185,7 @@ export default function AddCharge({ navigation }) {
   };
 
   const SavePurchase = () => {
-    if (CheckInput()) {
+    if (isValidInputs()) {
       return Alert.alert(
         "order",
         "Are you sure you want to  add the selected products to your account?",
@@ -294,7 +307,7 @@ export default function AddCharge({ navigation }) {
         >
           <TouchableOpacity
             onPress={() => {
-              SetFlag(!flag), doAnimation(closeState, 3, 500);
+              SetFlag(!flag), SetId(-1), doAnimation(closeState, 3, 500);
             }}
             style={styles.save}
           >

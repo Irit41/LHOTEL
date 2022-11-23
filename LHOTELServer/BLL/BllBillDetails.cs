@@ -12,7 +12,21 @@ namespace BLL
     {
         public static List<RoomResit> RoomResit(int id)
         {
-            return DalBillDetails.RoomResit(id);
+            List<RoomResit> roomResit = DalBillDetails.RoomResit(id);
+
+            var firstOrDefault = roomResit.FirstOrDefault();
+            if (firstOrDefault != null && firstOrDefault.Breakfest)
+            {
+                foreach (RoomResit item in roomResit)
+                {
+                    if (item.ProductCode == 8) item.PricePerNight += 70;
+
+             
+
+                }
+
+            }
+            return roomResit;
         }
         public static bool AddCharge(Charge charge)
         {

@@ -1770,7 +1770,11 @@ go
 --select * from [Customers_Rooms]
 -- exec FindCustomerReservations 111111112
 
-
+SELECT dbo.Customers.First_Name, dbo.Customers.Last_Name
+FROM     dbo.Customers_Rooms INNER JOIN
+                  dbo.Customers ON dbo.Customers_Rooms.Customer_ID = dbo.Customers.Customer_ID
+WHERE  (dbo.Customers_Rooms.Customer_ID = 206055899)
+GROUP BY dbo.Customers_Rooms.Customer_ID, dbo.Customers.First_Name, dbo.Customers.Last_Name
 
 create proc AlterCustomerRoom
 @Room_Number int,
@@ -1813,10 +1817,27 @@ go
 --select * from Bill_Details where  Customer_ID = 111111117
 
 
---  מביא את החדרים שתאריך היציאה שלהם גדול מהתאריך של היום
---  מצביא על חדרים תפוסים
 
-create proc GetBookedRooms
+
+CREATE FUNCTION Customer_FullName (@Customer_ID int)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT First_Name,Last_Name
+    FROM Customers
+    WHERE Customer_ID = @Customer_ID
+)
+
+
+SELECT * FROM Customer_FullName(206055899)
+
+
+
+exec  GetBookedRooms
+
+CREATE PRO  GetBookedRooms
+
 as
 
 begin tran	
@@ -1829,12 +1850,64 @@ begin tran
 		return
 	end
 commit tran
+
+
+
+
+
+
+
+
+    CREATE TABLE   Tbl_customers_inRooms
+   (  First_Name nvarchar(30) NOT NULL,
+	Last_Name nvarchar(30),
+    Room_Number int NOT NULL,
+	Bill_Number int ,
+	Customer_ID int NOT NULL,
+	Bill_Date Date NOT NULL,
+	Entry_Date Date NOT NULL,
+	Exit_Date Date NOT NULL,
+	Amount_Of_People int NOT NULL,
+	Breakfast BIT NOT NULL,
+	Room_Status nvarchar(30) NOT NULL )
+
+
+
+
+--  מביא את החדרים שתאריך היציאה שלהם גדול מהתאריך של היום
+--  מצביא על חדרים תפוסים
+drop FUNCTION Customer_FullName (@Customer_ID int)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT First_Name,Last_Name
+    FROM Customers
+    WHERE Customer_ID = @Customer_ID
+)
+alter proc GetBookedRooms
+as
+
+
+begin tran	
+SELECT dbo.Customers_Rooms.Bill_Number, dbo.Customers_Rooms.Bill_Date, dbo.Customers_Rooms.Customer_ID, dbo.Customers.First_Name, dbo.Customers.Last_Name, dbo.Customers_Rooms.Entry_Date, dbo.Customers_Rooms.Exit_Date, 
+                  dbo.Customers_Rooms.Room_Number, dbo.Customers_Rooms.Amount_Of_People, dbo.Customers_Rooms.Breakfast, dbo.Customers_Rooms.Room_Status
+FROM     dbo.Customers_Rooms INNER JOIN
+                  dbo.Customers ON dbo.Customers_Rooms.Customer_ID = dbo.Customers.Customer_ID
+WHERE  (dbo.Customers_Rooms.Room_Status = N'Occupied' )
+GROUP BY dbo.Customers_Rooms.Bill_Number, dbo.Customers_Rooms.Bill_Date, dbo.Customers_Rooms.Customer_ID, dbo.Customers.First_Name, dbo.Customers.Last_Name, dbo.Customers_Rooms.Entry_Date, 
+                  dbo.Customers_Rooms.Exit_Date, dbo.Customers_Rooms.Room_Number, dbo.Customers_Rooms.Amount_Of_People, dbo.Customers_Rooms.Room_Status, dbo.Customers_Rooms.Breakfast
+order by  Customer_ID
+	if (@@error !=0)
+	begin
+		rollback tran
+		print 'error'
+		return
+	end
+commit tran
+
 go
-
 exec GetBookedRooms
-
-
-   
 
 
 --  תביא לי את כול החדרים הפנויים
@@ -2059,7 +2132,7 @@ declare @bill_number as int = (select [Bill_Number] from Bill
 commit tran
 go
 
---exec Room_Resit 111111112
+--exec Room_Resit 111111119
 --select * from Bill
 --exec GetCustomersRooms
 --select * from Bill_Details
@@ -2600,21 +2673,23 @@ go
 
 
 
-create proc Income_And_Expenses
+alter proc Income_And_Expenses
 as
 begin tran		
 	
-	SELECT CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2)) as Date
+	SELECT CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2)) as Date 
 	,CAST( Sum([Sum_Total] * -1 ) as float) as [Expens + / Profit -]  
-	from [dbo].[Purchase_Of_Goods]
+	from [dbo].[Purchase_Of_Goods] 	
 
 	GROUP BY CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2))
 	union all 
-	select  CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2)) as Date
-	,CAST(Sum([Price_Per_Night])as float) as [Expens/Profit] 
+	select  CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2)) as Date 	
+	,CAST(Sum([Price_Per_Night])as float) as [Expens/Profit]  
 	
-	from dbo.Purchases_Documentation
+	from dbo.Purchases_Documentation 
+
 	GROUP BY CAST(YEAR(Purchase_Date) AS VARCHAR(4)) + '-' + CAST(MONTH(Purchase_Date) AS VARCHAR(2))
+
 	if (@@error !=0)
 	begin
 		rollback tran
@@ -2624,7 +2699,7 @@ begin tran
 commit tran
 go
 --exec Income_And_Expenses
---select * from [dbo].[Purchase_Of_Goods]
+--select * from [dbo].[Purchase_Of_Goods] 	order by Purchase_Date
 --select * from dbo.Purchases_Documentation
 
 

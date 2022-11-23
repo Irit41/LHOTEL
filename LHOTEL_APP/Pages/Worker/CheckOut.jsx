@@ -155,7 +155,7 @@ export default function CheckOut() {
               {" "}
               {item.AmountOfPeople}
             </Icon>
-            <DatesPattern  EntryDate ={item.EntryDate} ExitDate ={item.ExitDate}/>
+            <DatesPattern img={false} EntryDate ={item.EntryDate} ExitDate ={item.ExitDate}/>
 
            
           </View>

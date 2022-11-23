@@ -30,6 +30,6 @@ namespace DAL
         public DateTime ExitDate { set; get; }
         public int AmountOfPeople { set; get; }
         public bool Breakfast { set; get; }
-        //public string RoomStatus { set; get; }
+    
     }
 }

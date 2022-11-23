@@ -8,7 +8,7 @@ import { Divider, Text } from "react-native-paper";
 import moment from "moment";
 import Icon from "react-native-vector-icons/Ionicons";
 import AppContext from "../../AppContext";
-import { GrayButton,BlueButton, DatePattern } from "../../styles";
+import { GrayButton,BlueButton, DatesPattern } from "../../styles";
 
 
 
@@ -109,6 +109,7 @@ export default function ShortCheckIn({ navigation }) {
           </Text>
         </View>
         <View style={{ paddingTop: 10, alignSelf: "flex-end" }}>
+        <DatesPattern img={true} EntryDate ={roomsReservation.EntryDate} ExitDate ={roomsReservation.ExitDate}/>
           {/* <Text style={{ fontSize: 20, fontWeight: "600" }}>
             <Image style={styles.icon} source={images.calendar} />
             {" " +
@@ -126,7 +127,6 @@ export default function ShortCheckIn({ navigation }) {
             )}{" "}
             nights)
           </Text> */}
-          <DatePattern  EntryDate ={roomsReservation.EntryDate}ExitDate ={roomsReservation.ExitDate}/>
           <Text
             style={{
               color: "#888",
@@ -320,8 +320,9 @@ export default function ShortCheckIn({ navigation }) {
       // console.log(requestOptions.body);
       let result = await fetch('http://proj13.ruppin-tech.co.il/DeleteReservation', requestOptions);
       if (result) {
-        alert("Task details successfully saved")
-        navigation.goBack()
+        alert("Reservation has been cancelled");
+       
+        navigation.navigate("CheckIn");
       }
     } catch (error) {
       alert(error)

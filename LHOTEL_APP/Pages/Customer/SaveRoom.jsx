@@ -22,7 +22,6 @@ SaveRoom({route,navigation }) {
   // let { rooms_flags } = navigation.route.params;
   const user = myContext.user;
   const roomsReservation = myContext.roomsReservation;
-
   const [loading, SetLoading] = useState(false);
   const [arrRoomsData, SetArrRoomsData] = useState([]);
 
@@ -80,7 +79,9 @@ SaveRoom({route,navigation }) {
       if (value) {
         let room = rooms.filter((room) => room.RoomType === key);
         if (room[0] !== undefined) {
+          
           room = room[0];
+          if(roomsReservation.Breakfast)room.PricePerNight+=70; 
           array.push(room);
         }
       }
@@ -88,7 +89,7 @@ SaveRoom({route,navigation }) {
     SetArrRoomsData(array);
   };
 
-  // console.log(rooms_flags)
+
 
   const isValidParams = () => {
     return !(
@@ -134,18 +135,13 @@ SaveRoom({route,navigation }) {
         }
       }
     }
-   
-    let sum = 0
-    for (let i = 0; i < the_data.length; i++) {
-      let pricePerNight = the_data[i].pricePerNight;
-      let count = the_data[i].count;
-      let tempToatal = pricePerNight * count
+    // let sum = 0
+    let sumTotal = the_data.reduce(function (prev, current) {
+      return current.pricePerNight * current.count +prev ;
+    }, 0);
+    sumTotal*= roomsReservation.NumberOfNights
 
-      sum += tempToatal;
-      if (roomsReservation.Breakfast) sum += 70 * count
-    }
-
-    roomsReservation.totalSum = sum
+    roomsReservation.totalSum = sumTotal
     navigation.navigate("Credit", { the_data: the_data });
   };
   const SetCount = (number, roomType) => {
@@ -161,7 +157,7 @@ SaveRoom({route,navigation }) {
         break;
     }
   };
-console.log(arrRoomsData);
+// console.log(arrRoomsData);
  let roomsList = arrRoomsData.map((room, index) => (
     <CardRoom
       key={index}

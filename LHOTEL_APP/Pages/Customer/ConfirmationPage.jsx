@@ -14,7 +14,7 @@ export default function ConfirmationPage({ route, navigation }) {
   let { the_data } = route.params;
   const myContext = useContext(AppContext);
   const roomsReservation = myContext.roomsReservation;
-
+// console.log(roomsReservation);
   let listCards = the_data.map((room) => (
     <ReservationCard
       key={room.type}

@@ -3,7 +3,8 @@ import React, { useState, useContext } from "react";
 import { ActivityIndicator } from "react-native";
 import AppContext from "../../AppContext";
 import { TextInput } from "react-native-paper";
-import { BlueButton,GrayButton} from "../../styles";
+import { BlueButton,Spinner} from "../../styles";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Login({ navigation }) {
   const [id, setID] = useState("");
@@ -43,11 +44,15 @@ export default function Login({ navigation }) {
 
     SetLoading(true);
   };
-
-  const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
+  useFocusEffect(
+    React.useCallback(() => {
+      return ()=>{
+        setID("");
+        setPassword("");
+      }
+  
+     
+    }, [])
   );
 
   const LogIn = () => {
@@ -58,11 +63,6 @@ export default function Login({ navigation }) {
     } else {
       Alert.alert("No such user exists in the system");
     }
-  };
-
-  const Delete = () => {
-    setID("");
-    setPassword("");
   };
 
   return (
@@ -98,19 +98,14 @@ export default function Login({ navigation }) {
       />
 </View>
       <View style={styles.ButtonContainer}>
-      <TouchableOpacity style={{width:150}} onPress={() => LogIn()}>
+      <TouchableOpacity  onPress={() => LogIn()}>
         <BlueButton text = {"SUBMIT"}/>
 
           {/* <Text style={styles.button2} onPress={() => LogIn()}>
             SUBMIT
           </Text> */}
         </TouchableOpacity>
-        <TouchableOpacity style={{width:140}} onPress={Delete}>
-        <GrayButton text = {"DELETE"}/>
-          {/* <Text style={styles.button} onPress={Delete}>
-            DELETE
-          </Text> */}
-        </TouchableOpacity>
+       
        
       </View>
     </View>
@@ -143,9 +138,9 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   ButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    // flexDirection: "row",
+    // alignItems: "center",
+    // justifyContent: "space-between",
     marginTop:20,
     padding: 30,
   },

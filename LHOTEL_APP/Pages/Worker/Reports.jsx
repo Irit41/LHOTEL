@@ -41,7 +41,7 @@ const RequestType = [
   },
   { label: "Number of tasks per month", value: "NumberOfTasksPerMonth" },
   { label: "Product purchase by name", value: "ProductPurchaseByName" },
-  { label: "Income and expenses", value: "IncomeAndExpenses" },
+  { label: "Incomes", value: "IncomeAndExpenses" },
 ];
 
 export default function Reports({ navigation }) {

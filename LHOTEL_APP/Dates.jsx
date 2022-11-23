@@ -125,16 +125,21 @@ export default function Dates() {
 //   });
   useFocusEffect(
     React.useCallback(() => {
-    //  roomsReservation.NumberOfNights = numberOfNights;
+      roomsReservation.EntryDate = moment().toDate();
+      roomsReservation.ExitDate = moment().add(1, "days").toDate();
+      setFlagEntry(false);
+      setFlagExit(false);
+      SetIsEntryModalOpened(false);
+      SetIsExitModalOpened(false);
+      //  roomsReservation.NumberOfNights = numberOfNights;
       // setNumberOfNights(1);
       return () => {
-        setFlagEntry(false);
-        setFlagExit(false);
-        SetIsEntryModalOpened(false);
-        SetIsExitModalOpened(false);
+        // setFlagEntry(false);
+        // setFlagExit(false);
+        // SetIsEntryModalOpened(false);
+        // SetIsExitModalOpened(false);
         // setNumberOfNights(1);
-        roomsReservation.EntryDate = moment().toDate();
-        roomsReservation.ExitDate = moment().add(1, "days").toDate();
+
   // roomsReservation.AmountOfPeople = 0;
   setAmountOfPeople(0);
       };
