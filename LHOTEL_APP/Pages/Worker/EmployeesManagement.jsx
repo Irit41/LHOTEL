@@ -5,6 +5,7 @@ import EMCard from "./EMCard";
 import { ActivityIndicator } from "react-native";
 import { images } from "../../images";
 import AppContext from "../../AppContext";
+import { Spinner } from "../../styles";
 
 
 export default function EmployeesManagement({ navigation }) {
@@ -125,11 +126,11 @@ export default function EmployeesManagement({ navigation }) {
   };
 
 
-  const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+  // const Spinner = () => (
+  //   <View style={[styles.container, styles.horizontal]}>
+  //     <ActivityIndicator size="large" />
+  //   </View>
+  // );
 
   let listEmployees = employees.map((item) => (
     <EMCard

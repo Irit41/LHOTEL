@@ -25,13 +25,13 @@ export default function TasksCard(props) {
     // }
 
 
-    const MarkTaskAsDone = () =>{
-        SetFlag(!flag)
-        if(!flag === true)
-            props.MarkTaskAsDone(TaskCode)
-        else
-            props.RemoveFromCheck(TaskCode)
-    }
+    // const MarkTaskAsDone = () =>{
+    //     SetFlag(!flag)
+    //     if(!flag === true)
+    //         props.MarkTaskAsDone(TaskCode)
+    //     else
+    //         props.RemoveFromCheck(TaskCode)
+    // }
    
     return (
         <View style={{ backgroundColor: TaskStatus==='Open'? 'rgba(35,100,168, 0.4)': '#C0C0C0',

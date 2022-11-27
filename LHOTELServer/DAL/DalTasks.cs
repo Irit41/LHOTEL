@@ -99,9 +99,10 @@ namespace DAL
 
         }
 
-        public static List<Task> GetTaskByCode(int code)
+        public static Task GetTaskByCode(int code)
         {
-            List<Task> tasks = new List<Task>();
+      
+            Task task =null;
             try
             {
                 string str = $@"exec GetTask_ByCode {code}";
@@ -110,7 +111,7 @@ namespace DAL
                
                 while (reader.Read())
                 {
-                    tasks.Add(new Task()
+                    task = new Task()
                     {
                         TaskCode = (int)reader["Task_Code"],
                         EmployeeID = (reader["Employee_ID"] != DBNull.Value)
@@ -127,7 +128,7 @@ namespace DAL
                         TaskStatus = (string)reader["Task_Status"],
                         Description = (reader["Description"] != DBNull.Value)
                         ?(string)reader["Description"] : null,
-                    });
+                    };
                 }
 
             }
@@ -140,7 +141,7 @@ namespace DAL
             {
                 SqlClass.CloseDB();
             }
-            return tasks;
+            return task;
 
         }
 
@@ -167,7 +168,7 @@ namespace DAL
             }
         }
 
-        public static bool CloseTask(int code, string endTime)
+        public static bool CloseTask(string taskStatus, int code, string endTime)
         {
             try
             {
@@ -175,7 +176,7 @@ namespace DAL
                 {
                     return false;
                 }
-                string str = $@"exec CloseTask {code}, '{endTime}'";
+                string str = $@"exec CloseTask '{taskStatus}',{code}, '{endTime}'";
                 int result = SqlClass.ExeNonQuery(str);
                 if (result >= 1)
                     return true;

@@ -72,9 +72,11 @@ export const GrayButton = ({ text }) => (
 
 );
 export const Spinner = () => (
+    // #09143C
+   
+     <ActivityIndicator size="large" color={"#0000b3"} />
+
     
-      <ActivityIndicator size="large" color={"#09143C"} />
-  
   ); 
 export const DatesPattern = ({img, EntryDate, ExitDate }) => (
     <View>

@@ -52,11 +52,11 @@ export default function Reports({ navigation }) {
   // const [request, SetRequest] = useState(false);
   const [isMainViewed, SetIsMainViewed] = useState(true);
 
-  const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+  // const Spinner = () => (
+  //   <View style={[styles.container, styles.horizontal]}>
+  //     <ActivityIndicator size="large" />
+  //   </View>
+  // );
 
   const CreateTableData = () => {
     return (

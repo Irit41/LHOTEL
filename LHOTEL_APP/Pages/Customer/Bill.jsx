@@ -69,11 +69,7 @@ export default function Bill() {
     SetLoading(true);
   };
 
-  const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+ 
 
   const BilldHistoryData = () => {
     let billNumbers = [];

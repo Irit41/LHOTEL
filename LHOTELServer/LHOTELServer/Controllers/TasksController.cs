@@ -99,9 +99,12 @@ namespace LHOTELServer.Controllers
         {
             try
             {
+                string taskStatus = data["Task_Status"].ToObject<string>();
+
+                
                 int code = data["task_code"].ToObject<int>();
                 string endTime = data["end_time"].ToObject<string>();
-                return Ok(BllTasks.CloseTask(code, endTime));
+                return Ok(BllTasks.CloseTask(taskStatus,code, endTime));
             }
             catch (Exception e)
             {

@@ -20,7 +20,7 @@ namespace BLL
             return DalTasks.GetTaskById(id);
         }
 
-        public static List<Task> GetTaskByCode(int code)
+        public static Task GetTaskByCode(int code)
         {
             return DalTasks.GetTaskByCode(code);
         }
@@ -30,9 +30,9 @@ namespace BLL
             return DalTasks.AddNewTask(task);
         }
 
-        public static bool CloseTask(int code, string endTime)
+        public static bool CloseTask(string taskStatus,int code, string endTime)
         {
-            return DalTasks.CloseTask(code, endTime);
+            return DalTasks.CloseTask(taskStatus,code, endTime);
         }
         public static bool AlterTask(Task task)
         {

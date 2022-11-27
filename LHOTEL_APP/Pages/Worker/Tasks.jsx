@@ -16,6 +16,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { images } from "../../images";
 import { Dimensions } from "react-native";
 import { Searchbar } from "react-native-paper";
+import { Spinner } from "../../styles";
 export default function Tasks(props) {
   const myContext = useContext(AppContext);
   const myEmployee = myContext.employee;
@@ -26,11 +27,17 @@ export default function Tasks(props) {
   const [loading, SetLoading] = useState(false);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  useEffect(() => {
-    // GetEmployees();
-    if (myEmployee.Description === "Manager") GetAllTasksFromDB();
-    else GetTasksByID();
-  }, [props.route.name]);
+  // useEffect(() => {
+  //   // GetEmployees();
+  //   if (myEmployee.Description === "Manager") GetAllTasksFromDB();
+  //   else GetTasksByID();
+  // }, [props.route.name]);
+  useFocusEffect(
+    React.useCallback(() => {
+      if (myEmployee.Description === "Manager") GetAllTasksFromDB();
+      else GetTasksByID();
+    }, [props.route.name])
+  );
 
   const GetTasksByID = async () => {
     try {
@@ -114,68 +121,27 @@ export default function Tasks(props) {
     SetTasksDisplay(listTemp);
   };
 
-  const MarkTaskAsDone = (taskCode) => {
-    let newArrayTasks = tasksDisplay.filter(
-      (task) => task.TaskCode === taskCode
-    )[0];
-    let temp = [...taskToMarkAsDone, newArrayTasks];
-    SetTaskToMarkAsDone(temp);
-  };
+  // const MarkTaskAsDone = (taskCode) => {
+  //   let newArrayTasks = tasksDisplay.filter(
+  //     (task) => task.TaskCode === taskCode
+  //   )[0];
+  //   let temp = [...taskToMarkAsDone, newArrayTasks];
+  //   SetTaskToMarkAsDone(temp);
+  // };
 
-  const RemoveFromCheck = (taskCode) => {
-    let newArrayTasks = taskToMarkAsDone.filter(
-      (task) => task.TaskCode !== taskCode
-    );
-    SetTaskToMarkAsDone(newArrayTasks);
-  };
+  // const RemoveFromCheck = (taskCode) => {
+  //   let newArrayTasks = taskToMarkAsDone.filter(
+  //     (task) => task.TaskCode !== taskCode
+  //   );
+  //   SetTaskToMarkAsDone(newArrayTasks);
+  // };
 
-  const CloseTask = async () => {
-    try {
-      if (taskToMarkAsDone.length === 0) {
-        alert("No tasks have been selected for execution");
-        return;
-      }
-      SetLoading(false);
-      let counter = 0;
-      let endTime = moment().format("HH:mm");
-      for (let index = 0; index < taskToMarkAsDone.length; index++) {
-        // console.log(taskToMarkAsDone[index]);
-        const requestOptions = {
-          method: "PUT",
-          body: JSON.stringify({
-            task_code: taskToMarkAsDone[index].TaskCode,
-            end_time: endTime,
-          }),
-          headers: { "Content-Type": "application/json" },
-        };
-        // console.log(requestOptions.body);
-        let result = await fetch(
-          "http://proj13.ruppin-tech.co.il/CloseTask",
-          requestOptions
-        );
-        let temp = await result.json();
-        if (temp) {
-          counter++;
-          // GetAllTasksFromDB()
-        }
-      }
-      // console.log(counter > 1);
-      if (counter > 1) {
-        alert("All selected tasks have been successfully closed");
-        GetAllTasksFromDB();
-      }
-    } catch (error) {
-      alert(error);
-      SetLoading(true);
-    }
-    SetLoading(true);
-  };
 
-  const Spinner = () => (
-    <View style={[Styles.container, Styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+  // const Spinner = () => (
+  //   <View style={[Styles.container, Styles.horizontal]}>
+  //     <ActivityIndicator size="large" />
+  //   </View>
+  // );
   let tasksList = tasksDisplay.map((task) => (
     <TasksCard
       key={task.TaskCode}
@@ -190,8 +156,8 @@ export default function Tasks(props) {
       TaskStatus={task.TaskStatus}
       Description={task.Description}
       EditTaskDetails={EditTaskDetails}
-      MarkTaskAsDone={MarkTaskAsDone}
-      RemoveFromCheck={RemoveFromCheck}
+      // MarkTaskAsDone={MarkTaskAsDone}
+      // RemoveFromCheck={RemoveFromCheck}
     />
   ));
 

@@ -21,7 +21,7 @@ import moment from "moment";
 import { useEffect } from "react";
 import { images } from "../../images";
 import Modal from "react-native-modal";
-
+import { windowHeight } from "../../styles";
 import { FloatingMenu } from "react-native-floating-action-menu";
 const RequestType = [
   { label: "Room Cleaning", value: "Room Cleaning" },
@@ -35,14 +35,18 @@ export default function EditTasks({ route, navigation }) {
   const [dropdown, setDropdown] = useState(null);
 
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isStatusModalVisible, setStatusModalVisible] = useState(false);
+  // const [Status, setStatus] = useState("");
+
   const [flagStartTime, setFlagStartTime] = useState(false);
   const [flagEndTime, setFlagEndTime] = useState(false);
   const [taskStatus, SetTaskStatus] = useState(false);
   const [isMenuOpen, SetIsMenuOpen] = useState(false);
   const [description, SetDescription] = useState("");
+  const [workerNotes, SetWorkerNotes] = useState("");
 
   
-  const windowHeight = Dimensions.get("window").height;
+  // const windowHeight = Dimensions.get("window").height;
   const [task, SetTask] = useState({
     TaskCode: null,
     EmployeeID: null,
@@ -56,19 +60,23 @@ export default function EditTasks({ route, navigation }) {
     Description: "",
   });
 
-  const toggleModal = () => {
+  const toggleNotesModal = () => {
     setModalVisible(!isModalVisible);
+  };
+  const toggleStatusModal = () => {
+    setStatusModalVisible(!isStatusModalVisible);
   };
 
   useEffect(() => {
     if (route.params !== undefined) {
       SetTask(route.params.taskDetails);
-
+      console.log(task);
+      SetWorkerNotes("");
       // SetTaskStatus(
       //   route.params.taskDetails.TaskStatus === "Open" ? true : false
       // );
     }
-  }, []);
+  }, [navigation]);
 
   const handelTimeStart = (time) => {
     task.StartTime = moment(time).format("HH:mm");
@@ -82,10 +90,10 @@ export default function EditTasks({ route, navigation }) {
     setFlagEndTime(false);
   };
 
-  const HandelTaskStatus = () => {
-    SetTaskStatus(!taskStatus);
-    task.TaskStatus = !taskStatus ? "Open" : "Close";
-  };
+  // const HandelTaskStatus = () => {
+  //   SetTaskStatus(!taskStatus);
+  //   task.TaskStatus = !taskStatus ? "Open" : "Close";
+  // };
 
   const CheckValues = () => {
     return (
@@ -96,13 +104,15 @@ export default function EditTasks({ route, navigation }) {
   };
 
   const AlterTask = async () => {
-    if (task.EmployeeName !== null)
-    task.EmployeeID =
-      myContext.employees[
-        myContext.employees.findIndex(
-          (obj) => obj.EmployeeName === task.EmployeeName
-        )
-      ].EmployeeID;
+    // if (task.EmployeeName !== null)
+    //   task.EmployeeID =
+    //     myContext.employees[
+    //       myContext.employees.findIndex(
+    //         (obj) => obj.EmployeeName === task.EmployeeName
+    //       )
+    //     ].EmployeeID;
+        console.log(task);
+
     try {
       if (!CheckValues()) {
         alert("The fields are not filled correctly");
@@ -119,16 +129,54 @@ export default function EditTasks({ route, navigation }) {
       );
       if (result) {
         alert("Task details successfully saved");
-        navigation.goBack();
+       
+    navigation.goBack();
       }
     } catch (error) {
       alert(error);
     }
   };
+  const CloseTask = async () => {
+    try {
+      if (task.TaskStatus === 'Open') {
+        alert("A proper closing status must be selected");
+        return;
+      }
+      // SetLoading(false);
+      
+      let endTime = moment().format("HH:mm");
+     
+        const requestOptions = {
+          method: "PUT",
+          body: JSON.stringify({
+            Task_Status:task.TaskStatus,
+            task_code: task.TaskCode,
+            end_time: endTime,
+          }),
+          headers: { "Content-Type": "application/json" },
+        };
+        // console.log(requestOptions.body);
+        let result = await fetch(
+          "http://proj13.ruppin-tech.co.il/CloseTask",
+          requestOptions
+        );
+        let temp = await result.json();
+        if (temp) {
+          alert("The task was successfully closed");
+        
+         navigation.goBack();
+        }
+      
+
+    } catch (error) {
+      alert(error);
+      // SetLoading(true);
+    }
+    // SetLoading(true);
+  };
 
   const DeleteTask = async () => {
     try {
-      
       // SetLoading(false);
       const requestOptions = {
         method: "DELETE",
@@ -146,7 +194,8 @@ export default function EditTasks({ route, navigation }) {
       // console.log(temp);
       if (temp) {
         alert("Task successfully deleted");
-        navigation.goBack();
+
+      navigation.goBack();
         // SetLoading(true);
         // GetAllTasksFromDB();
       }
@@ -159,35 +208,30 @@ export default function EditTasks({ route, navigation }) {
     {
       label: "Delete task",
       img: <Image style={styles.save} source={images.trashCan} />,
-      
     },
     {
       label: "Update status",
       img: <Image style={styles.save} source={images.check} />,
-     
     },
     {
       label: "Save changes",
       img: <Image style={styles.save} source={images.save} />,
-      
     },
   ];
   const handleItemPress = (item) => {
     switch (item.label) {
       case "Save changes":
-        AlterTask() 
-       break;
-       case "Delete task":
+        AlterTask();
+        break;
+      case "Delete task":
         DeleteTask();
-       break;
-       case "Update status":
-        console.log("Update");
-       break;
+        break;
+      case "Update status":
+        toggleStatusModal();
+        break;
       default:
         break;
     }
-    
-  
   };
 
   const ItemIcons = (item) => {
@@ -268,7 +312,7 @@ export default function EditTasks({ route, navigation }) {
             data={myContext.roomServiceEmpView}
             labelField="label"
             valueField="value"
-            placeholder="Select employee"
+            placeholder={task.EmployeeName}
             value={task.EmployeeName}
             onChange={(Name) => (task.EmployeeName = Name.value)}
           />
@@ -282,9 +326,22 @@ export default function EditTasks({ route, navigation }) {
             value={task.TaskName}
             onChange={(taskName) => (task.TaskName = taskName.value)}
           /> */}
-          <Text style={{ fontSize: 18, padding: 20, fontWeight: "bold" }}>
-            Status : {task.TaskStatus}
-          </Text>
+          {
+            workerNotes ==="" ? <Text style={{ fontSize: 18, paddingRight: 20, fontWeight: "bold" }}>
+            Status : {task.TaskStatus.split('|')[0]}
+          </Text>:
+      <TouchableOpacity  style ={{ paddingVertical: 25,paddingHorizontal:5,
+        backgroundColor: "#EEEEEE",
+        borderRadius: 22,}}onPress={() => alert(workerNotes)}>
+         <Badge
+                status="primary"
+            
+                containerStyle={{ position: "absolute", top: 5, left: 0 }}
+              />
+      <Text style={{ fontSize: 18 , paddingRight: 21, fontWeight: "bold"}}> Status  :  {task.TaskStatus.split('|')[0]}</Text>
+    </TouchableOpacity>
+          }
+    
         </View>
 
         <View style={styles.timeStyle}>
@@ -337,7 +394,7 @@ export default function EditTasks({ route, navigation }) {
               backgroundColor: "#EEEEEE",
               borderRadius: 22,
             }}
-            onPress={toggleModal}
+            onPress={() => toggleNotesModal()}
           >
             {task.Description !== null ? (
               <Badge
@@ -350,6 +407,75 @@ export default function EditTasks({ route, navigation }) {
             <Image style={styles.save} source={images.tasks} />
           </TouchableOpacity>
         </View>
+        <Modal isVisible={isStatusModalVisible}>
+          <View
+            style={{
+              // flex: 1,
+              backgroundColor: "#C0C0C0",
+              width: "90%",
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: "#fff",
+              marginVertical: 50,
+              // height:250,
+              alignSelf: "center",
+            }}
+          >
+            <View style={{ flexDirection: "row-reverse" }}>
+              <Text style={{ fontSize: 18, padding: 20, fontWeight: "bold" }}>
+                Status :{" "}
+              </Text>
+              <Dropdown
+                style={styles.dropdownStatus}
+                data={[
+                  { value: "Completed" },
+                  { value: "Partially completed" },
+                  { value: "Not completed" },
+                ]}
+                labelField="value"
+                valueField="value"
+                placeholder={task.TaskStatus.split('|')[0]}
+                value={taskStatus}
+                onChange={(taskStatus) => SetTaskStatus(taskStatus.value)}
+              />
+            </View>
+            {taskStatus !== "Completed" ? (
+              <TextInput
+                activeOutlineColor="#000"
+                mode="outlined"
+                placeholder={task.TaskStatus.split('|')[1]}
+                style={styles.TextInputMulti}
+               onChangeText={(text) => SetWorkerNotes(text)}
+                multiline={true}
+                numberOfLines={4}
+              />
+            ) : null}
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                paddingVertical: 20,
+              }}
+            >
+              <Button
+                title="Save"
+                color="#1E3F99"
+                onPress={() => {
+                  toggleStatusModal(), task.TaskStatus = taskStatus,
+                  task.TaskStatus += workerNotes!==""? '|'+ workerNotes:workerNotes,
+                  CloseTask()
+                }}
+              />
+              <Button
+                title="cancel"
+                color="#888"
+                onPress={() => toggleStatusModal()}
+              />
+            </View>
+          </View>
+        </Modal>
+
         <Modal isVisible={isModalVisible}>
           <View
             style={{
@@ -381,13 +507,22 @@ export default function EditTasks({ route, navigation }) {
                 paddingVertical: 20,
               }}
             >
-              <Button title="Save notes" color="#1E3F99" onPress={()=>{
-                toggleModal(),
-                task.Description = description}} />
-              <Button title="cancel" color="#888" onPress={toggleModal} />
+              <Button
+                title="Save notes"
+                color="#1E3F99"
+                onPress={() => {
+                  toggleNotesModal(), (task.Description = description);
+                }}
+              />
+              <Button
+                title="cancel"
+                color="#888"
+                onPress={() => toggleNotesModal()}
+              />
             </View>
           </View>
         </Modal>
+
         <View
           style={{
             alignSelf: "center",
@@ -480,6 +615,14 @@ const styles = StyleSheet.create({
   save: {
     width: 30,
     height: 30,
+  },
+  dropdownStatus: {
+    alignSelf: "flex-end",
+    height: 70,
+    width: 200,
+
+    borderRadius: 22,
+    paddingHorizontal: 8,
   },
   timeStyle: {
     flexDirection: "row-reverse",

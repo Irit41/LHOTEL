@@ -1179,6 +1179,7 @@ begin tran
 commit tran
 go
 --exec GetAllShifts
+
  --CONVERT(VARCHAR(5), dbo.Shifts.Entrance_Time, 108) AS Entrance_Time 
 
 
@@ -1225,7 +1226,7 @@ begin tran
 commit tran
 go
 --exec GetAllShifts
---exec ClockIn 444, '15:33'
+--exec ClockIn 111, '15:33'
 --exec ClockIn 222, '12:00'
 --exec ClockIn 333, '08:56'
 
@@ -1247,6 +1248,25 @@ begin tran
 commit tran
 go
 --exec DeleteShift 111,'2022-08-23 02:16:12.000'
+--create proc ClockOutAuto
+--@Employee_ID int,
+--@Leaving_Time nvarchar(5)
+--as
+--begin tran
+--	update [dbo].[Shifts]
+--	set [Leaving_Time] = @Leaving_Time
+--	where Employee_ID = @Employee_ID and [Leaving_Time] IS NULL
+--	if (@@error !=0)
+--	begin
+--		rollback tran
+--		print 'error'
+--		return
+--	end
+--commit tran
+--go
+
+
+
 
 
 
@@ -1266,7 +1286,7 @@ begin tran
 	end
 commit tran
 go
---exec ClockOut 222 ,'12:00'
+--exec ClockOut 123456789 ,'17:00'
 -- select * from [dbo].[Shifts]
 
 
@@ -1334,7 +1354,7 @@ GROUP BY dbo.Employees_Tasks.Task_Code, dbo.Employees_Tasks.Employee_ID, dbo.Tas
 commit tran
 go
 --exec GetAllTasks
--- exec GetTask_ByCode 82
+-- exec GetTask_ByCode 48
 
 
 
@@ -1483,6 +1503,73 @@ begin tran
 	end
 commit tran
 go
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+alter proc AlterTaskByManager
+@Tasks_Code int,
+@Employee_ID int, 
+@Employee_Name nvarchar(30),
+@Room_Number int,
+@Task_Name nvarchar(30),
+@Start_Time time(7) ,
+@End_Time time(7),
+@Task_Status nvarchar(30),
+@Description nvarchar(30)
+as
+begin tran
+declare @time nvarchar(5)
+set @time = CONVERT(TIME, GETDATE())
+
+		  IF @Employee_ID != null  and NOT EXISTS (SELECT Employee_ID FROM Shifts WHERE (Employee_ID = @Employee_ID))
+    BEGIN
+ exec ClockIn  @Employee_ID,@time
+  exec AlterTask @Tasks_Code,@Employee_ID, @Employee_Name ,@Room_Number ,@Task_Name ,@Start_Time,@End_Time,@Task_Status,@Description 
+	END
+	  IF @Employee_ID != null  and NOT EXISTS (SELECT Employee_ID FROM Shifts WHERE (Employee_ID = @Employee_ID))
+    BEGIN
+			set @time = CONVERT(TIME, GETDATE())
+		exec ClockOut  @Employee_ID,@time
+		end
+	delete from Shifts where Employee_ID = @Employee_ID
+	if (@@error !=0)
+	begin
+
+		rollback tran
+		print 'error'
+		return
+	end
+commit tran
+go
+
+
+
+
+
+
+
+
+
+
+
 --exec GetAllTasks
 --exec GetAllShifts
 --select * from Shifts
@@ -1490,6 +1577,22 @@ go
 --select * from [dbo].[Employees_Tasks]
 	delete from Shifts where Employee_ID =333
 
+	exec AlterTaskByManager 44,333,6,'Room Service','09:51','10:54','Opzczxczxcen','Pizza'
+		declare @time nvarchar(5)
+
+		set @time = CONVERT(TIME, GETDATE())
+	exec ClockIn 333,@time
+
+
+	@Tasks_Code int,
+@Employee_ID int, 
+@Employee_Name nvarchar(30),
+@Room_Number int,
+@Task_Name nvarchar(30),
+@Start_Time time(7) ,
+@End_Time time(7),
+@Task_Status nvarchar(30),
+@Description nvarchar(30)
 create proc DeleteTask
 @Tasks_Code int
 as
@@ -2046,7 +2149,7 @@ select * from  AvailableRooms()
 --exec AddNewBill_Detail 111111112,21,'Coca cola',9,'Cash'
 --exec CheckIn 111111112, '2022-08-22'
 --exec CheckOut 111111112, '2022-08-24'
---exec Room_Resit 111111112
+--exec Room_Resit 111111119
 --exec GetAllCustomersHistory 111111112
 --select * from Bill_Details
 --where Customer_ID = 111111112
@@ -2698,9 +2801,10 @@ begin tran
 	end
 commit tran
 go
---exec Income_And_Expenses
---select * from [dbo].[Purchase_Of_Goods] 	order by Purchase_Date
---select * from dbo.Purchases_Documentation
+exec Income_And_Expenses
+
+select * from [dbo].[Purchase_Of_Goods] 	
+select * from dbo.Purchases_Documentation
 
 
 

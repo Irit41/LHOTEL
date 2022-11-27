@@ -6,6 +6,7 @@ import AppContext from './AppContext';
 import Modal from "react-native-modal";
 import { useFocusEffect } from "@react-navigation/native";
 import CardRoom from "./Pages/Customer/CardRoom";
+import { Spinner } from "./styles";
 
 export default function Rooms({navigation, childFunc}) {
 
@@ -218,11 +219,11 @@ const isValidParams = () => {
     </View>
   );
 }
-const Spinner = () => (
-  <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator size="large" />
-  </View>
-);
+// const Spinner = () => (
+//   <View style={[styles.container, styles.horizontal]}>
+//     <ActivityIndicator size="large" />
+//   </View>
+// );
 
 const styles = StyleSheet.create({
   HeadLine: {

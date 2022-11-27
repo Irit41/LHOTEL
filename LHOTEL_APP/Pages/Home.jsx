@@ -18,6 +18,7 @@ import AppContext from "../AppContext";
 import { ActivityIndicator } from "react-native";
 
 import { useFocusEffect } from "@react-navigation/native";
+import { Spinner } from "../styles";
 
 export default function Home({ navigation }) {
   const [loading, SetLoading] = useState(true);
@@ -30,11 +31,11 @@ export default function Home({ navigation }) {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  const Spinner = () => (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+  // const Spinner = () => (
+  //   <View style={[styles.container, styles.horizontal]}>
+  //     <ActivityIndicator size="large" />
+  //   </View>
+  // );
   useFocusEffect(
     React.useCallback(() => {
       setPassword("");
@@ -106,7 +107,7 @@ export default function Home({ navigation }) {
           <Image style={styles.Save} source={images.back} />
         </TouchableOpacity>
 
-        <View style={styles.items}>{loading ? null : <Spinner />}</View>
+        <View style={styles.items}>{loading ? null : <Spinner/>}</View>
         <TextInput
           label="Employee ID"
           activeOutlineColor="#000"

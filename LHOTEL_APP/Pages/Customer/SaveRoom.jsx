@@ -14,7 +14,7 @@ import CardRoom from "./CardRoom";
 import AppContext from "../../AppContext";
 import Modal from "react-native-modal";
 import { useFocusEffect } from "@react-navigation/native";
-import { BlueButton } from "../../styles";
+import { BlueButton, Spinner } from "../../styles";
 
 export default function 
 SaveRoom({route,navigation }) {
@@ -209,7 +209,7 @@ SaveRoom({route,navigation }) {
           </View>
         </View>
       </Modal>
-      <View>{loading ? roomsList : <Spinner />}</View>
+      <View>{loading ? roomsList : <Spinner/>}</View>
       {
            JSON.stringify(myContext.employee) === "{}"? <View style={styles.save}>
            {loading ? (
@@ -223,11 +223,11 @@ SaveRoom({route,navigation }) {
     </ScrollView>
   );
 }
-const Spinner = () => (
-  <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator size="large" />
-  </View>
-);
+// const Spinner = () => (
+//   <View style={[styles.container, styles.horizontal]}>
+//     <ActivityIndicator size="large" />
+//   </View>
+// );
 
 const styles = StyleSheet.create({
   HeadLine: {

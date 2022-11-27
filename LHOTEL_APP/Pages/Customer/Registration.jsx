@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TextInput, Button, ScrollView, Alert, Touchable
 import React, { useState } from 'react'
 import { User } from '../Class/User'
 import { ActivityIndicator } from "react-native";
+import { Spinner } from '../../styles';
 
 
 export default function Registration({ navigation }) {
@@ -27,11 +28,11 @@ export default function Registration({ navigation }) {
         }}
 
         
-    const Spinner = () => (
-        <View style={[styles.container, styles.horizontal]}>
-            <ActivityIndicator size="large" />
-        </View>
-    );
+    // const Spinner = () => (
+    //     <View style={[styles.container, styles.horizontal]}>
+    //         <ActivityIndicator size="large" />
+    //     </View>
+    // );
 
 
     const Save_User = async () => {
@@ -100,7 +101,7 @@ export default function Registration({ navigation }) {
         <ScrollView>
             <Text style={styles.HeadLine}>Registration</Text>
             <View >
-                {loading ? null : <Spinner />}
+                {loading ? null : <Spinner/>}
             </View>
             <View style={styles.label}>
 
