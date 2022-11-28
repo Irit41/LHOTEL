@@ -44,7 +44,7 @@ export default function Dates() {
   //  roomsReservation.NumberOfNights = numberOfNights;
     setFlagExit(false);
     SetIsExitModalOpened(true);
-    // hideDatePickerExit();
+    // hideDatePickerExit();zxereg
   };
   useEffect(() => {
     if (
