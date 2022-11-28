@@ -26,13 +26,14 @@ export default function Drawer() {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   let isUserConnected = JSON.stringify(user) !== "{}";
   let isAtHotel = myContext.bill.CustomerID !== "";
+  // console.log(isAtHotel);
   useFocusEffect(
     React.useCallback(() => {
       FetchCustomerReservationFromDB()
-      console.log(myContext.bill);
-     }, [isUserConnected && isAtHotel])
+      // console.log(myContext.bill);
+     }, [isUserConnected])
   );
-
+  // isUserConnected || isAtHotel
   const FetchCustomerReservationFromDB = async () => {
     if (user.CustomerID !== undefined) {
       try {

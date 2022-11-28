@@ -18,13 +18,9 @@ namespace DAL
             try
             {
                 SqlDataReader reader = SqlClass.ExcNQReturnReder($@"exec Room_Resit {id}");
-              
-
-                 
-
                 while (reader.Read())
                 {
-                    roomResit.Add( new RoomResit()
+                    RoomResit receipt = new RoomResit()
                     {
                         BillNumber = (int)reader["Bill_Number"],
                         CustomerID = (int)reader["Customer_ID"],
@@ -39,7 +35,13 @@ namespace DAL
                         NumberOfNights = (int)reader["Number_Of_Nights"],
                         PaymentMethod = (string)reader["Payment_Method"],
                         ProductCode = (int)reader["Product_Code"],
-                    });
+                    };
+                    roomResit.Add(receipt);
+                    if (receipt.ProductCode == 8)
+                    {
+                        receipt.PricePerNight += 70;
+
+                    }
                 }
                
             }

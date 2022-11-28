@@ -47,12 +47,13 @@ namespace DAL
 
     }
 
-    public class RoomsHistory: ExistingReservation
+    public class RoomsHistory : ExistingReservation
     {
         public string RoomType { set; get; }
         public int NumberOfNights { set; get; }
         public string PaymentMethod { set; get; }
         public DateTime PurchaseDate { set; get; }
+        public int ProductCode { set; get; }
 
     }
 }

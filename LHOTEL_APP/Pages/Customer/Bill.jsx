@@ -57,7 +57,7 @@ export default function Bill() {
       let temp = await result.json();
       // console.log(temp);
       SetTableData(temp);
-      temp!== null && temp.length !== 0 
+      temp !== null && temp.length !== 0
         ? SetIsDataExists(!isDataExists)
         : alert("The requested information does not exist");
 
@@ -68,8 +68,6 @@ export default function Bill() {
     }
     SetLoading(true);
   };
-
- 
 
   const BilldHistoryData = () => {
     let billNumbers = [];
@@ -130,11 +128,15 @@ export default function Bill() {
 
     return tempData;
   };
- 
+
   const ResitCard = () => {
-  // console.log(tableData);
-    let listRooms = tableData.map((room, index) =>
-      room.ProductCode === 8 ? (
+    // console.log(tableData);
+    // data
+    //   .filter((item) => item.state == "New York")
+    //   .map(({ id, name, city }) => ({ id, name, city }));
+    let listRooms = tableData
+      .filter((room) => room.ProductCode === 8)
+      .map((room, index) => (
         <View
           key={index}
           style={{
@@ -147,11 +149,11 @@ export default function Bill() {
           <Text style={styles.cardText}>{room.RoomType}</Text>
           <Text style={styles.cardText}>{room.PricePerNight} $ </Text>
         </View>
-      ) : null
-    );
+      ));
 
-    let listProducts = tableData.map((room, index) =>
-      room.ProductCode !== 8 ? (
+    let listProducts = tableData
+      .filter((room) => room.ProductCode !== 8)
+      .map((room, index) => (
         <View
           key={index}
           style={{
@@ -163,41 +165,40 @@ export default function Bill() {
           <Text style={styles.cardText}>{room.RoomType}</Text>
           <Text style={styles.cardText}>x {room.NumberOfNights}</Text>
           <Text style={styles.cardText}>{room.PricePerNight} $ </Text>
-
         </View>
-      ) : null
-    );
-console.log(tableData);
+      ));
+
+   console.log(listRooms.length);
     let sumTotal = tableData.reduce(function (prev, current) {
       return current.PricePerNight * current.NumberOfNights + prev;
     }, 0);
-   
+    // console.log(listRooms);
     return (
       <View style={styles.CardStyle}>
         <View style={{ padding: 10 }}>
-         
-          
-            
-            <DatesPattern img={false} EntryDate ={tableData[0].EntryDate} ExitDate ={tableData[0].ExitDate}/>
+          <DatesPattern
+            img={false}
+            EntryDate={tableData[0].EntryDate}
+            ExitDate={tableData[0].ExitDate}
+          />
 
-           
-{
-  tableData[0].Breakfest? <Text style={{paddingTop:15,fontSize:17}}>* Includes breakfast  </Text>:null
-}
-          
+          {tableData[0].Breakfest ? (
+            <Text style={{ paddingTop: 15, fontSize: 17 }}>
+              * Includes breakfast{" "}
+            </Text>
+          ) : null}
         </View>
         <View>
           <Text style={styles.listCardStyle}>Rooms</Text>
           {listRooms}
         </View>
-{
-  listProducts.length>1&& listRooms.length<2?  <Text style={styles.listCardStyle}>Products</Text>:null
-}
+        {listProducts.length > 0? (
+          <Text style={styles.listCardStyle}>Products</Text>
+        ) : null}
         {/* <Text style={styles.listCardStyle}>Products</Text> */}
         <View style={{ padding: 10 }}>
           {listProducts}
           <Text style={{ fontSize: 25 }}>Sum Total: {sumTotal} $</Text>
-        
         </View>
 
         <View></View>
@@ -220,12 +221,12 @@ console.log(tableData);
         requestOptions
       );
       let temp = await result.json();
-   
+
       if (temp) {
         alert("Your room reservation has been cancelled");
         SetTableData(null);
         SetLoading(true);
-        SetIsDataExists(!isDataExists)
+        SetIsDataExists(!isDataExists);
       }
     } catch (error) {
       alert(error);
@@ -239,43 +240,37 @@ console.log(tableData);
         text: "Yes",
         onPress: () => {
           DeleteReservationFromDB();
-
         },
       },
       { text: "No" },
     ]);
   };
   const ReservationCard = () => {
-  
     return (
       <View style={styles.CardStyle}>
-        <View style={{padding:10}}>
+        <View style={{ padding: 10 }}>
+          <Text style={styles.topCardText}>ID: {tableData[0].CustomerID}</Text>
+          <Text style={styles.topCardText}>
+            Name : {tableData[0].FirstName} {tableData[0].LastName}
+          </Text>
+          <Text style={styles.topCardText}>
+            {moment(tableData[0].EntryDate).format("DD/MM/YYYY")} -{" "}
+            {moment(tableData[0].ExitDate).format("DD/MM/YYYY")}
+          </Text>
 
-        
-        <Text style={styles.topCardText}>
-         ID: {tableData[0].CustomerID}
-        </Text>
-        <Text style={styles.topCardText}>
-          Name : {tableData[0].FirstName} {tableData[0].LastName}
-        </Text>
-        <Text style={styles.topCardText}>
-       {moment(tableData[0].EntryDate).format("DD/MM/YYYY")} -{" "}
-          {moment(tableData[0].ExitDate).format("DD/MM/YYYY")}
-        </Text>
-       
-        <Text style={styles.topCardText}>
-          Adults : {tableData[0].AmountOfPeople}
-        </Text>
-        <Text style={styles.topCardText}>Email : {tableData[0].Mail}</Text>
-        <View style={{ alignItems: "center", paddingTop: 10 }}>
-          <TouchableOpacity
-            style={styles.deleteBTN}
-            onPress={() => DeleteReservation()}
-          >
-            <Image style={styles.icon} source={images.trashCan} />
-            <Text style={{fontSize:18}}>Delete Reservation</Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={styles.topCardText}>
+            Adults : {tableData[0].AmountOfPeople}
+          </Text>
+          <Text style={styles.topCardText}>Email : {tableData[0].Mail}</Text>
+          <View style={{ alignItems: "center", paddingTop: 10 }}>
+            <TouchableOpacity
+              style={styles.deleteBTN}
+              onPress={() => DeleteReservation()}
+            >
+              <Image style={styles.icon} source={images.trashCan} />
+              <Text style={{ fontSize: 18 }}>Delete Reservation</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -309,26 +304,25 @@ console.log(tableData);
           break;
       }
       return (
-        <View >
+        <View>
           <View>
-          <TouchableOpacity
-            onPress={() => SetIsDataExists(!isDataExists)}
-            style={{
-              padding: 15,
-              borderRadius: 50,
-              borderColor:'#000',
-              borderWidth:0.4,
-              width:50,
-              height:50,
-              marginBottom:15,
-              left: 5,
-           
-            }}
-          >
-            <Image style={styles.Save} source={images.back} />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => SetIsDataExists(!isDataExists)}
+              style={{
+                padding: 15,
+                borderRadius: 50,
+                borderColor: "#000",
+                borderWidth: 0.4,
+                width: 50,
+                height: 50,
+                marginBottom: 15,
+                left: 5,
+              }}
+            >
+              <Image style={styles.Save} source={images.back} />
+            </TouchableOpacity>
           </View>
-         
+
           {temp}
         </View>
       );
@@ -360,9 +354,7 @@ console.log(tableData);
 
   return (
     <ScrollView>
-      {!isDataExists ?
-        <Text style={styles.HeadLine}>Bill</Text>:null
-      }
+      {!isDataExists ? <Text style={styles.HeadLine}>Bill</Text> : null}
       {user.FirstName === undefined ? (
         <View style={{ alignSelf: "center", padding: 10, paddingTop: 60 }}>
           <Text>A user must be logged in to view the requested tables</Text>
@@ -379,12 +371,8 @@ console.log(tableData);
               numColumns={1}
             />
           )}
-
-       
         </View>
       )}
-
-    
     </ScrollView>
   );
 }
@@ -419,7 +407,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
     marginBottom: 20,
-    marginTop:10,
+    marginTop: 10,
     textAlign: "center",
   },
   header: {
@@ -459,8 +447,8 @@ const styles = StyleSheet.create({
     margin: 6,
   },
   icon: {
-   width:30,
-   height:30
+    width: 30,
+    height: 30,
   },
   save: {
     // backgroundColor: "#CDCDCD",

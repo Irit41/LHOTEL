@@ -56,9 +56,24 @@ namespace BLL
         {
             return DalRooms.DeleteReservation(id);
         }
-        public static List<RoomsHistory> GetAllCustomersHistory(int id)
+        public static Dictionary<string, List<RoomsHistory>> GetAllCustomersHistory(int id)
         {
-            return DalRooms.GetAllCustomersHistory(id);
+            List<RoomsHistory> historyList = DalRooms.GetAllCustomersHistory(id);
+            Dictionary<string, List<RoomsHistory>> allHistoryDict =
+                new Dictionary<string, List<RoomsHistory>>
+                {
+                    { "Rooms", new List<RoomsHistory> ()},
+                    { "Product",  new List<RoomsHistory> () }
+                };
+            foreach (RoomsHistory data in historyList)
+            {
+                if (data.ProductCode == 8) allHistoryDict["Rooms"].Add(data); else allHistoryDict["Product"].Add(data);
+
+
+
+            }
+
+            return allHistoryDict;
         }
 
     }

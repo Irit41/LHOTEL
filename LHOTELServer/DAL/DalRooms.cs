@@ -225,7 +225,7 @@ namespace DAL
         }
 
 
-        public static List<RoomsHistory> GetAllCustomersHistory(int id)
+        public static  List<RoomsHistory> GetAllCustomersHistory(int id)
         {
             List<RoomsHistory> rooms = new List<RoomsHistory>();
 
@@ -249,6 +249,7 @@ namespace DAL
                         PricePerNight = (int)reader["Price_Per_Night"],
                         NumberOfNights = (int)reader["Number_Of_Nights"],
                         PaymentMethod = (string)reader["Payment_Method"],
+                       ProductCode = (int)reader["Product_Code"],
                     });
                 }
             }
