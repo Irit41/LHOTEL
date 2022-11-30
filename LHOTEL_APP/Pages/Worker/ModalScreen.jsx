@@ -22,7 +22,10 @@ export default function ModalScreen(props) {
   const SearchTask = () => {
     let { search } = props.route.params;
     setSearch(search);
-
+    const EditTaskDetails = (taskcode) => {
+        let taskDetails = myContext.allTasks.filter((task) => task.TaskCode === taskcode)[0];
+        props.navigation.navigate("EditTasks", { taskDetails: taskDetails });
+      };
     let task = myContext.allTasks.filter(
       (currtask) => currtask.TaskCode == search
     );
@@ -42,7 +45,7 @@ export default function ModalScreen(props) {
             EndTime={task.EndTime}
             TaskStatus={task.TaskStatus}
             Description={task.Description}
-            EditTaskDetails={[]}
+            EditTaskDetails={EditTaskDetails}
           />
         </View>
       );

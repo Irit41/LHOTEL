@@ -43,9 +43,9 @@ export default function Router() {
   
   const myContext = useContext(AppContext);
 
-const funf=(d)=>{
-if(d==="" )SetShowSearch(false)
-SetText(d)
+const SearchText=(data)=>{
+if(data==="" )SetShowSearch(false)
+SetText(data)
 
 }
 
@@ -202,7 +202,7 @@ SetText(d)
                   // onIconPress: () =>(console.log("fdgdg")),
                   onIconPress={()=> navigation.navigate("ModalScreen",{search:text})}
                   // onEndEditing ={()=>console.log("ggggg")}
-                  onChangeText={(text) => funf(text) }
+                  onChangeText={(text) => SearchText(text) }
                     style={{
                       position: "absolute",
                       width: 250,
