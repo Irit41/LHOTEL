@@ -91,7 +91,7 @@ export default function ShortCheckIn({ navigation }) {
         style={{
           marginHorizontal: 10,
           paddingTop: 10,
-          height: 200 + (Math.ceil(roomsReservation.rooms.length / 3) - 1) * 25,
+          height: 220 + (Math.ceil(roomsReservation.rooms.length / 3) - 1) * 25,
         }}
       >
         <View style={styles.Details}>
@@ -127,7 +127,8 @@ export default function ShortCheckIn({ navigation }) {
             )}{" "}
             nights)
           </Text> */}
-          <Text
+            <View style={styles.Details}>
+            <Text
             style={{
               color: "#888",
               paddingHorizontal: 5,
@@ -138,6 +139,20 @@ export default function ShortCheckIn({ navigation }) {
           >
             {roomsReservation.AmountOfPeople} adults
           </Text>
+            {roomsReservation.Breakfast ? (
+            <Text   style={{
+              color: "#888",
+              paddingRight: 5,
+              paddingTop: 10,
+              fontSize: 17,
+              alignSelf: "flex-end",
+            }}>
+              * Breakfast included{"  | "}
+            </Text>
+          ) : null}
+              
+            </View>
+         
         </View>
 
         <View>

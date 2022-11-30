@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-
+using System.Linq;
 using DAL;
 
 namespace BLL
@@ -56,24 +56,22 @@ namespace BLL
         {
             return DalRooms.DeleteReservation(id);
         }
-        public static Dictionary<string, List<RoomsHistory>> GetAllCustomersHistory(int id)
+        public static List<RoomsHistory> GetAllCustomersHistory(int id)
         {
-            List<RoomsHistory> historyList = DalRooms.GetAllCustomersHistory(id);
-            Dictionary<string, List<RoomsHistory>> allHistoryDict =
-                new Dictionary<string, List<RoomsHistory>>
-                {
-                    { "Rooms", new List<RoomsHistory> ()},
-                    { "Product",  new List<RoomsHistory> () }
-                };
-            foreach (RoomsHistory data in historyList)
+            List<RoomsHistory> customerHistory = DalRooms.GetAllCustomersHistory(id);
+           
+            if (customerHistory != null)
             {
-                if (data.ProductCode == 8) allHistoryDict["Rooms"].Add(data); else allHistoryDict["Product"].Add(data);
+                foreach (RoomsHistory item in customerHistory)
+                {
+                    if (item.ProductCode == 8 && item.Breakfast) item.PricePerNight += 70;
 
 
+
+                }
 
             }
-
-            return allHistoryDict;
+            return customerHistory;
         }
 
     }

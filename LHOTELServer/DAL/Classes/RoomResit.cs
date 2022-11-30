@@ -15,7 +15,7 @@ namespace DAL.Classes
         public string RoomType { set; get; }
         public decimal PricePerNight { set; get; }
         public decimal Amount { set; get; }
-        public bool Breakfest { set; get; }
+        public bool Breakfast { set; get; }
         public DateTime EntryDate { set; get; }
         public DateTime ExitDate { set; get; }
         public int NumberOfNights { set; get; }

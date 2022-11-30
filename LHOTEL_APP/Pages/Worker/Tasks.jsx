@@ -22,23 +22,71 @@ export default function Tasks(props) {
   const myEmployee = myContext.employee;
   const [dropdown, setDropdown] = useState(null);
   const [tasks, SetTasks] = useState([]);
+  const [currentTasks, SetCurrentTasks] = useState([]);
+
   const [tasksDisplay, SetTasksDisplay] = useState([]);
   const [taskToMarkAsDone, SetTaskToMarkAsDone] = useState([]);
   const [loading, SetLoading] = useState(false);
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [search, setSearch] = useState("");
 
-  // useEffect(() => {
-  //   // GetEmployees();
-  //   if (myEmployee.Description === "Manager") GetAllTasksFromDB();
-  //   else GetTasksByID();
-  // }, [props.route.name]);
   useFocusEffect(
     React.useCallback(() => {
+    
       if (myEmployee.Description === "Manager") GetAllTasksFromDB();
       else GetTasksByID();
+      if(props.route.name==="Tasks"){
+        let { search } = props.route.params;
+    
+        SearchTask(search)}
+      // setSearch("");
     }, [props.route.name])
   );
+  useEffect(() => {
+    GetEmployees();
+  }, []);
+ 
+  const GetEmployees = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    let result = await fetch(
+      "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
+      requestOptions
+    );
+    let employees = await result.json();
 
+    if (employees !== null) {
+      let array = [{ label: "Select employee", value: null }];
+      myContext.SetEmployees(employees);
+      employees.map((employee) =>
+        array.push({
+          label: employee.EmployeeName,
+          value: employee.EmployeeName,
+        })
+      );
+
+      myContext.SetRoomServiceEmpView(array);
+
+      // SetLoading(true);
+      return;
+    }
+    GetEmployees();
+  };
+  const SearchTask = (value) => {
+    setSearch(value);
+    let task = tasks.filter((currtask) => currtask.TaskCode == value);
+// console.log(tasks);
+    if (task.length ===1) {
+      SetTasksDisplay(task);
+    }
+  
+    // if (task.length > 0) {
+    //   SetTasksDisplay(task);
+    // } else {
+    //   SetTasksDisplay(currentTasks);
+    // }
+  };
   const GetTasksByID = async () => {
     try {
       const requestOptions = {
@@ -57,6 +105,7 @@ export default function Tasks(props) {
 
       if (temp !== null) {
         SetTasks(temp);
+        myContext.SetAllTasks(temp)
         HandelRequest(temp);
 
         SetLoading(true);
@@ -80,6 +129,7 @@ export default function Tasks(props) {
       let temp = await result.json();
       //  console.log(temp);
       if (temp !== null) {
+        myContext.SetAllTasks(temp)
         SetTasks(temp);
         HandelRequest(temp);
         // forceUpdate();
@@ -97,7 +147,6 @@ export default function Tasks(props) {
   };
 
   const HandelRequest = (allTasks) => {
-    // console.log(tasks);
     let listTemp = null;
     switch (props.route.name) {
       case "All Tasks":
@@ -119,30 +168,54 @@ export default function Tasks(props) {
     }
 
     SetTasksDisplay(listTemp);
+    // SetCurrentTasks(listTemp);
   };
 
-  // const MarkTaskAsDone = (taskCode) => {
-  //   let newArrayTasks = tasksDisplay.filter(
-  //     (task) => task.TaskCode === taskCode
-  //   )[0];
-  //   let temp = [...taskToMarkAsDone, newArrayTasks];
-  //   SetTaskToMarkAsDone(temp);
-  // };
+  // let tasksList = tasksDisplay.map((task) => (
+  //   <TasksCard
+  //     key={task.TaskCode}
+  //     TaskCode={task.TaskCode}
+  //     EmployeeID={task.EmployeeID}
+  //     EmployeeName={task.EmployeeName}
+  //     TaskName={task.TaskName}
+  //     RoomNumber={task.RoomNumber}
+  //     StartDate={moment(task.StartDate).format("DD/MM/YYYY")}
+  //     StartTime={task.StartTime}
+  //     EndTime={task.EndTime}
+  //     TaskStatus={task.TaskStatus}
+  //     Description={task.Description}
+  //     EditTaskDetails={EditTaskDetails}
+  //   />
+  // ));
+  // onPress={CloseTask}
+  return (
+    <View>
+      {/* <Searchbar
+        style={Styles.searchbar}
+        placeholder="search by task number ..."
+        onChangeText={SearchTask}
+        value={search}
+      /> */}
 
-  // const RemoveFromCheck = (taskCode) => {
-  //   let newArrayTasks = taskToMarkAsDone.filter(
-  //     (task) => task.TaskCode !== taskCode
-  //   );
-  //   SetTaskToMarkAsDone(newArrayTasks);
-  // };
+      {/* {tasksDisplay.length > 5 ? (
+        <Searchbar
+          style={Styles.searchbar}
+          placeholder="search by task number ..."
+          onChangeText={SearchTask}
+
+          value={search}
+        />
+      ) : null} */}
 
 
-  // const Spinner = () => (
-  //   <View style={[Styles.container, Styles.horizontal]}>
-  //     <ActivityIndicator size="large" />
-  //   </View>
-  // );
-  let tasksList = tasksDisplay.map((task) => (
+
+
+
+ {/* <ScrollView style={{ marginBottom: tasksDisplay.length > 5 ? 90 : 0 }}> */}
+
+ 
+      <ScrollView >
+        <View style={Styles.items}>{loading ? tasksDisplay.map((task) => (
     <TasksCard
       key={task.TaskCode}
       TaskCode={task.TaskCode}
@@ -156,23 +229,8 @@ export default function Tasks(props) {
       TaskStatus={task.TaskStatus}
       Description={task.Description}
       EditTaskDetails={EditTaskDetails}
-      // MarkTaskAsDone={MarkTaskAsDone}
-      // RemoveFromCheck={RemoveFromCheck}
     />
-  ));
-
-  return (
-    <View>
-      {tasksDisplay.length > 5 ? (
-        <Searchbar
-          style={Styles.searchbar}
-          placeholder="search by name ..."
-          value={"search"}
-        />
-      ) : null}
-
-      <ScrollView style={{ marginBottom: tasksDisplay.length > 5 ? 90 : 0 }}>
-        <View style={Styles.items}>{loading ? tasksList : <Spinner />}</View>
+  )) : <Spinner />}</View>
       </ScrollView>
     </View>
   );
@@ -224,16 +282,17 @@ const Styles = StyleSheet.create({
     backgroundColor: "#D9E7E0",
     padding: 10,
     borderRadius: 50,
-    width: 70,
+    width: 55,
+    height: 55,
     position: "absolute",
-    bottom: 75,
-    left: 30,
+    bottom: 95,
+    right: 20,
     borderWidth: 2,
     zIndex: 2,
   },
   save: {
     alignSelf: "center",
-    width: 30,
+    width: 25,
     height: 25,
   },
   container: {

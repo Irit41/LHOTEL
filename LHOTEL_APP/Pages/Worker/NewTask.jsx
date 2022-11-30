@@ -76,7 +76,7 @@ export default function NewTask({ route, navigation }) {
   // };
   useFocusEffect(
     React.useCallback(() => {
-      GetEmployees();
+      // GetEmployees();
    
       SetTask({
         TaskCode: null,
@@ -131,30 +131,7 @@ export default function NewTask({ route, navigation }) {
     );
   };
   // console.log(tasks);
-  const GetEmployees = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    let result = await fetch(
-      "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
-      requestOptions
-    );
-    let employees = await result.json();
-
-    if (employees !== null) {
-      let array =[ { label: "Select employee", value: null }]
-      myContext.SetEmployees(employees);
-      employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
-
-      myContext.SetRoomServiceEmpView(array);
-
-      // SetLoading(true);
-      return;
-    }
-    GetEmployees();
-
-  };
+ 
   // console.log(myContext.roomServiceEmpView);
   const AddNewTask = async () => {
    if (task.EmployeeName !== null)
@@ -164,7 +141,7 @@ export default function NewTask({ route, navigation }) {
           (obj) => obj.EmployeeName === task.EmployeeName
         )
       ].EmployeeID;
-// console.log(task);
+
     try {
       if (!CheckValues()) {
         alert("The fields are not filled correctly");
@@ -181,16 +158,13 @@ export default function NewTask({ route, navigation }) {
       );
       if (result) {
         alert("Task details successfully saved");
-        navigation.navigate("WorkerMenu");
+        navigation.goBack();
       }
     } catch (error) {
       alert(error);
     }
   };
-  // console.log(
-  //   myContext.employees.findIndex(
-  //     (obj) => obj.EmployeeName === "Yoni rich"
-  //   ));
+  
   return (
     <ScrollView style={{ paddingHorizontal: 15 }}>
       <Text style={styles.NewTaskStyle}>New Task</Text>
@@ -247,9 +221,9 @@ export default function NewTask({ route, navigation }) {
       <View style={styles.timeStyle}>
         <View style={styles.StartEndTimeStyle}>
           <TouchableOpacity onPress={() => setFlagStartTime(true)}>
-            <Text style={{ fontSize: 18 }}>Start : {task.StartTime}</Text>
+            <Text style={{ fontSize: 18 ,padding:7,marginRight:10}}>Start : {task.StartTime}</Text>
           </TouchableOpacity>
-          <TextInput.Icon name="clock" size={25} style={{ paddingRight: 5 }} />
+          <TextInput.Icon name="clock" size={25} style={{ paddingRight: 15 }} />
         </View>
 
         <View style={styles.StartEndTimeStyle}>
@@ -257,9 +231,9 @@ export default function NewTask({ route, navigation }) {
             onPress={() => setFlagEndTime(true)}
             style={styles.Btn}
           >
-            <Text style={{ fontSize: 18 }}>Until : {task.EndTime}</Text>
+            <Text style={{ fontSize: 18 ,padding:7,marginRight:10}}>Until : {task.EndTime}</Text>
           </TouchableOpacity>
-          <TextInput.Icon name="clock" size={25} style={{ paddingRight: 5 }} />
+          <TextInput.Icon name="clock" size={25} style={{ paddingRight: 15 }} />
         </View>
       </View>
       <DateTimePickerModal
@@ -338,7 +312,7 @@ const styles = StyleSheet.create({
   NewTaskStyle: {
     fontSize: 40,
     fontWeight: "bold",
-    paddingTop: 20,
+    paddingTop: 60,
     alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
@@ -380,7 +354,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   CheckboxContainer: {
-    marginVertical: 5,
+    marginVertical: 25,
   },
   save: {
     width: 30,
@@ -389,7 +363,8 @@ const styles = StyleSheet.create({
   timeStyle: {
     flexDirection: "row-reverse",
     alignItems: "center",
-
+margin:5,
+paddingVertical:10,
     justifyContent: "space-between",
   },
   StartEndTimeStyle: {
@@ -401,7 +376,8 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 10,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   TextInputStyle: {
     marginBottom: 5,

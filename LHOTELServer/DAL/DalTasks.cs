@@ -202,7 +202,7 @@ namespace DAL
                     return false;
                 }
 
-                string str = $@"exec AlterTask {task.TaskCode},{task.EmployeeID},{task.RoomNumber},
+                string str = $@"exec AlterTask {task.TaskCode},{task.EmployeeID},'{task.EmployeeName}',{task.RoomNumber},
 '{task.TaskName}','{task.StartTime}','{task.EndTime}','{task.TaskStatus}','{task.Description}'";
                
                 str = str.Replace("\r\n", string.Empty);

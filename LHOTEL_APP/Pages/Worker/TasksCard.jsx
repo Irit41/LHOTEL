@@ -36,8 +36,9 @@ export default function TasksCard(props) {
     return (
         <View style={{ backgroundColor: TaskStatus==='Open'? 'rgba(35,100,168, 0.4)': '#C0C0C0',
         borderBottomColor: 'black',
-        borderRadius: 5,
+        borderRadius: 5,height:255,
         margin: 10,}}>
+         
             <View style={styles.Details}>
           
             <Text>{StartDate}</Text>
@@ -51,10 +52,10 @@ export default function TasksCard(props) {
                    
                 </View>
 
-                <View style={styles.Details}>
-                <Text>Status: {TaskStatus}</Text>
-                    <Text style={{fontWeight: EmployeeID === -1 ? 'bold':'400',color: EmployeeID === -1 ? 'red':'black'}}>Name : {EmployeeName}</Text>
-                </View>
+               
+                <Text style={{padding:5}}>Status: {TaskStatus}</Text>
+                    <Text style={{fontWeight: EmployeeID === -1 ? 'bold':'400',color: EmployeeID === -1 ? 'red':'black',padding:5}}>Name : {EmployeeName}</Text>
+               
 
                 <View style={styles.Details}>
                     {EndTime === null ? <Text>End Time : </Text> : <Text>End Time : {EndTime}</Text>}
@@ -99,7 +100,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         backgroundColor:'white',
-   
+        height:220,
+        paddingHorizontal:5
     },
 
     Details: {

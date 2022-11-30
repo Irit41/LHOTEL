@@ -20,8 +20,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { DatesPattern } from "../../styles";
 
 export default function Bill() {
-  const [tableData, SetTableData] = useState(null);
-  const [loading, SetLoading] = useState(true);
+  const [dataTable, SetDataTable] = useState(null);
+
   const [isDataExists, SetIsDataExists] = useState(false);
   const [request, SetRequest] = useState("");
   const myContext = useContext(AppContext);
@@ -29,7 +29,7 @@ export default function Bill() {
 
   const bills = [
     { label: "Reservation", value: "GetReservedRoomsByCustomerId" },
-    { label: "Room Resit", value: "GetRoomResit" },
+    { label: "Room receipt", value: "GetRoomResit" },
     { label: "Previous Reservationes", value: "GetAllCustomersHistory" },
   ];
   useFocusEffect(
@@ -40,7 +40,6 @@ export default function Bill() {
 
   const FetchTableFromDB = async (request) => {
     try {
-      SetLoading(false);
       SetRequest(request);
       const requestOptions = {
         method: "PUT",
@@ -49,29 +48,25 @@ export default function Bill() {
         }),
         headers: { "Content-Type": "application/json" },
       };
-      // console.log(request);
+
       let result = await fetch(
         "http://proj13.ruppin-tech.co.il/" + request,
         requestOptions
       );
       let temp = await result.json();
-      // console.log(temp);
-      SetTableData(temp);
+
+      SetDataTable(temp);
       temp !== null && temp.length !== 0
         ? SetIsDataExists(!isDataExists)
         : alert("The requested information does not exist");
-
-      SetLoading(true);
-      // SetFlag(!flag)
     } catch (error) {
       alert(error);
     }
-    SetLoading(true);
   };
 
   const BilldHistoryData = () => {
     let billNumbers = [];
-    tableData.map(function (per) {
+    dataTable.map(function (per) {
       if (
         billNumbers.find((number) => number.BillNumber === per.BillNumber) ===
         undefined
@@ -88,7 +83,7 @@ export default function Bill() {
 
     let tempData = [];
     for (let index = 0; index < billNumbers.length; index++) {
-      let temp = tableData
+      let temp = dataTable
         .filter((per) => per.BillNumber === billNumbers[index].BillNumber)
         .map(
           ({
@@ -129,12 +124,8 @@ export default function Bill() {
     return tempData;
   };
 
-  const ResitCard = () => {
-    // console.log(tableData);
-    // data
-    //   .filter((item) => item.state == "New York")
-    //   .map(({ id, name, city }) => ({ id, name, city }));
-    let listRooms = tableData
+  const ReceiptCard = () => {
+    let listRooms = dataTable
       .filter((room) => room.ProductCode === 8)
       .map((room, index) => (
         <View
@@ -151,7 +142,7 @@ export default function Bill() {
         </View>
       ));
 
-    let listProducts = tableData
+    let listProducts = dataTable
       .filter((room) => room.ProductCode !== 8)
       .map((room, index) => (
         <View
@@ -168,23 +159,22 @@ export default function Bill() {
         </View>
       ));
 
-   console.log(listRooms.length);
-    let sumTotal = tableData.reduce(function (prev, current) {
+    let sumTotal = dataTable.reduce(function (prev, current) {
       return current.PricePerNight * current.NumberOfNights + prev;
     }, 0);
-    // console.log(listRooms);
+
     return (
       <View style={styles.CardStyle}>
         <View style={{ padding: 10 }}>
           <DatesPattern
             img={false}
-            EntryDate={tableData[0].EntryDate}
-            ExitDate={tableData[0].ExitDate}
+            EntryDate={dataTable[0].EntryDate}
+            ExitDate={dataTable[0].ExitDate}
           />
 
-          {tableData[0].Breakfest ? (
+          {dataTable[0].Breakfast ? (
             <Text style={{ paddingTop: 15, fontSize: 17 }}>
-              * Includes breakfast{" "}
+              * Breakfast included
             </Text>
           ) : null}
         </View>
@@ -192,7 +182,7 @@ export default function Bill() {
           <Text style={styles.listCardStyle}>Rooms</Text>
           {listRooms}
         </View>
-        {listProducts.length > 0? (
+        {listProducts.length > 1 && listRooms.length < 2 ? (
           <Text style={styles.listCardStyle}>Products</Text>
         ) : null}
         {/* <Text style={styles.listCardStyle}>Products</Text> */}
@@ -224,14 +214,13 @@ export default function Bill() {
 
       if (temp) {
         alert("Your room reservation has been cancelled");
-        SetTableData(null);
-        SetLoading(true);
+        SetDataTable(null);
+
         SetIsDataExists(!isDataExists);
       }
     } catch (error) {
       alert(error);
     }
-    SetLoading(true);
   };
 
   const DeleteReservation = () => {
@@ -249,19 +238,19 @@ export default function Bill() {
     return (
       <View style={styles.CardStyle}>
         <View style={{ padding: 10 }}>
-          <Text style={styles.topCardText}>ID: {tableData[0].CustomerID}</Text>
+          <Text style={styles.topCardText}>ID: {dataTable[0].CustomerID}</Text>
           <Text style={styles.topCardText}>
-            Name : {tableData[0].FirstName} {tableData[0].LastName}
+            Name : {dataTable[0].FirstName} {dataTable[0].LastName}
           </Text>
           <Text style={styles.topCardText}>
-            {moment(tableData[0].EntryDate).format("DD/MM/YYYY")} -{" "}
-            {moment(tableData[0].ExitDate).format("DD/MM/YYYY")}
+            {moment(dataTable[0].EntryDate).format("DD/MM/YYYY")} -{" "}
+            {moment(dataTable[0].ExitDate).format("DD/MM/YYYY")}
           </Text>
 
           <Text style={styles.topCardText}>
-            Adults : {tableData[0].AmountOfPeople}
+            Adults : {dataTable[0].AmountOfPeople}
           </Text>
-          <Text style={styles.topCardText}>Email : {tableData[0].Mail}</Text>
+          <Text style={styles.topCardText}>Email : {dataTable[0].Mail}</Text>
           <View style={{ alignItems: "center", paddingTop: 10 }}>
             <TouchableOpacity
               style={styles.deleteBTN}
@@ -277,14 +266,14 @@ export default function Bill() {
   };
 
   const CreateCard = () => {
-    if (tableData !== null && tableData.length > 0) {
+    if (dataTable !== null && dataTable.length > 0) {
       let temp = null;
       switch (request) {
         case "GetReservedRoomsByCustomerId":
           temp = ReservationCard();
           break;
         case "GetRoomResit":
-          temp = ResitCard();
+          temp = ReceiptCard();
           break;
         case "GetAllCustomersHistory":
           let data = BilldHistoryData();
@@ -360,10 +349,11 @@ export default function Bill() {
           <Text>A user must be logged in to view the requested tables</Text>
         </View>
       ) : (
-        <View style={styles.DropdownContainer}>
+        <View style={{ padding: 20 }}>
           {isDataExists ? (
             <CreateCard />
           ) : (
+            
             <FlatList
               data={bills}
               renderItem={BillTypeCard}
@@ -410,13 +400,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
   },
-  header: {
-    paddingVertical: 20,
 
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-  },
   virtualTag: {
     top: -35,
     width: 150,
@@ -427,40 +411,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  DropdownContainer: {
-    padding: 20,
-  },
-  dropdown: {
-    backgroundColor: "white",
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
-    marginTop: 20,
-  },
-  tableContainer: {
-    padding: 10,
-  },
-  head: {
-    height: 60,
-    backgroundColor: "#f1f8ff",
-  },
-  text: {
-    margin: 6,
-  },
   icon: {
     width: 30,
     height: 30,
   },
-  save: {
-    // backgroundColor: "#CDCDCD",
-    padding: 15,
-    borderRadius: 50,
 
-    position: "absolute",
-    // top:5,
-    left: 5,
-    // borderWidth: 0.2,
-    zIndex: 2,
-  },
   Save: {
     width: 20,
     height: 20,
@@ -477,7 +432,7 @@ const styles = StyleSheet.create({
   },
   CardStyle: {
     backgroundColor: "#CDCDCD",
-    // padding: 10,
+
     borderColor: "black",
     borderRadius: 5,
     borderWidth: 1,
@@ -492,11 +447,5 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
 
     fontSize: 16,
-  },
-  detailsBill: {
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingBottom: 5,
   },
 });

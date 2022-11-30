@@ -55,5 +55,6 @@ namespace DAL
         public DateTime PurchaseDate { set; get; }
         public int ProductCode { set; get; }
 
+
     }
 }

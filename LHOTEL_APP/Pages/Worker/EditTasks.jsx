@@ -70,7 +70,7 @@ export default function EditTasks({ route, navigation }) {
   useEffect(() => {
     if (route.params !== undefined) {
       SetTask(route.params.taskDetails);
-      console.log(task);
+      // console.log(task);
       SetWorkerNotes("");
       // SetTaskStatus(
       //   route.params.taskDetails.TaskStatus === "Open" ? true : false
@@ -104,13 +104,13 @@ export default function EditTasks({ route, navigation }) {
   };
 
   const AlterTask = async () => {
-    // if (task.EmployeeName !== null)
-    //   task.EmployeeID =
-    //     myContext.employees[
-    //       myContext.employees.findIndex(
-    //         (obj) => obj.EmployeeName === task.EmployeeName
-    //       )
-    //     ].EmployeeID;
+    if (task.EmployeeName !== null && task.EmployeeID === -1)
+      task.EmployeeID =
+        myContext.employees[
+          myContext.employees.findIndex(
+            (obj) => obj.EmployeeName === task.EmployeeName
+          )
+        ].EmployeeID;
         console.log(task);
 
     try {
@@ -316,32 +316,29 @@ export default function EditTasks({ route, navigation }) {
             value={task.EmployeeName}
             onChange={(Name) => (task.EmployeeName = Name.value)}
           />
-          {/* <Dropdown
-                      style={styles.dropdown}
-
-            data={RequestType}
-            labelField="label"
-            valueField="value"
-            placeholder="Task Request"
-            value={task.TaskName}
-            onChange={(taskName) => (task.TaskName = taskName.value)}
-          /> */}
-          {
-            workerNotes ==="" ? <Text style={{ fontSize: 18, paddingRight: 20, fontWeight: "bold" }}>
-            Status : {task.TaskStatus.split('|')[0]}
-          </Text>:
-      <TouchableOpacity  style ={{ paddingVertical: 25,paddingHorizontal:5,
-        backgroundColor: "#EEEEEE",
-        borderRadius: 22,}}onPress={() => alert(workerNotes)}>
-         <Badge
+           <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              justifyContent: "center",
+              padding: 15,
+              backgroundColor: "#EEEEEE",
+              borderRadius: 22,
+            }}
+            onPress={() => toggleNotesModal()}
+          >
+            {task.Description !== null ? (
+              <Badge
                 status="primary"
-            
-                containerStyle={{ position: "absolute", top: 5, left: 0 }}
+                value={"1"}
+                containerStyle={{ position: "absolute", top: -4, left: -2 }}
               />
-      <Text style={{ fontSize: 18 , paddingRight: 21, fontWeight: "bold"}}> Status  :  {task.TaskStatus.split('|')[0]}</Text>
-    </TouchableOpacity>
-          }
-    
+            ) : null}
+            <Text style={{ paddingHorizontal: 10, fontSize: 20 }}>Notes</Text>
+            <Image style={styles.save} source={images.tasks} />
+          </TouchableOpacity>
+      
+         
         </View>
 
         <View style={styles.timeStyle}>
@@ -368,6 +365,7 @@ export default function EditTasks({ route, navigation }) {
               size={25}
               style={{ paddingRight: 5 }}
             />
+
           </View>
         </View>
         <DateTimePickerModal
@@ -383,30 +381,23 @@ export default function EditTasks({ route, navigation }) {
           onConfirm={handelTimeEnd}
           onCancel={() => setFlagEndTime(false)}
         />
-
-        <View style={{ alignItems: "flex-end", margin: 20 }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              justifyContent: "center",
-              padding: 15,
-              backgroundColor: "#EEEEEE",
-              borderRadius: 22,
-            }}
-            onPress={() => toggleNotesModal()}
-          >
-            {task.Description !== null ? (
-              <Badge
+ {
+            workerNotes ==="" ? <Text style={{ fontSize: 18, padding: 20, fontWeight: "bold" }}>
+            Status : {task.TaskStatus.split('|')[0]}
+          </Text>:
+      <TouchableOpacity  style ={{ paddingVertical: 25,paddingHorizontal:5,
+        backgroundColor: "#EEEEEE",
+        borderRadius: 22,}}onPress={() => alert(workerNotes)}>
+         <Badge
                 status="primary"
-                value={"1"}
-                containerStyle={{ position: "absolute", top: -4, left: -2 }}
+            
+                containerStyle={{ position: "absolute", top: 5, left: 0 }}
               />
-            ) : null}
-            <Text style={{ paddingHorizontal: 10, fontSize: 20 }}>Notes</Text>
-            <Image style={styles.save} source={images.tasks} />
-          </TouchableOpacity>
-        </View>
+      <Text style={{ fontSize: 18 , paddingRight: 21, fontWeight: "bold"}}> Status  :  {task.TaskStatus.split('|')[0]}</Text>
+    </TouchableOpacity>
+          }
+    
+       
         <Modal isVisible={isStatusModalVisible}>
           <View
             style={{

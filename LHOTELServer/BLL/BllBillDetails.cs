@@ -10,41 +10,23 @@ namespace BLL
 {
     public abstract class BllBillDetails
     {
-        public static Dictionary<string, List<RoomResit>> RoomResit(int id)
+        public static List<RoomResit> RoomResit(int id)
         {
             List<RoomResit> roomResit = DalBillDetails.RoomResit(id);
-            Dictionary<string, List<RoomResit>> receipts =
-                new Dictionary<string, List<RoomResit>>
-                {
-                    { "Rooms", new List<RoomResit> ()},
-                    { "Product",  new List<RoomResit> () }
-                };
-            foreach (RoomResit receipt in roomResit)
+
+            var firstOrDefault = roomResit.FirstOrDefault();
+            if (firstOrDefault != null && firstOrDefault.Breakfast)
             {
-                if (receipt.ProductCode == 8) receipts["Rooms"].Add(receipt); else receipts["Product"].Add(receipt);
+                foreach (RoomResit item in roomResit)
+                {
+                    if (item.ProductCode == 8) item.PricePerNight += 70;
 
+             
 
+                }
 
             }
-
-
-            //var firstOrDefault = roomResit.FirstOrDefault();
-            //if (firstOrDefault != null && firstOrDefault.Breakfest)
-            //{
-            //    foreach (RoomResit item in roomResit)
-            //    {
-            //        if (item.ProductCode == 8)
-            //        {
-            //            item.PricePerNight += 70;
-
-            //        }
-
-
-
-            //    }
-
-            //}
-            return receipts;
+            return roomResit;
         }
         public static bool AddCharge(Charge charge)
         {

@@ -169,14 +169,6 @@ export default function CheckOut() {
           </View>
         
         
-            {/* <View style={Styles.Details}>
-            <Text style={{ padding: 10, alignSelf: "flex-end", fontSize: 18 }}>
-            FROM : {moment(item.EntryDate).format("DD.MM.YYYY")}
-          </Text>
-          <Text style={{ padding: 10, alignSelf: "flex-end", fontSize: 18 }}>
-            TO : {moment(item.ExitDate).format("DD.MM.YYYY")}
-          </Text>
-            </View> */}
 
           <View
             style={{

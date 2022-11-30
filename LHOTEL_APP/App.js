@@ -68,6 +68,7 @@ export default function App() {
 
   const [employee, setEmployee] = useState({});
   const [user, SetUser] = useState({})
+  const [allTasks, SetAllTasks] = useState([]);
 
   const setEmployeeDB = (obj) => {
     setEmployee(obj)
@@ -93,6 +94,7 @@ export default function App() {
     roomsReservation: roomsReservation,
     employees:employees,
     roomServiceEmpView:roomServiceEmpView,
+    allTasks:allTasks,
     setEmployeeDB,
     setUserDB,
     setIsUserExist,
@@ -100,7 +102,8 @@ export default function App() {
     SetReservastionData,
     SetRooms_flags,
     SetEmployees,
-    SetRoomServiceEmpView
+    SetRoomServiceEmpView,
+    SetAllTasks
    
   };
 

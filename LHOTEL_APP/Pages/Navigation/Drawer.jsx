@@ -11,7 +11,7 @@ import Payment from "../Customer/Payment";
 import ConfirmationPage from "../Customer/ConfirmationPage";
 import Credit from "../Credit";
 import AppContext from "../../AppContext";
-import RoomService from "../Customer/RoomService";
+import LhotelService from "../Customer/LhotelService";
 import Products from "../Customer/Products";
 import Bill from "../Customer/Bill";
 import CustomDrawer from "./CustomDrawer";
@@ -158,8 +158,8 @@ export default function Drawer() {
         />
         {/* drawerItemStyle: isUserConnected ?  {}:  { display: "none" }, */}
         <drawer.Screen
-          name="Room Service"
-          component={RoomService}
+          name="Lhotel Service"
+          component={LhotelService}
           options={{
             drawerItemStyle: isAtHotel ? {} : { display: "none" },
             headerTitle: " ",

@@ -7,7 +7,7 @@ import { images } from "../../images";
 export default function BillHistoryCard(props) {
   let { BillNumber, BillDate, EntryDate, ExitDate, SumTotal, BillDetailes } =
     props;
-
+console.log(BillDetailes);
   return (
     <View   style={{margin:10}}>
         
@@ -22,9 +22,14 @@ export default function BillHistoryCard(props) {
           <Text style={styles.topCardText}>
             Dates : {EntryDate} - {ExitDate}
           </Text>
-    
+         
         </View>
-
+        {
+            BillDetailes[0].Breakfast ?   <Text style={{paddingLeft:10,paddingBottom:15}}>
+            * Breakfast included
+            </Text>:null
+          }
+        
         {BillDetailes.map((bill,index) =>
           bill.RoomType !== "Single room" &&
           bill.RoomType !== "Double room" &&

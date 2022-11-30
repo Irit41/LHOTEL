@@ -1503,87 +1503,13 @@ begin tran
 	end
 commit tran
 go
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-alter proc AlterTaskByManager
-@Tasks_Code int,
-@Employee_ID int, 
-@Employee_Name nvarchar(30),
-@Room_Number int,
-@Task_Name nvarchar(30),
-@Start_Time time(7) ,
-@End_Time time(7),
-@Task_Status nvarchar(30),
-@Description nvarchar(30)
-as
-begin tran
-declare @time nvarchar(5)
-set @time = CONVERT(TIME, GETDATE())
-
-		  IF @Employee_ID != null  and NOT EXISTS (SELECT Employee_ID FROM Shifts WHERE (Employee_ID = @Employee_ID))
-    BEGIN
- exec ClockIn  @Employee_ID,@time
-  exec AlterTask @Tasks_Code,@Employee_ID, @Employee_Name ,@Room_Number ,@Task_Name ,@Start_Time,@End_Time,@Task_Status,@Description 
-	END
-	  IF @Employee_ID != null  and NOT EXISTS (SELECT Employee_ID FROM Shifts WHERE (Employee_ID = @Employee_ID))
-    BEGIN
-			set @time = CONVERT(TIME, GETDATE())
-		exec ClockOut  @Employee_ID,@time
-		end
-	delete from Shifts where Employee_ID = @Employee_ID
-	if (@@error !=0)
-	begin
-
-		rollback tran
-		print 'error'
-		return
-	end
-commit tran
-go
-
-
-
-
-
-
-
-
-
-
-
 --exec GetAllTasks
 --exec GetAllShifts
 --select * from Shifts
 --exec AlterTask 92,-1,13,'Room Service','12:10','12:10','Open',''
 --select * from [dbo].[Employees_Tasks]
 	delete from Shifts where Employee_ID =333
-
-	exec AlterTaskByManager 44,333,6,'Room Service','09:51','10:54','Opzczxczxcen','Pizza'
-		declare @time nvarchar(5)
-
-		set @time = CONVERT(TIME, GETDATE())
-	exec ClockIn 333,@time
-
-
+	exec AlterTask 44,333,'ccc',6,'Room Service','09:51','10:54','Completed','Pizza'
 	@Tasks_Code int,
 @Employee_ID int, 
 @Employee_Name nvarchar(30),
@@ -1613,14 +1539,15 @@ go
 
 
 
-create proc CloseTask
+alter proc CloseTask
+@Task_Status nvarchar(150),
 @Task_Code int,
 @time nvarchar(5)
 as
 begin tran
 	UPDATE [dbo].[Employees_Tasks]
 	SET 
-	[Task_Status]='Close',
+	[Task_Status]=@Task_Status,
 	[End_Time] = @time
 	WHERE [Task_Code] = @Task_Code
 	if (@@error !=0)
@@ -2142,6 +2069,10 @@ select * from  AvailableRooms()
 --
 
 
+[object Object],[object Object],[object Object],[object Object][object Object],[object Object]
+[object Object],[object Object],[object Object],[object Object][object Object],[object Object]
+
+
 
 
 --select * from [dbo].[Bill_Details]
@@ -2149,8 +2080,9 @@ select * from  AvailableRooms()
 --exec AddNewBill_Detail 111111112,21,'Coca cola',9,'Cash'
 --exec CheckIn 111111112, '2022-08-22'
 --exec CheckOut 111111112, '2022-08-24'
---exec Room_Resit 111111119
---exec GetAllCustomersHistory 111111112
+exec Room_Resit 111111119
+exec GetAllCustomersHistory 111111119
+DELETE from Purchases_Documentation where Bill_Number= 12
 --select * from Bill_Details
 --where Customer_ID = 111111112
 --select * from [dbo].[Customers_Rooms]

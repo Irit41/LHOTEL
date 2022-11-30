@@ -29,7 +29,7 @@ const RequestType = [
   { label: "Product purchase", value: "Product purchase" },
 ];
 
-export default function RoomService({ navigation }) {
+export default function LhotelService({ navigation }) {
   const myContext = useContext(AppContext);
 
 
@@ -131,7 +131,7 @@ export default function RoomService({ navigation }) {
 
   return (
     <ScrollView>
-      <Text style={styles.HeadLine}>LHotel Room Service</Text>
+      <Text style={styles.HeadLine}>LHotel Service</Text>
       <View style={styles.label}>
         <View style={styles.container}>
           <Dropdown
