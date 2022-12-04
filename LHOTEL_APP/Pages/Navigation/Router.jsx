@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import Home from "../Home";
 import Drawer from "./Drawer";
-// import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import Tasks from "../Worker/Tasks";
 import Registration from "../Customer/Registration";
@@ -9,6 +9,7 @@ import ConfirmationPage from "../Customer/ConfirmationPage";
 import CustomerHome from "../Customer/CustomerHome";
 import WorkerMenu from "../Worker/WorkerMenu";
 import { Searchbar } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -37,17 +38,7 @@ const Stack = createNativeStackNavigator();
 const MaterialTopTabs = createMaterialTopTabNavigator();
 
 export default function Router() {
-  const [showSearch, SetShowSearch] = useState(false);
-  const [isSearchIconPressed, SetIsSearchIconPressed] = useState(false);
-  const [text, SetText] = useState(" ");
-  
   const myContext = useContext(AppContext);
-
-const SearchText=(data)=>{
-if(data==="" )SetShowSearch(false)
-SetText(data)
-
-}
 
   return (
     <NavigationContainer independent={true}>
@@ -169,66 +160,18 @@ SetText(data)
           component={Products}
           options={{ headerShown: myContext.isIos }}
         />
-         <Stack.Screen
-    name="ModalScreen"
-    component={ModalScreen}
-    options={{ presentation: 'transparentModal' , headerShown: false}}
-  
-  />
+        <Stack.Screen
+          name="ModalScreen"
+          component={ModalScreen}
+          options={{ presentation: "transparentModal", headerShown: false }}
+        />
 
         <Stack.Screen
           name="Top"
           children={createTopTabs}
           options={({ navigation }) => ({
             headerTitle: "",
-            headerRight: () => (
-              <View
-                style={{
-                  flexDirection: "row-reverse",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Icon
-                  name="addfile"
-                  type="antdesign"
-                  size={27}
-                  color="#fff"
-                  style={{ paddingLeft: 15 }}
-                  onPress={() => navigation.navigate("NewTask")}
-                />
-                {showSearch ? (
-                  <Searchbar
-                  // onIconPress: () =>(console.log("fdgdg")),
-                  onIconPress={()=> navigation.navigate("ModalScreen",{search:text})}
-                  // onEndEditing ={()=>console.log("ggggg")}
-                  onChangeText={(text) => SearchText(text) }
-                    style={{
-                      position: "absolute",
-                      width: 250,
-                      left: 55,
-                      alignSelf: "center",
-
-                      backgroundColor: "#CDCDCD",
-
-                      borderRadius: 12,
-                      zIndex: 2,
-                    }}
-                    placeholder="search by task number ..."
-                    value={text}
-                  />
-                ) : (
-                  <Icon
-                    name="search"
-                    size={29}
-                    color="#fff"
-                    style={{ paddingHorizontal: 20 }}
-                    onPress={() => SetShowSearch(!showSearch)}
-                  />
-                )}
-               
-              </View>
-            ),
+            headerRight: () => <SreachView navigation={navigation} />,
             headerTintColor: "white",
             headerMode: "none",
             headerStyle: {
@@ -246,6 +189,73 @@ SetText(data)
     </NavigationContainer>
   );
 }
+const SreachView = ({ navigation }) => {
+  const [showSearch, SetShowSearch] = useState(false);
+
+  const [text, SetText] = useState(" ");
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      SetText(" ");
+    }, [])
+  );
+  const SearchText = (data) => {
+    if (data === "") SetShowSearch(false);
+    SetText(data);
+  };
+
+  return (
+    <View
+      style={{
+        flexDirection: "row-reverse",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 5,
+      }}
+    >
+      <Icon
+        name="addfile"
+        type="antdesign"
+        size={27}
+        color="#fff"
+        onPress={() => navigation.navigate("NewTask")}
+      />
+      <View style={{ width: 15 }} />
+      {showSearch ? (
+        <Searchbar
+          onIconPress={() =>
+            navigation.navigate("ModalScreen", { search: text })
+          }
+          onChangeText={(text) => SearchText(text)}
+          style={{
+            position: "absolute",
+            width: 250,
+            left: 55,
+            // alignSelf: "center",
+
+            backgroundColor: "#CDCDCD",
+
+            borderRadius: 12,
+            zIndex: 2,
+          }}
+          keyboardType="numeric"
+          placeholder="task number ..."
+          value={text}
+        />
+      ) : (
+        <Icon
+          name="search"
+          size={29}
+          color="#fff"
+          onPress={() => {
+            SetShowSearch(!showSearch), SetText(" ");
+          }}
+        />
+      )}
+    </View>
+  );
+};
 
 const createTopTabs = (props) => {
   return (
@@ -253,7 +263,6 @@ const createTopTabs = (props) => {
       <MaterialTopTabs.Screen name="All Tasks" component={Tasks} />
       <MaterialTopTabs.Screen name="Today's Tasks" component={Tasks} />
       <MaterialTopTabs.Screen name="Open Tasks" component={Tasks} />
-      {/* <MaterialTopTabs.Screen name="Task Form" component={NewTask} /> */}
     </MaterialTopTabs.Navigator>
   );
 };

@@ -3,14 +3,14 @@ import React, { useState, useContext } from "react";
 import { ActivityIndicator } from "react-native";
 import AppContext from "../../AppContext";
 import { TextInput } from "react-native-paper";
-import { BlueButton,Spinner} from "../../styles";
+import { BlueButton, Spinner } from "../../styles";
 import { useFocusEffect } from "@react-navigation/native";
 
 export default function Login({ navigation }) {
   const [id, setID] = useState("");
   const [password, setPassword] = useState("");
   const [loading, SetLoading] = useState(true);
- 
+
   const myContext = useContext(AppContext);
 
   const FetchUserFromDB = async (hashPassword) => {
@@ -46,12 +46,10 @@ export default function Login({ navigation }) {
   };
   useFocusEffect(
     React.useCallback(() => {
-      return ()=>{
+      return () => {
         setID("");
         setPassword("");
-      }
-  
-     
+      };
     }, [])
   );
 
@@ -69,44 +67,34 @@ export default function Login({ navigation }) {
     <View>
       <Text style={styles.HeadLine}>Login</Text>
       <View style={{ paddingTop: 10 }}>{loading ? null : <Spinner />}</View>
-<View style={{marginHorizontal:20}}> 
+      <View style={{ marginHorizontal: 20 }}>
+        <TextInput
+          label="ID"
+          activeOutlineColor="#000"
+          left={<TextInput.Icon name="account" />}
+          keyboardType="numeric"
+          mode="outlined"
+          style={{ marginHorizontal: 10, marginVertical: 20, paddingLeft: 3 }}
+          onChangeText={(id) => setID(id)}
+          value={id}
+        />
 
-
-
-      <TextInput
-        label="ID"
-        activeOutlineColor="#000"
-        left={<TextInput.Icon name="account" />}
-        keyboardType="numeric"
-        mode="outlined"
-        style={{ marginHorizontal:10,marginVertical:20, paddingLeft: 3  }}
-        onChangeText={(id) => setID(id)}
-        value={id}
-        // onChangeText={myContext.setEmployeeId}
-      />
-
-      <TextInput
-        label="Password"
-        activeOutlineColor="#000"
-        left={<TextInput.Icon name="lock" />}
-        keyboardType="numeric"
-        mode="outlined"
-        style={{marginHorizontal:10,marginVertical:20, paddingLeft: 3 }}
-        value={password}
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-      />
-</View>
+        <TextInput
+          label="Password"
+          activeOutlineColor="#000"
+          left={<TextInput.Icon name="lock" />}
+          keyboardType="numeric"
+          mode="outlined"
+          style={{ marginHorizontal: 10, marginVertical: 20, paddingLeft: 3 }}
+          value={password}
+          secureTextEntry={true}
+          onChangeText={(password) => setPassword(password)}
+        />
+      </View>
       <View style={styles.ButtonContainer}>
-      <TouchableOpacity  onPress={() => LogIn()}>
-        <BlueButton text = {"SUBMIT"}/>
-
-          {/* <Text style={styles.button2} onPress={() => LogIn()}>
-            SUBMIT
-          </Text> */}
+        <TouchableOpacity onPress={() => LogIn()}>
+          <BlueButton text={"SUBMIT"} />
         </TouchableOpacity>
-       
-       
       </View>
     </View>
   );
@@ -128,9 +116,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
     fontSize: 20,
-    // borderWidth: 1,
-
-    // borderRadius: 10,
   },
   Text: {
     fontSize: 15,
@@ -138,10 +123,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   ButtonContainer: {
-    // flexDirection: "row",
-    // alignItems: "center",
-    // justifyContent: "space-between",
-    marginTop:20,
+    marginTop: 20,
     padding: 30,
   },
   button: {
@@ -150,9 +132,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 5,
   },
-  button2: {
-   
-  },
+  button2: {},
   container: {
     flex: 1,
   },

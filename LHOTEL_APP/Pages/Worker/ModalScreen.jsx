@@ -3,33 +3,33 @@ import {
   View,
   Text,
   Pressable,
-  Button,
-  StyleSheet,
+ StyleSheet,
 } from "react-native";
 import AppContext from "../../AppContext";
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useContext} from "react";
 import moment from "moment";
-
 import { useTheme } from "@react-navigation/native";
 import { useCardAnimation } from "@react-navigation/native-stack";
 import TasksCard from "./TasksCard";
 
 export default function ModalScreen(props) {
   const { colors } = useTheme();
-  const [search, setSearch] = useState("");
   const myContext = useContext(AppContext);
-  //   console.log(myContext.allTasks);
+
   const SearchTask = () => {
     let { search } = props.route.params;
-    setSearch(search);
+ 
     const EditTaskDetails = (taskcode) => {
-        let taskDetails = myContext.allTasks.filter((task) => task.TaskCode === taskcode)[0];
-        props.navigation.navigate("EditTasks", { taskDetails: taskDetails });
-      };
+      let taskDetails = myContext.allTasks.filter(
+        (task) => task.TaskCode === taskcode
+      )[0];
+      props.navigation.navigate("EditTasks", { taskDetails: taskDetails });
+    };
     let task = myContext.allTasks.filter(
       (currtask) => currtask.TaskCode == search
     );
 
+  
     if (task.length === 1) {
       task = task[0];
       return (
@@ -52,15 +52,13 @@ export default function ModalScreen(props) {
     } else
       return (
         <View style={{ height: 270 }}>
-          <Text>"no task have this number "</Text>
+          <Text style={{ textAlign: "center" ,paddingVertical:100,fontSize:20,paddingHorizontal:50}}>
+            There is no task with the task number you entered
+          </Text>
         </View>
       );
 
-    // if (task.length > 0) {
-    //   SetTasksDisplay(task);
-    // } else {
-    //   SetTasksDisplay(currentTasks);
-    // }
+   
   };
 
   return (
@@ -76,7 +74,7 @@ export default function ModalScreen(props) {
           StyleSheet.absoluteFill,
           { backgroundColor: "rgba(0, 0, 0, 0.5)" },
         ]}
-        // onPress={navigation.goBack}
+   
       />
       <Animated.View
         style={{
@@ -88,12 +86,7 @@ export default function ModalScreen(props) {
         }}
       >
         <SearchTask style={{ height: 650 }} />
-        {/* <Button
-            title="Okay"
-            color={colors.primary}
-            style={{ alignSelf: 'flex-end' }}
-            onPress={()=>props.navigation.goBack()}
-          /> */}
+    
       </Animated.View>
     </View>
   );

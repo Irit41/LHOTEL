@@ -31,20 +31,19 @@ export default function Tasks(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-    
       if (myEmployee.Description === "Manager") GetAllTasksFromDB();
       else GetTasksByID();
-      if(props.route.name==="Tasks"){
+      if (props.route.name === "Tasks") {
         let { search } = props.route.params;
-    
-        SearchTask(search)}
-      // setSearch("");
+
+        SearchTask(search);
+      }
     }, [props.route.name])
   );
   useEffect(() => {
     GetEmployees();
   }, []);
- 
+
   const GetEmployees = async () => {
     const requestOptions = {
       method: "GET",
@@ -68,7 +67,6 @@ export default function Tasks(props) {
 
       myContext.SetRoomServiceEmpView(array);
 
-      // SetLoading(true);
       return;
     }
     GetEmployees();
@@ -76,16 +74,10 @@ export default function Tasks(props) {
   const SearchTask = (value) => {
     setSearch(value);
     let task = tasks.filter((currtask) => currtask.TaskCode == value);
-// console.log(tasks);
-    if (task.length ===1) {
+
+    if (task.length === 1) {
       SetTasksDisplay(task);
     }
-  
-    // if (task.length > 0) {
-    //   SetTasksDisplay(task);
-    // } else {
-    //   SetTasksDisplay(currentTasks);
-    // }
   };
   const GetTasksByID = async () => {
     try {
@@ -105,7 +97,7 @@ export default function Tasks(props) {
 
       if (temp !== null) {
         SetTasks(temp);
-        myContext.SetAllTasks(temp)
+        myContext.SetAllTasks(temp);
         HandelRequest(temp);
 
         SetLoading(true);
@@ -127,12 +119,12 @@ export default function Tasks(props) {
         requestOptions
       );
       let temp = await result.json();
-      //  console.log(temp);
+
       if (temp !== null) {
-        myContext.SetAllTasks(temp)
+        myContext.SetAllTasks(temp);
         SetTasks(temp);
         HandelRequest(temp);
-        // forceUpdate();
+
         SetLoading(true);
       }
     } catch (error) {
@@ -140,7 +132,7 @@ export default function Tasks(props) {
       SetLoading(true);
     }
   };
-  // console.log(tasks);
+
   const EditTaskDetails = (taskcode) => {
     let taskDetails = tasks.filter((task) => task.TaskCode === taskcode)[0];
     props.navigation.navigate("EditTasks", { taskDetails: taskDetails });
@@ -168,71 +160,31 @@ export default function Tasks(props) {
     }
 
     SetTasksDisplay(listTemp);
-    // SetCurrentTasks(listTemp);
   };
 
-  // let tasksList = tasksDisplay.map((task) => (
-  //   <TasksCard
-  //     key={task.TaskCode}
-  //     TaskCode={task.TaskCode}
-  //     EmployeeID={task.EmployeeID}
-  //     EmployeeName={task.EmployeeName}
-  //     TaskName={task.TaskName}
-  //     RoomNumber={task.RoomNumber}
-  //     StartDate={moment(task.StartDate).format("DD/MM/YYYY")}
-  //     StartTime={task.StartTime}
-  //     EndTime={task.EndTime}
-  //     TaskStatus={task.TaskStatus}
-  //     Description={task.Description}
-  //     EditTaskDetails={EditTaskDetails}
-  //   />
-  // ));
-  // onPress={CloseTask}
   return (
-    <View>
-      {/* <Searchbar
-        style={Styles.searchbar}
-        placeholder="search by task number ..."
-        onChangeText={SearchTask}
-        value={search}
-      /> */}
-
-      {/* {tasksDisplay.length > 5 ? (
-        <Searchbar
-          style={Styles.searchbar}
-          placeholder="search by task number ..."
-          onChangeText={SearchTask}
-
-          value={search}
-        />
-      ) : null} */}
-
-
-
-
-
- {/* <ScrollView style={{ marginBottom: tasksDisplay.length > 5 ? 90 : 0 }}> */}
-
- 
-      <ScrollView >
-        <View style={Styles.items}>{loading ? tasksDisplay.map((task) => (
-    <TasksCard
-      key={task.TaskCode}
-      TaskCode={task.TaskCode}
-      EmployeeID={task.EmployeeID}
-      EmployeeName={task.EmployeeName}
-      TaskName={task.TaskName}
-      RoomNumber={task.RoomNumber}
-      StartDate={moment(task.StartDate).format("DD/MM/YYYY")}
-      StartTime={task.StartTime}
-      EndTime={task.EndTime}
-      TaskStatus={task.TaskStatus}
-      Description={task.Description}
-      EditTaskDetails={EditTaskDetails}
-    />
-  )) : <Spinner />}</View>
-      </ScrollView>
-    </View>
+    <ScrollView style={Styles.items}>
+      {loading ? (
+        tasksDisplay.map((task) => (
+          <TasksCard
+            key={task.TaskCode}
+            TaskCode={task.TaskCode}
+            EmployeeID={task.EmployeeID}
+            EmployeeName={task.EmployeeName}
+            TaskName={task.TaskName}
+            RoomNumber={task.RoomNumber}
+            StartDate={moment(task.StartDate).format("DD/MM/YYYY")}
+            StartTime={task.StartTime}
+            EndTime={task.EndTime}
+            TaskStatus={task.TaskStatus}
+            Description={task.Description}
+            EditTaskDetails={EditTaskDetails}
+          />
+        ))
+      ) : (
+        <Spinner />
+      )}
+    </ScrollView>
   );
 }
 
