@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, ScrollView, Keyboard, Image, ImageBackground, StatusBar, Alert, TouchableOpacity, } from "react-native";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState} from "react";
 import { Searchbar } from "react-native-paper";
 import EMCard from "./EMCard";
-import { ActivityIndicator } from "react-native";
+
 import { images } from "../../images";
-import AppContext from "../../AppContext";
+
 import { Spinner } from "../../styles";
 
 
@@ -13,7 +13,7 @@ export default function EmployeesManagement({ navigation }) {
   const [employees, SetEmployees] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, SetLoading] = useState(false);
-  const myContext = useContext(AppContext);
+
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
 
@@ -126,11 +126,7 @@ export default function EmployeesManagement({ navigation }) {
   };
 
 
-  // const Spinner = () => (
-  //   <View style={[styles.container, styles.horizontal]}>
-  //     <ActivityIndicator size="large" />
-  //   </View>
-  // );
+  
 
   let listEmployees = employees.map((item) => (
     <EMCard

@@ -27,12 +27,10 @@ const RequestType = [
 export default function NewTask({ route, navigation }) {
   const myContext = useContext(AppContext);
 
-  const [dropdown, setDropdown] = useState(null);
+
   const [flagStartTime, setFlagStartTime] = useState(false);
   const [flagEndTime, setFlagEndTime] = useState(false);
-  const [employees, SetEmployees] = useState([]);
-  const [startTime, SetstartTime] = useState("");
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
 
   const [taskStatus, SetTaskStatus] = useState(false);
   const [task, SetTask] = useState({
@@ -47,36 +45,10 @@ export default function NewTask({ route, navigation }) {
     TaskStatus: "Open",
     Description: "",
   });
-  // useEffect(() => {
-  //   GetEmployees();
-   
-
-  // }, [myContext.employee])
-  // const GetEmployees = async () => {
-  //   const requestOptions = {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   };
-  //   let result = await fetch(
-  //     "http://proj13.ruppin-tech.co.il/GetEmployeesBasicDetails",
-  //     requestOptions
-  //   );
-  //   let employees = await result.json();
-
-  //   if (employees !== null) {
-  //     let array =[]
-  //     employees.map(employee=> array.push({ label: employee.EmployeeName, value:  employee.EmployeeName }))
-  //     SetEmployees(array);
-
-  //     // SetLoading(true);
-  //     return;
-  //   }
-  //   GetEmployees();
-
-  // };
+  
   useFocusEffect(
     React.useCallback(() => {
-      // GetEmployees();
+     
    
       SetTask({
         TaskCode: null,
@@ -93,15 +65,7 @@ export default function NewTask({ route, navigation }) {
     }, [navigation])
   );
 
-  // useEffect(() => {
-  //   // GetEmployees();
-  //   if (route.params !== undefined) {
-  //     SetTask(route.params.taskDetails);
-  //     SetTaskStatus(
-  //       route.params.taskDetails.TaskStatus === "Open" ? true : false
-  //     );
-  //   }
-  // }, []);
+
 
   const handelTimeStart = (time) => {
     task.StartTime = moment(time).format("HH:mm");
@@ -122,7 +86,7 @@ export default function NewTask({ route, navigation }) {
 
 
   
-  // ,task.EmployeeID = employees[Name]
+
   const CheckValues = () => {
     return (
       /^-?\d+$/.test(task.RoomNumber) &&
@@ -130,9 +94,9 @@ export default function NewTask({ route, navigation }) {
       task.TaskName !== ""
     );
   };
-  // console.log(tasks);
+
  
-  // console.log(myContext.roomServiceEmpView);
+
   const AddNewTask = async () => {
    if (task.EmployeeName !== null)
     task.EmployeeID =
@@ -180,17 +144,7 @@ export default function NewTask({ route, navigation }) {
             value={dropdown}
             onChange={(Name) => (task.EmployeeName = Name.value)}
           />
-          {/* <TextInput
-            activeOutlineColor="#000"
-            keyboardType="numeric"
-            mode="outlined"
-            label="Employee ID"
-            placeholder={
-              task.EmployeeID !== null ? JSON.stringify(task.EmployeeID) : ""
-            }
-            style={styles.TextInputStyle}
-            onChangeText={(id) => (task.EmployeeID = id)}
-          /> */}
+       
         </View>
         <View>
           <TextInput
@@ -261,9 +215,7 @@ export default function NewTask({ route, navigation }) {
         </View>
       </View>
       <View>
-        {/* <Text style={{ paddingLeft: 15, top:35,zIndex:1, fontSize: 18 }}>
-          Description :{" "}
-        </Text> */}
+      
         <TextInput
           label={"Description"}
           activeOutlineColor="#000"
@@ -297,7 +249,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 20,
     flexDirection: "row-reverse",
-    // alignItems: "center",
 
     justifyContent: "space-between",
   },

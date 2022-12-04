@@ -45,47 +45,6 @@ const RequestType = [
 ];
 
 export default function Reports({ navigation }) {
-  const [loading, SetLoading] = useState(true);
-
-  const [tableData, SetTableData] = useState([]);
-  const [dropdown, setDropdown] = useState(null);
-  // const [request, SetRequest] = useState(false);
-  const [isMainViewed, SetIsMainViewed] = useState(true);
-
-  // const Spinner = () => (
-  //   <View style={[styles.container, styles.horizontal]}>
-  //     <ActivityIndicator size="large" />
-  //   </View>
-  // );
-
-  const CreateTableData = () => {
-    return (
-      <View>
-        <View style={styles.tableContainer}>
-          <Table borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}>
-            <Row
-              data={tableData.map((per) => Object.keys(per))[0]}
-              // style={styles.head}
-              // textStyle={styles.text}
-            />
-            <Rows
-              // textStyle={styles.text}
-              data={tableData.map((per) => Object.values(per))}
-            />
-          </Table>
-        </View>
-      </View>
-    );
-  };
-
-  // const HandelRequest = (request) => {
-  //   SetLoading(false);
-  //   SetRequest(request.value);
-  //   if (request !== undefined && request.value !== "ProductPurchaseByName") {
-  //     GetTableFromDB(request.value);
-  //   }
-  //   SetLoading(true);
-  // };
   const ReportsMenu = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -143,55 +102,7 @@ export default function Reports({ navigation }) {
           numColumns={1}
           nestedScrollEnable={true}
         />
-
-        {/* <View style={{ padding: 10 }}>
-        <Dropdown
-          style={styles.dropdown}
-          data={RequestType}
-          searchPlaceholder="Search"
-          labelField="label"
-          valueField="value"
-          placeholder="Select a report to view"
-          value={dropdown}
-          onChange={(request) => {
-            HandelRequest(request);
-          }}
-        />
-      </View> */}
-        {/* 
-      <View style={styles.items}>
-        {loading ? <CreateTableData /> : <Spinner />}
-      </View> */}
-
-        {/* <View style={styles.items}>
-        {request === "ProductPurchaseByName" ? (
-          <View>
-            <Text style={styles.tableHeader}>Enter the product name</Text>
-            <TextInput
-              style={{ margin: 10, paddingLeft: 3,marginHorizontal:10 }}
-              onChangeText={(product) => SetProduct(product)}
-            ></TextInput>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: "rgba(35,100,168, 0.4)",
-                paddingVertical: 10,
-                paddingHorizontal: 40,
-                borderRadius: 5,
-                 width:150,
-                 marginTop:10,
-                 alignSelf:'center',
-                fontWeight: "500",
-              }}
-              onPress={GetTableProductPurchaseByName}
-            >
-              <Text style ={{fontSize:20}}>Search</Text>
-            </TouchableOpacity>
-          </View>
-        ) : null}
-      </View> */}
       </ImageBackground>
-      {/* ScrollView */}
     </View>
   );
 }
@@ -200,20 +111,16 @@ export const ReportView = ({ route, navigation }) => {
     "Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.",
   ]);
   let { report } = route.params;
-  const [request, SetRequest] = useState(false);
-  const [loading, SetLoading] = useState(true);
+
   const [isReportViewed, SetIsReportViewed] = useState(false);
   const [product, SetProduct] = useState("");
 
   const [tableData, SetTableData] = useState([]);
   useFocusEffect(
     React.useCallback(() => {
-      SetLoading(false);
-
       if (report !== undefined && report.value !== "ProductPurchaseByName") {
         GetTableFromDB();
       }
-      SetLoading(true);
     }, [])
   );
   const GetTableFromDB = async () => {
@@ -245,13 +152,11 @@ export const ReportView = ({ route, navigation }) => {
         }
         SetTableData(temp);
 
-        SetLoading(true);
         return;
       }
     } catch (error) {
       alert(error);
     }
-    SetLoading(true);
   };
   const GetTableProductPurchaseByName = async () => {
     if (product === "") {
@@ -260,7 +165,6 @@ export const ReportView = ({ route, navigation }) => {
     }
 
     try {
-      SetLoading(false);
       const requestOptions = {
         method: "PUT",
         body: JSON.stringify({
@@ -283,17 +187,15 @@ export const ReportView = ({ route, navigation }) => {
         };
 
         SetTableData([dataObj]);
-        SetLoading(true);
+
         SetIsReportViewed(!isReportViewed);
         return;
       } else {
         SetTableData([]);
-        SetLoading(true);
       }
     } catch (error) {
       alert(error);
     }
-    SetLoading(true);
   };
   return (
     <View>
@@ -329,21 +231,18 @@ export const ReportView = ({ route, navigation }) => {
 
             <TouchableOpacity
               style={{
-                // backgroundColor: "rgba(35,100,168, 0.4)",
-                // paddingVertical: 10,
                 marginHorizontal: 40,
                 borderWidth: 0.4,
                 borderRadius: 10,
 
                 borderColor: "#000",
                 marginTop: 10,
-                // alignSelf: "center",
+
                 fontWeight: "500",
               }}
               onPress={GetTableProductPurchaseByName}
             >
               <GrayButton text={"Search"} />
-              {/* <Text style={{ fontSize: 20 }}>Search</Text> */}
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -359,7 +258,6 @@ export const ReportView = ({ route, navigation }) => {
                 left: 10,
                 width: 45,
                 height: 45,
-                // marginBottom: 15,
                 justifyContent: "center",
               }}
             >
@@ -381,7 +279,6 @@ export const ReportView = ({ route, navigation }) => {
                 textStyle={styles.text}
               />
               <Rows
-                // style={styles.text}
                 textStyle={styles.cellText}
                 data={tableData.map((item) => Object.values(item))}
               />
@@ -389,32 +286,6 @@ export const ReportView = ({ route, navigation }) => {
           </ScrollView>
         </View>
       )}
-
-      {/* {request === "ProductPurchaseByName" ? (
-        <View>
-          <Text style={styles.tableHeader}>Enter the product name</Text>
-          <TextInput
-            style={{ margin: 10, paddingLeft: 3, marginHorizontal: 10 }}
-            onChangeText={(product) => SetProduct(product)}
-          ></TextInput>
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: "rgba(35,100,168, 0.4)",
-              paddingVertical: 10,
-              paddingHorizontal: 40,
-              borderRadius: 5,
-              width: 150,
-              marginTop: 10,
-              alignSelf: "center",
-              fontWeight: "500",
-            }}
-            onPress={GetTableProductPurchaseByName}
-          >
-            <Text style={{ fontSize: 20 }}>Search</Text>
-          </TouchableOpacity>
-        </View>
-      ) : null} */}
     </View>
   );
 };
@@ -470,7 +341,6 @@ const styles = StyleSheet.create({
   cellText: {
     padding: 10,
     alignSelf: "center",
-    // margin: 6,
     fontSize: 16,
   },
   button: {
@@ -483,7 +353,6 @@ const styles = StyleSheet.create({
     height: 50,
   },
   Save: {
-    // borderRadius: 50,
     width: 25,
     height: 25,
     alignSelf: "center",

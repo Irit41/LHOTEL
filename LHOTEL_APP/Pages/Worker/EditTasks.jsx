@@ -36,7 +36,7 @@ export default function EditTasks({ route, navigation }) {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [isStatusModalVisible, setStatusModalVisible] = useState(false);
-  // const [Status, setStatus] = useState("");
+ 
 
   const [flagStartTime, setFlagStartTime] = useState(false);
   const [flagEndTime, setFlagEndTime] = useState(false);
@@ -46,7 +46,6 @@ export default function EditTasks({ route, navigation }) {
   const [workerNotes, SetWorkerNotes] = useState("");
 
   
-  // const windowHeight = Dimensions.get("window").height;
   const [task, SetTask] = useState({
     TaskCode: null,
     EmployeeID: null,
@@ -70,11 +69,8 @@ export default function EditTasks({ route, navigation }) {
   useEffect(() => {
     if (route.params !== undefined) {
       SetTask(route.params.taskDetails);
-      // console.log(task);
       SetWorkerNotes("");
-      // SetTaskStatus(
-      //   route.params.taskDetails.TaskStatus === "Open" ? true : false
-      // );
+  
     }
   }, [navigation]);
 
@@ -90,10 +86,6 @@ export default function EditTasks({ route, navigation }) {
     setFlagEndTime(false);
   };
 
-  // const HandelTaskStatus = () => {
-  //   SetTaskStatus(!taskStatus);
-  //   task.TaskStatus = !taskStatus ? "Open" : "Close";
-  // };
 
   const CheckValues = () => {
     return (
@@ -142,7 +134,6 @@ export default function EditTasks({ route, navigation }) {
         alert("A proper closing status must be selected");
         return;
       }
-      // SetLoading(false);
       
       let endTime = moment().format("HH:mm");
      
@@ -155,7 +146,6 @@ export default function EditTasks({ route, navigation }) {
           }),
           headers: { "Content-Type": "application/json" },
         };
-        // console.log(requestOptions.body);
         let result = await fetch(
           "http://proj13.ruppin-tech.co.il/CloseTask",
           requestOptions
@@ -170,14 +160,13 @@ export default function EditTasks({ route, navigation }) {
 
     } catch (error) {
       alert(error);
-      // SetLoading(true);
+    
     }
-    // SetLoading(true);
+   
   };
 
   const DeleteTask = async () => {
     try {
-      // SetLoading(false);
       const requestOptions = {
         method: "DELETE",
         body: JSON.stringify({
@@ -185,24 +174,20 @@ export default function EditTasks({ route, navigation }) {
         }),
         headers: { "Content-Type": "application/json" },
       };
-      // console.log(requestOptions.body);
       let result = await fetch(
         "http://proj13.ruppin-tech.co.il/DeleteTask",
         requestOptions
       );
       let temp = await result.json();
-      // console.log(temp);
       if (temp) {
         alert("Task successfully deleted");
 
       navigation.goBack();
-        // SetLoading(true);
-        // GetAllTasksFromDB();
+        
       }
     } catch (error) {
       alert(error);
     }
-    // SetLoading(true);
   };
   const items = [
     {
@@ -237,12 +222,9 @@ export default function EditTasks({ route, navigation }) {
   const ItemIcons = (item) => {
     return item.img;
 
-    //     return(
-    //       item.img;
-    // {/* <Image style={styles.save} source={images.save} /> */}
-    //     )
+  
   };
-  // console.log(task);
+ 
   return (
     <View style={{ height: windowHeight }}>
       <FloatingMenu
@@ -285,16 +267,7 @@ export default function EditTasks({ route, navigation }) {
               onChange={(taskName) => (task.TaskName = taskName.value)}
             />
 
-            {/* <Text style={{ fontSize: 18 }}>Employee ID :</Text>
-            <TextInput
-              placeholder={
-                task.EmployeeID !== null ? JSON.stringify(task.EmployeeID) : ""
-              }
-              mode="outlined"
-              keyboardType="numeric"
-              style={styles.TextInputStyle}
-              onChangeText={(id) => (task.EmployeeID = id)}
-            /> */}
+        
           </View>
         </View>
 
@@ -401,14 +374,12 @@ export default function EditTasks({ route, navigation }) {
         <Modal isVisible={isStatusModalVisible}>
           <View
             style={{
-              // flex: 1,
               backgroundColor: "#C0C0C0",
               width: "90%",
               borderRadius: 10,
               borderWidth: 1,
               borderColor: "#fff",
               marginVertical: 50,
-              // height:250,
               alignSelf: "center",
             }}
           >
@@ -470,14 +441,12 @@ export default function EditTasks({ route, navigation }) {
         <Modal isVisible={isModalVisible}>
           <View
             style={{
-              // flex: 1,
               backgroundColor: "#C0C0C0",
               width: "90%",
               borderRadius: 10,
               borderWidth: 1,
               borderColor: "#fff",
               marginVertical: 100,
-              // height:250,
               alignSelf: "center",
             }}
           >
@@ -519,16 +488,7 @@ export default function EditTasks({ route, navigation }) {
             alignSelf: "center",
           }}
         >
-          {/* <TouchableOpacity onPress={DeleteTask}>
-                        <Image style={styles.BTNImages} source={images.trashCan} />
-                    </TouchableOpacity> */}
-          {/* <TouchableOpacity
-            style={styles.button}
-            onPress={AlterTask}
-          >
-            <Text style={{ fontSize: 20 }}>SAVE</Text>
-            <Image style={styles.save} source={images.save} />
-          </TouchableOpacity> */}
+         
         </View>
       </ScrollView>
     </View>
@@ -554,8 +514,7 @@ const styles = StyleSheet.create({
   },
   SumHeadLine: {
     paddingTop: 40,
-    // paddingBottom: 30,
-    // textAlign: "center",
+   
     paddingHorizontal: 20,
     fontSize: 20,
     // textDecorationLine: "underline",
@@ -640,10 +599,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   TextInputMulti: {
-    // marginBottom: 5,
+    
     margin: 5,
-    // width:200,
-    // alignSelf:'flex-end'
+   
   },
   TextInputStyle2: {
     width: 120,

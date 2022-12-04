@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, } from "react-native";
 import { Divider } from "react-native-paper";
-import { ActivityIndicator } from "react-native";
+
 import { Spinner } from "../../styles";
 
 
@@ -33,12 +33,6 @@ export default function Shift() {
     }
     SetLoading(true)
   }
-
-  // const Spinner = () => (
-  //   <View style={[styles.container, styles.horizontal]}>
-  //     <ActivityIndicator size="large" />
-  //   </View>
-  // );
 
 
   const GetEmployeeCard = ({ item }) => {

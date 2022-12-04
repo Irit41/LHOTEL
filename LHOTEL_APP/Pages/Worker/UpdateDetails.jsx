@@ -31,8 +31,7 @@ export default function UpdateDetails({ route, navigation }) {
     };
     const handleDate = (date) => {
         let dateString = moment(date).format('YYYY-MM-DD')
-        // setFlagDate(date)
-        // console.log(dateString);
+      
         employee.BirthDate = dateString
         hideDate()
     };
@@ -44,18 +43,16 @@ export default function UpdateDetails({ route, navigation }) {
             return false
     }
 
-    // console.log(JSON.stringify(employee));
+   
 
 
     const SaveEmployeeToDB = async () => {
-        // navigation.goBack()
         try {
             const requestOptions = {
                 method: 'PUT',
                 body: JSON.stringify(employee),
                 headers: { 'Content-Type': 'application/json' }
             };
-            // console.log(requestOptions.body);
             let result = await fetch('http://proj13.ruppin-tech.co.il/AlterEmployeeById', requestOptions);
             if (result) {
                 alert("Employee details have been saved successfully")
@@ -70,7 +67,6 @@ export default function UpdateDetails({ route, navigation }) {
 
 
     const SaveUser = () => {
-        // console.log(employee);
 
         if (CheckDetails()) {
             return Alert.alert(
@@ -80,7 +76,6 @@ export default function UpdateDetails({ route, navigation }) {
                     {
                         text: "Yes",
                         onPress: () => {
-                            // employee.Birth_Date = moment(employee.Birth_Date).format('YYYY-MM-DD')
                             SaveEmployeeToDB()
                         },
                     },
@@ -90,7 +85,6 @@ export default function UpdateDetails({ route, navigation }) {
         }
 
     }
-    // console.log(employee);
 
 
     return (
@@ -105,7 +99,6 @@ export default function UpdateDetails({ route, navigation }) {
                 <View>
                     <Text > Full Name :</Text>
                     <TextInput
-                        // label={employee.EmployeeName}
                         placeholder={employee.EmployeeName}
                    
                         mode="outlined"
@@ -116,7 +109,6 @@ export default function UpdateDetails({ route, navigation }) {
                 <View style ={{paddingTop:10}}>
                     <Text >Phone Number :</Text>
                     <TextInput
-                        // label={JSON.stringify(employee.PhoneNumber)}
                         placeholder={employee.PhoneNumber}
        
                         keyboardType='numeric'
@@ -128,7 +120,6 @@ export default function UpdateDetails({ route, navigation }) {
                 <View style ={{paddingTop:10}}>
                     <Text style={{ paddingLeft: 5 }}>Address :</Text>
                     <TextInput
-                        // label={JSON.stringify(employee.Address)}
                         placeholder={employee.Address}
                       
                         mode="outlined"
@@ -247,8 +238,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
-        // borderColor:"black",
-        // borderWidth:1,
+  
     },
     input: {
         height: 70,
@@ -262,8 +252,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        // paddingHorizontal:70,
-        // paddingVertical:90,
+ 
       },
 
 })

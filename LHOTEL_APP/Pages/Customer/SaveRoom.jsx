@@ -19,7 +19,7 @@ import { BlueButton, Spinner } from "../../styles";
 export default function 
 SaveRoom({route,navigation }) {
   const myContext = useContext(AppContext);
-  // let { rooms_flags } = navigation.route.params;
+
   const user = myContext.user;
   const roomsReservation = myContext.roomsReservation;
   const [loading, SetLoading] = useState(false);
@@ -42,12 +42,8 @@ SaveRoom({route,navigation }) {
       roomsReservation.CounterSingle = 0;
       roomsReservation.CounterDouble = 0;
       roomsReservation.CounterSuite = 0;
-      // return () => {
-      //   roomsReservation.CounterSingle = 0;
-      //   roomsReservation.CounterDouble = 0;
-      //   roomsReservation.CounterSuite = 0;
-      // };
-    }, [route.params!== undefined?route.params:navigation])
+   
+    }, [route?.params!== undefined?route.params:navigation])
   );
 
 
@@ -223,11 +219,7 @@ SaveRoom({route,navigation }) {
     </ScrollView>
   );
 }
-// const Spinner = () => (
-//   <View style={[styles.container, styles.horizontal]}>
-//     <ActivityIndicator size="large" />
-//   </View>
-// );
+
 
 const styles = StyleSheet.create({
   HeadLine: {

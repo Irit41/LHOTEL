@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Checkbox } from 'react-native-paper';
+
 import { images } from '../../images';
-import { fontSize } from '@mui/system';
+
 
 
 
@@ -13,25 +13,13 @@ export default function TasksCard(props) {
         EndTime, TaskStatus, Description } = props
 
 
-    const [flag, SetFlag] = useState(false)
+
 
     const EditTaskDetails = (TaskCode) =>{
         props.EditTaskDetails(TaskCode)
     }
 
-    // console.log(flag);
-    // const DeleteTask = (TaskCode) => {
-    //     props.DeleteTask(TaskCode)
-    // }
-
-
-    // const MarkTaskAsDone = () =>{
-    //     SetFlag(!flag)
-    //     if(!flag === true)
-    //         props.MarkTaskAsDone(TaskCode)
-    //     else
-    //         props.RemoveFromCheck(TaskCode)
-    // }
+    
    
     return (
         <View style={{ backgroundColor: TaskStatus==='Open'? 'rgba(35,100,168, 0.4)': '#C0C0C0',
@@ -68,15 +56,7 @@ export default function TasksCard(props) {
                     <TouchableOpacity onPress={() => EditTaskDetails(TaskCode)}>
                         <Image style={styles.BTNImages} source={images.edit} />
                     </TouchableOpacity>
-                    {/* <View style={styles.Checkbox}>
-                        {TaskStatus === "Open" ?
-                            <Checkbox label="Item" status={flag ? 'checked' : 'unchecked'}
-                                onPress={MarkTaskAsDone} />
-                            : null}
-                    </View> */}
-                    {/* <TouchableOpacity onPress={() => DeleteTask(TaskCode)}>
-                        <Image style={styles.BTNImages} source={images.trashCan} />
-                    </TouchableOpacity> */}
+                 
 
 
                 </View>
@@ -88,7 +68,6 @@ export default function TasksCard(props) {
 
 const styles = StyleSheet.create({
     container: {
-        // padding: 5,
         backgroundColor: '#D9E7E2',
         borderBottomColor: 'black',
         borderRadius: 5,

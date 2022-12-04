@@ -16,7 +16,7 @@ import Products from "../Customer/Products";
 import Bill from "../Customer/Bill";
 import CustomDrawer from "./CustomDrawer";
  import Rooms from "../../Rooms";
-// import { useFocusEffect } from "@react-navigation/native";
+
 const drawer = createDrawerNavigator();
 
 export default function Drawer() {
@@ -26,11 +26,11 @@ export default function Drawer() {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   let isUserConnected = JSON.stringify(user) !== "{}";
   let isAtHotel = myContext.bill.CustomerID !== "";
-  // console.log(isAtHotel);
+
   useFocusEffect(
     React.useCallback(() => {
       FetchCustomerReservationFromDB()
-      // console.log(myContext.bill);
+  
      }, [isUserConnected])
   );
   // isUserConnected || isAtHotel
@@ -49,7 +49,6 @@ export default function Drawer() {
           requestOptions
         );
         let customerReservation = await result.json();
-        // console.log(JSON.stringify(user))
         if (customerReservation.length !== 0) {
        
           bill.CustomerType = customerReservation[0].CustomerType;
@@ -96,11 +95,7 @@ export default function Drawer() {
           component={CustomerHome}
           options={{
             headerShown: false
-            // headerTitle: " ",
-            // headerTintColor: "white",
-            // headerStyle: {
-            //   backgroundColor: "#000",
-            // },
+       
           }}
         />
 
@@ -128,22 +123,7 @@ export default function Drawer() {
             },
           }}
         />
-        {/* <drawer.Screen
-          name="LogOut"
-          options={{
-            headerTitle: "",
-            headerTintColor: "white",
-            headerMode: 'none',
-            headerStyle: {
-              backgroundColor: "#000",
-            },
-          }}
-        /> */}
-        {/* {JSON.stringify(myContext.user) !== '{}'? 
-        (<drawer.Screen
-          name="Booking"
-          component={Booking}
-        />) : null} */}
+       
         <drawer.Screen
           name="Booking"
           component={Booking}
@@ -156,7 +136,7 @@ export default function Drawer() {
             },
           }}
         />
-        {/* drawerItemStyle: isUserConnected ?  {}:  { display: "none" }, */}
+      
         <drawer.Screen
           name="Lhotel Service"
           component={LhotelService}
@@ -169,13 +149,13 @@ export default function Drawer() {
             },
           }}
         />
-        {/* isUserConnected */}
+   
         <drawer.Screen
           name="Products"
           component={Products}
           options={{
             drawerItemStyle: { display: "none" },
-            // drawerItemStyle: { display: "none" },
+        
             headerTitle: "",
             headerTintColor: "white",
             headerMode: "none",

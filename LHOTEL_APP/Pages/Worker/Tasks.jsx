@@ -1,31 +1,27 @@
 import {
-  View,
-  Text,
+ 
   ScrollView,
   StyleSheet,
-  Image,
-  TouchableOpacity,
+
+
 } from "react-native";
-import React, { useState, useContext, useReducer, useEffect } from "react";
-import { Dropdown } from "react-native-element-dropdown";
-import { ActivityIndicator } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+
 import TasksCard from "./TasksCard";
 import moment from "moment";
 import AppContext from "../../AppContext";
 import { useFocusEffect } from "@react-navigation/native";
-import { images } from "../../images";
-import { Dimensions } from "react-native";
-import { Searchbar } from "react-native-paper";
+
 import { Spinner } from "../../styles";
 export default function Tasks(props) {
   const myContext = useContext(AppContext);
   const myEmployee = myContext.employee;
-  const [dropdown, setDropdown] = useState(null);
+
   const [tasks, SetTasks] = useState([]);
-  const [currentTasks, SetCurrentTasks] = useState([]);
+
 
   const [tasksDisplay, SetTasksDisplay] = useState([]);
-  const [taskToMarkAsDone, SetTaskToMarkAsDone] = useState([]);
+
   const [loading, SetLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -36,7 +32,7 @@ export default function Tasks(props) {
       if (props.route.name === "Tasks") {
         let { search } = props.route.params;
 
-        SearchTask(search);
+     
       }
     }, [props.route.name])
   );
@@ -71,14 +67,7 @@ export default function Tasks(props) {
     }
     GetEmployees();
   };
-  const SearchTask = (value) => {
-    setSearch(value);
-    let task = tasks.filter((currtask) => currtask.TaskCode == value);
-
-    if (task.length === 1) {
-      SetTasksDisplay(task);
-    }
-  };
+ 
   const GetTasksByID = async () => {
     try {
       const requestOptions = {

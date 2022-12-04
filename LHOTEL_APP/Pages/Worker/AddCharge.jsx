@@ -56,7 +56,7 @@ export default function AddCharge({ navigation }) {
   };
   useEffect(() => {
       SetRoom_Number(-1);
-      // SetId(-1);
+     
       SetPayment("");
 
       SetSumTotal(0);
@@ -64,17 +64,7 @@ export default function AddCharge({ navigation }) {
       SetGoodsCount(0);
     }, [!flag]);
   
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     SetRoom_Number(-1);
-  //     SetId(-1);
-  //     SetPayment("");
-
-  //     SetSumTotal(0);
-  //     SetProductsToAdd([]);
-  //     SetGoodsCount(0);
-  //   }, [flag])
-  // );
+ 
   const Cal_Sum = () => {
     let sum = 0;
     let goodsCounter = 0;

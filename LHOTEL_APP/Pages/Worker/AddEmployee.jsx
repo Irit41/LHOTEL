@@ -15,7 +15,7 @@ const Roles = [
 
 export default function AddEmployee({ navigation }) {
   const [flagDate, setFlagDate] = useState(false);
-  // const [dropdown, setDropdown] = useState(null);
+
   const [id, SetId] = useState("");
   const [name, SetName] = useState("");
   const [phoneNumber, SetPhoneNumber] = useState("");
@@ -57,7 +57,6 @@ export default function AddEmployee({ navigation }) {
         body: JSON.stringify(employee),
         headers: { "Content-Type": "application/json" },
       };
-      // console.log(requestOptions.body);
       let result = await fetch("http://proj13.ruppin-tech.co.il/AddNewEmployee", requestOptions);
       if (result) {
         alert("The employee was saved successfully");

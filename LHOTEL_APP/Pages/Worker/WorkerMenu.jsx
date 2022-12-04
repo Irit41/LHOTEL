@@ -61,9 +61,7 @@ export default function WorkerMenu({ navigation }) {
 
   const ClockIn = async (today) => {
     try {
-      // let user = CreateUser()
-      //       user = JSON.stringify(user.fields)
-      //       console.log(user)
+      
       const requestOptions = {
         method: 'PUT',
         body: JSON.stringify({
@@ -75,7 +73,7 @@ export default function WorkerMenu({ navigation }) {
       let result = await fetch('http://proj13.ruppin-tech.co.il/ClockIn', requestOptions);
       if (result) {
         alert("ClockIn at : " + today);
-        // navigation.navigate('Login')
+     
       }
     } catch (error) {
       alert(error)
@@ -93,11 +91,9 @@ export default function WorkerMenu({ navigation }) {
         headers: { 'Content-Type': 'application/json' }
       };
 
-      // console.log(requestOptions.body);
       let result = await fetch('http://proj13.ruppin-tech.co.il/ClockOut', requestOptions);
       if (result) {
         alert("ClockOut at : " + today);
-        // navigation.navigate('Login')
       }
     } catch (error) {
       alert(error)

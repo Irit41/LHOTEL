@@ -13,52 +13,9 @@ import { GrayButton,BlueButton, DatesPattern } from "../../styles";
 
 
 export default function ShortCheckIn({ navigation }) {
-  // { route, navigation }
+
   const myContext = useContext(AppContext);
   const roomsReservation = myContext.roomsReservation;
-// console.log(roomsReservation);
-  // let { roomsReservationReservation } = route.params;
-
-  // const curr = currReservation[0];
-  // console.log(curr);
-
-  //   const CalcCost = () => {
-  //     let total = 0
-  //     // if (roomsReservation.BillNumber === undefined) {
-
-  //     // }
-
-  //     roomsReservation.rooms.map((room) => {
-  //       total+= room.PricePerNight
-
-  //         });
-
-  //         // useEffect(() => { GetCardsByRole(); 
-  //         // }, []);
-
-  // console.log(roomsReservation.rooms);
-
-  //     // if (roomsReservation.BillNumber === undefined) {
-  //     //   let rooms_costs = [
-  //     //     { type: "Single", cost: 100, amount: roomsReservation.CounterSingle },
-  //     //     { type: "Double", cost: 300, amount: roomsReservation.CounterDouble },
-  //     //     { type: "Suite", cost: 500, amount: roomsReservation.CounterSuite },
-  //     //   ];
-  //     //   rooms_costs.map((room) => {
-  //     //     room.cost = room.cost * room.amount;
-  //     //   });
-  //     //   rooms_costs.forEach((element) => {
-  //     //     total += element.cost;
-  //     //   });
-  //     // } else {
-  //     //   for (let i = 0; i < currReservation.length; i++) {
-  //     //     total += currReservation[i].PricePerNight;
-  //     //   }
-  //     // }
-
-  //     return total;
-  //   };
-
 
 
   const ReservationCard = () => {
@@ -110,23 +67,7 @@ export default function ShortCheckIn({ navigation }) {
         </View>
         <View style={{ paddingTop: 10, alignSelf: "flex-end" }}>
         <DatesPattern img={true} EntryDate ={roomsReservation.EntryDate} ExitDate ={roomsReservation.ExitDate}/>
-          {/* <Text style={{ fontSize: 20, fontWeight: "600" }}>
-            <Image style={styles.icon} source={images.calendar} />
-            {" " +
-              moment(new Date(roomsReservation.EntryDate))
-                .format("DD.MM.YYYY")
-                .split(".")[0] +
-              " - " +
-              moment(new Date(roomsReservation.ExitDate)).format(
-                "DD.MM.YYYY"
-              )}{" "}
-            (
-            {moment(roomsReservation.ExitDate).diff(
-              moment(roomsReservation.EntryDate),
-              "days"
-            )}{" "}
-            nights)
-          </Text> */}
+         
             <View style={styles.Details}>
             <Text
             style={{
@@ -225,7 +166,6 @@ export default function ShortCheckIn({ navigation }) {
       );
       let reservationResult = await result.json();
       if (reservationResult) {
-        // console.log(reservationResult);
         alert("You have checked in successfully !");
       }
       navigation.navigate("CheckIn");
@@ -266,7 +206,6 @@ export default function ShortCheckIn({ navigation }) {
       );
       let customerResult = await result.json();
       if (customerResult) {
-        // console.log(customerResult);
         alert("You have checked in successfully !");
       }
       navigation.navigate("CheckIn");
@@ -284,12 +223,11 @@ export default function ShortCheckIn({ navigation }) {
         }),
         headers: { "Content-Type": "application/json" },
       };
-      // console.log( roomsReservation.EntryDate);
-      // console.log(requestOptions.body);
+    
       let result = await fetch("http://proj13.ruppin-tech.co.il/CheckIn", requestOptions);
       let customerResult = await result.json();
       if (customerResult !== null) {
-        // console.log(customerResult);
+      
         alert("You have checked in successfully !");
       }
       navigation.navigate("CheckIn");
@@ -297,8 +235,7 @@ export default function ShortCheckIn({ navigation }) {
       alert(error);
     }
   };
-  // console.log(roomsReservation.rooms);
-  // console.log(myContext.isUserExist);
+
   const DeleteReservationRequest = () => {
     Alert.alert("Delete",
       "The reservation will be permanently deleted",
@@ -310,16 +247,9 @@ export default function ShortCheckIn({ navigation }) {
           style: "cancel",
         },
 
-        // {text: 'Ok', onPress: () => DeleteReservation()},
-        // {text: 'No', onPress: () => console.log('No button clicked'), style: 'cancel'},
+      
       ],
-      // {
-      //   cancelable: true,
-      //   onDismiss: () =>
-      //     Alert.alert(
-      //       "This alert was dismissed by tapping outside of the alert dialog."
-      //     ),
-      // }
+     
     );
   }
   const DeleteReservation = async () => {
@@ -332,7 +262,6 @@ export default function ShortCheckIn({ navigation }) {
         }),
         headers: { 'Content-Type': 'application/json' }
       };
-      // console.log(requestOptions.body);
       let result = await fetch('http://proj13.ruppin-tech.co.il/DeleteReservation', requestOptions);
       if (result) {
         alert("Reservation has been cancelled");
@@ -405,7 +334,6 @@ export default function ShortCheckIn({ navigation }) {
                   paddingHorizontal: 5,
                   paddingVertical: 5,
                   fontSize: 18,
-                  // alignSelf: "flex-end",
                 }}
               >
                 Type : {roomsReservation.CustomerType}
@@ -415,7 +343,6 @@ export default function ShortCheckIn({ navigation }) {
                   paddingHorizontal: 5,
                   paddingVertical: 5,
                   fontSize: 18,
-                  // alignSelf: "flex-end",
                 }}
               >
                 ID : {roomsReservation.CustomerID}
@@ -428,8 +355,7 @@ export default function ShortCheckIn({ navigation }) {
               </Text>
             </View>
             <View style={styles.Details}>
-              {/* <Text style = {{paddingHorizontal:5,paddingVertical:5,fontSize:18 ,alignSelf:'flex-end'}}>5421******</Text> */}
-              {/* <Icon name="card" size={25} color="#a8a9ad" /> */}
+          
             </View>
             <Text style={{ padding: 10, fontSize: 18, alignSelf: "flex-end" }}>
               {" "}
@@ -447,25 +373,11 @@ export default function ShortCheckIn({ navigation }) {
 
           <TouchableOpacity
             style={{width: 150, height: "60%", marginHorizontal: 10 }}
-            //   onPress={() => SaveReservationToDB()}
             onPress={() => CheckIn()}
           >
-            {/* <LinearGradient
-              style={[
-                {
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 10,
-                },
-              ]}
-              colors={["#46aeff", "#5884ff"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            > */}
+        
                   <BlueButton text={"CHECK IN"}/>
-              {/* <Text style={{ color: "#fff" }}>CHECK IN NOW</Text> */}
-            {/* </LinearGradient> */}
+            
           </TouchableOpacity>
           <TouchableOpacity
             style={{ width: 150, height: "60%", marginHorizontal: 10 }}
@@ -473,22 +385,7 @@ export default function ShortCheckIn({ navigation }) {
 
           >
             <GrayButton text={"DELETE"}/>
-            {/* <LinearGradient
-              style={[
-                {
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 10,
-                },
-              ]}
-              // colors={["#edf0fc", "#d6dfff"]}
-              colors={["#888", "#CDCDCD"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={{ color: "#fff" }}>DELETE RESERVATION</Text>
-            </LinearGradient> */}
+        
           </TouchableOpacity>
         </View>
       </View>
@@ -516,7 +413,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
 
-    // padding: 20,
   },
 
   containerTaskDedtails: {

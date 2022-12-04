@@ -9,7 +9,7 @@ import AppContext from "../../AppContext";
 import React, { useContext} from "react";
 import moment from "moment";
 import { useTheme } from "@react-navigation/native";
-import { useCardAnimation } from "@react-navigation/native-stack";
+
 import TasksCard from "./TasksCard";
 
 export default function ModalScreen(props) {

@@ -17,7 +17,7 @@ import moment from "moment";
 import { Searchbar } from "react-native-paper";
 import AppContext from "../../AppContext";
 
-import { TextInput } from "react-native-paper";
+
 import { DatesPattern } from "../../styles";
 const numColumns = 2;
 
@@ -27,7 +27,7 @@ export default function CheckOut() {
   const [search, setSearch] = useState("");
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const myContext = useContext(AppContext);
-  const roomsReservation = myContext.roomsReservation;
+ 
   useEffect(() => {
     FetchData();
 

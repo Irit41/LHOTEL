@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, } from "react-nat
 import React, { useEffect, useState, useContext } from "react";
 import { CreditCardInput } from "react-native-credit-card-input-view";
 import AppContext from "../AppContext";
-import { loadAsync } from "expo-font";
 
 
 export default function Credit({ route, navigation }) {

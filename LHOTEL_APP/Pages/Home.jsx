@@ -31,11 +31,6 @@ export default function Home({ navigation }) {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  // const Spinner = () => (
-  //   <View style={[styles.container, styles.horizontal]}>
-  //     <ActivityIndicator size="large" />
-  //   </View>
-  // );
   useFocusEffect(
     React.useCallback(() => {
       setPassword("");
@@ -76,7 +71,6 @@ export default function Home({ navigation }) {
         return;
       }
       myContext.setEmployeeDB(employee); // שמור את פרטי המשתמש במשתנה גלובלי במערכת
-      // navigation.navigate("Credit");
       navigation.navigate("WorkerMenu");
     } catch (error) {
       alert(error);
@@ -117,7 +111,6 @@ export default function Home({ navigation }) {
           style={{ margin: 10, paddingLeft: 3 }}
           onChangeText={(id) => setId(id)}
           value={id}
-          // onChangeText={myContext.setEmployeeId}
         />
 
         <TextInput
@@ -136,7 +129,6 @@ export default function Home({ navigation }) {
           style={styles.btn}
           onPress={() => {
             LogIn();
-            // console.log(JSON.stringify(myContext.employee))
           }}
         >
           <Text style={{ fontSize: 20, color: "white", fontWeight: "800" }}>
@@ -198,24 +190,20 @@ export default function Home({ navigation }) {
                     doAnimation(closeState, 1, 500);
                 }}
                 style={{
-                  // width: "80%",
                   height: 60,
                   marginHorizontal: 10,
-                  // marginVertical: 20,
                   alignSelf: "center",
                 }}
               >
                 <LinearGradient
                   style={[
                     {
-                      // flex: 1,
                       shadowColor: "grey",
                       color: "white",
                       shadowOffset: { width: 0, height: 4 },
                       shadowOpacity: 0.3,
                       shadowRadius: 5,
                       elevation: 5,
-                      // backgroundColor: 'orange',
                       width: 150,
                       padding: 20,
                       textAlign: "center",
@@ -240,7 +228,6 @@ export default function Home({ navigation }) {
                   doAnimation(closeState, 8, 500), setInfo(true);
                 }}
                 style={{
-                  // width: "80%",
                   height: 60,
                   marginHorizontal: 10,
                   marginVertical: 20,

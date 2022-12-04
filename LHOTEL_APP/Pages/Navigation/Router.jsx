@@ -29,7 +29,7 @@ import Credit from "../Credit";
 import Products from "../Customer/Products";
 import AppContext from "../../AppContext";
 import Reports, { ReportView } from "../Worker/Reports";
-import { Button, Icon } from "react-native-elements";
+import {  Icon } from "react-native-elements";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ModalScreen from "../Worker/ModalScreen";
@@ -198,7 +198,7 @@ const SreachView = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       SetText(" ");
-    }, [])
+    }, [navigation])
   );
   const SearchText = (data) => {
     if (data === "") SetShowSearch(false);

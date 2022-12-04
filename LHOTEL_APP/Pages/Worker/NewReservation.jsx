@@ -20,10 +20,8 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { images } from "../../images";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Dialog from "react-native-dialog";
-// import { TextInput } from "react-native-paper";
-import moment from "moment";
+
 import SaveRoom from "../Customer/SaveRoom";
 
 export default function NewReservation({ navigation }) {
@@ -33,25 +31,9 @@ export default function NewReservation({ navigation }) {
   const roomsReservation = myContext.roomsReservation;
   const [arrRoomsData, SetArrRoomsData] = useState([]);
   const [IDCheck, setIDCheck] = useState("");
-  // const [flagEnrty, setFlagEntry] = useState(false);
-  // const [flagExit, setFlagExit] = useState(false);
-  // const [isEntryModalOpened, SetIsEntryModalOpened] = useState(false);
-  // const [isExitModalOpened, SetIsExitModalOpened] = useState(false);
-  // const [numberOfNights, setNumberOfNights] = useState(1);
+
   const [breakfast, setBreakfast] = useState(false);
 
-  // const handleConfirmEnteryDate = (date) => {
-  //   roomsReservation.EntryDate = date;
-  //   setFlagEntry(false);
-  //   SetIsEntryModalOpened(true);
-  // };
-
-  // const handleConfirmExitDate = (date) => {
-  //   roomsReservation.ExitDate = date;
-  //   setFlagExit(false);
-  //   SetIsExitModalOpened(true);
-  //   // hideDatePickerExit();
-  // };
 
   const handleOk = () => {
     setVisible(false);
@@ -62,15 +44,7 @@ export default function NewReservation({ navigation }) {
     React.useCallback(() => {
      
       setIDCheck("");
-      
-      // return () => {
-        
-    //     setFlagEntry(false);
-    //     setFlagExit(false);
-    //  SetIsEntryModalOpened(false);
-    //  SetIsExitModalOpened(false);
-      
-      // };
+   
     }, [navigation])
   );
 
@@ -127,7 +101,7 @@ export default function NewReservation({ navigation }) {
       return;
     }
 
-    // roomsReservation.NumberOfNights = numberOfNights;
+
     roomsReservation.Breakfast = breakfast;
     let rooms_amounts = {
       "Single room": roomsReservation.CounterSingle,
@@ -219,7 +193,7 @@ export default function NewReservation({ navigation }) {
         >
           <ScrollView>
             <Dates/>
-            <SaveRoom navigation={navigation} route={" "}/>
+            <SaveRoom navigation={navigation}/>
             
 
             <View style={styles.switchContainer}>

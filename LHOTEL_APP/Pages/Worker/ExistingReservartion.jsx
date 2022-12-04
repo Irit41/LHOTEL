@@ -13,13 +13,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { images } from "../../images";
 import moment from "moment";
 
-// import { Ionicons } from "@expo/vector-icons";
-// import { CustomCard } from "./CustomCard";
 import { useFocusEffect } from "@react-navigation/native";
 import AppContext from "../../AppContext";
 
 export default function ExistingReservation({ route, navigation }) {
-  // let { Id } = route.params
+
 
   const [id, setId] = useState("");
   const myContext = useContext(AppContext);
@@ -78,9 +76,7 @@ export default function ExistingReservation({ route, navigation }) {
         roomsReservation.LastName = currReservation[0].LastName;
         roomsReservation.Mail = currReservation[0].Mail;
         roomsReservation.PhoneNumber = currReservation[0].PhoneNumber;
-      
-        // console.log(currReservation[0].RoomNumber);
-        // console.log(currReservation[0].PricePerNight);
+     
         if (currReservation.length > 1) {
           currReservation.map((room) =>
         
