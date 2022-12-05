@@ -26,6 +26,7 @@ const RequestType = [
 
 export default function NewTask({ route, navigation }) {
   const myContext = useContext(AppContext);
+  const [dropdown, setDropdown] = useState(null);
 
 
   const [flagStartTime, setFlagStartTime] = useState(false);

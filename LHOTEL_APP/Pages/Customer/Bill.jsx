@@ -198,7 +198,7 @@ export default function Bill() {
 
   const DeleteReservationFromDB = async () => {
     try {
-      SetLoading(false);
+    
       const requestOptions = {
         method: "DELETE",
         body: JSON.stringify({
@@ -211,7 +211,7 @@ export default function Bill() {
         requestOptions
       );
       let temp = await result.json();
-
+console.log(temp);
       if (temp) {
         alert("Your room reservation has been cancelled");
         SetDataTable(null);

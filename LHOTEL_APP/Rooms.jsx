@@ -12,22 +12,18 @@ export default function Rooms({navigation, childFunc}) {
 
 
   const myContext = useContext(AppContext);
-  const user = myContext.user
+  
   const roomsReservation = myContext.roomsReservation
   const [counterSingle, SetCounterSingle] = useState(0);
   const [counterDouble, SetCounterDouble] = useState(0);
   const [counterSuite, SetCounterSuite] = useState(0);
-  // roomsReservation.CounterSingle = 0 
-        // roomsReservation.CounterDouble = 0 
-        // roomsReservation.CounterSuite = 0
-        // roomsReservation.totalSum = 0
+ 
 
   const [loading, SetLoading] = useState(false);
   const [arrRoomsData, SetArrRoomsData] = useState([]);
 
-  const [isModalVisible, setModalVisible] = useState(false);
-//   useEffect(() => {
-//     childFunc.current = GoToPayment  }, [])
+
+
 
  
   useFocusEffect(
@@ -35,14 +31,7 @@ export default function Rooms({navigation, childFunc}) {
       SetLoading(false)
       FetchData()
       childFunc.current = GoToPayment
-      return () => {
-        // roomsReservation.CounterSingle = 0 
-        // roomsReservation.CounterDouble = 0 
-        // roomsReservation.CounterSuite = 0
-        // roomsReservation.totalSum = 0
-
-       
-      };
+    
     }, [myContext.rooms_flags])
   );
 
@@ -67,7 +56,6 @@ export default function Rooms({navigation, childFunc}) {
 
   const BilldData = (rooms) => {
     let array = [];
-    // console.log(myContext.rooms_flags);
     for (const [key, value] of Object.entries(myContext.rooms_flags)) {
       if (value) {
         let room = rooms.filter((room) => room.RoomType === key);
@@ -82,17 +70,6 @@ export default function Rooms({navigation, childFunc}) {
   };
 
 
-  // console.log(rooms_flags)
-
-//   const isValidParams = () => {
-//     let temp = Object.values(rooms_flags)
-//    return ((temp[0] && roomsReservation.CounterSingle === 0)&&
-//       (temp[1] && roomsReservation.CounterDouble === 0) &&
-//       (temp[2] && roomsReservation.CounterSuite === 0)) 
-  
-   
- 
-//   }
 
 const isValidParams = () => {
     return (
@@ -106,28 +83,18 @@ const isValidParams = () => {
 
   const GoToPayment = () => {
 
-    // if (isValidParams()) {
-    //   alert("Some fields are not filled in Properly")
-    //   return
-    // }
+  
     if (!isValidParams()) {
         alert("Some fields are not filled in Properly");
         return;
       }
-      
-
-    // if (Object.keys(user).length === 0) {
-    //   toggleModal()
-    //   return
-    // }
+   
 
     let rooms_amounts = {
         "Single room": counterSingle,
       "Double room": counterDouble,
       "Suite":counterSuite,
-    //   "Single room": roomsReservation.CounterSingle,
-    //   "Double room": roomsReservation.CounterDouble,
-    //   "Suite": roomsReservation.CounterSuite,
+ 
     };
    
 
@@ -150,7 +117,6 @@ const isValidParams = () => {
         }
       }
     }
-//    console.log(the_data);
     let sum = 0
     for (let i = 0; i < the_data.length; i++) {
       let pricePerNight = the_data[i].pricePerNight;
@@ -162,13 +128,9 @@ const isValidParams = () => {
     }
 
     roomsReservation.totalSum = sum
-   console.log(sum);
-    //  navigation.navigate("Credit", { the_data: the_data ,totalSum:sum});
+ 
   };
  
-// const calc =()=>{
-    
-// }
 
   const SetCount = (number, roomType) => {
     switch (roomType) {
@@ -219,11 +181,7 @@ const isValidParams = () => {
     </View>
   );
 }
-// const Spinner = () => (
-//   <View style={[styles.container, styles.horizontal]}>
-//     <ActivityIndicator size="large" />
-//   </View>
-// );
+
 
 const styles = StyleSheet.create({
   HeadLine: {
