@@ -1,6 +1,6 @@
 
 
-----  йцйшъ ощъощ
+----  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 --CREATE USER MyLogin FOR LOGIN MyLogin
 --ALTER ROLE db_owner ADD MEMBER MyLogin
 --GO
@@ -397,10 +397,10 @@ go
 
 
 --=================================================================================================================================================
-                                                --фшецгешеъ
+                                                --пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 --=================================================================================================================================================
 
--- фшецгешеъ тебгйн
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 -------------------------------------------
 create proc GetAllEmployees
@@ -549,7 +549,7 @@ go
 
 
 ---------------------------------------------------------
----  йдйд цешк мозеч аеъ одибмд "ощошеъ е"ощйоеъ" у
+---  пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ"пїЅпїЅпїЅпїЅпїЅпїЅ" пїЅ
 alter proc DeleteEmployeeById
 @id int
 as
@@ -573,7 +573,7 @@ go
 
 
 
--- фшецгешеъ мчезеъ
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 ----------------------------------------------
 create proc GetAllCustomers
 as
@@ -778,7 +778,7 @@ go
 
 
 
--- фшецгешеъ чивешйд
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 create proc GetCategory
 as
 begin tran
@@ -835,7 +835,7 @@ go
 
 
 
--- фшецгешеъ оецшйн
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 create proc GetAllProducts
 as
 begin tran
@@ -937,7 +937,7 @@ go
 
 
 
----  фшецгешеъ шлйщеъ дсфчд
+---  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 create proc GetAllPurchase_Of_Goods
 as
 begin tran
@@ -1046,7 +1046,7 @@ go
 
 
 
---  фшецгешеъ згшйн 
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
 ----------------------------------------
 create proc GetAllRooms
 as
@@ -1159,7 +1159,7 @@ go
 -- exec DeleteRoomById 1
 
 
----  фшецгешеъ ибмъ ощошеъ
+---  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 create proc GetAllShifts
 as
 begin tran
@@ -1291,7 +1291,7 @@ go
 
 
 select * from Employees_Tasks
---  фшецгешеъ ощйоеъ
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 create proc GetAllTasks
 as
 begin tran
@@ -1564,7 +1564,7 @@ go
 
 exec AddNewTask 333,'ccc',6,'Room Service','2022-11-21','09:51','','Open','Pizza'
 
--- фшецгешеъ зщбеп ммчез
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 ---------------------------------------------------
 create proc GetAllBills
 as
@@ -1682,7 +1682,7 @@ go
 
 
 
---  фшецгешеъ згшйн щоешйн ммчезеъ
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 -------------------------------------------------
 create proc GetCustomersRooms
 as
@@ -1904,8 +1904,8 @@ commit tran
 
 
 
---  обйа аъ дзгшйн щъашйк дйцйад щмдн вгем одъашйк щм дйен
---  оцбйа тм згшйн ъфесйн
+--  пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+--  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 drop FUNCTION Customer_FullName (@Customer_ID int)
 RETURNS TABLE
 AS
@@ -1940,7 +1940,7 @@ go
 exec GetBookedRooms
 
 
---  ъбйа мй аъ лем дзгшйн дфреййн
+--  пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 create FUNCTION AvailableRooms()
 returns @Temp TABLE ( Room_Number int ,Room_Type nvarchar(30), Price_Per_Night int, Details nvarchar(100) )                     
 as
@@ -1977,10 +1977,10 @@ go
 
 
 
---  фшецгешд ащш обцтъ аъ щойшъ дзгшйн ммчез
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 create proc SaveRoomReservation
 @id int,
-@Card_Holder_Name  nvarchar(30),    -- йцйшъ фшоишйн дгшещйн мбйцет джорд 
+@Card_Holder_Name  nvarchar(30),    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
 @Credit_Card_Date nvarchar(5),
 @Three_Digit int,
 @Credit_Card_Number nvarchar(50),
@@ -1995,54 +1995,54 @@ create proc SaveRoomReservation
 as
 begin tran	
     
-	exec UpdateCustomerCredit @id,@Card_Holder_Name,@Credit_Card_Date,@Three_Digit,@Credit_Card_Number  ---дфтмъ фшецгешд дотглръ фший л.ащшай бйизеп щм мчез тм фй ъ.ж
+	exec UpdateCustomerCredit @id,@Card_Holder_Name,@Credit_Card_Date,@Three_Digit,@Credit_Card_Number  ---пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ.пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ.пїЅ
 
 
-	DECLARE @Bill_Date as date = (select Bill_Date from Bill where Customer_ID = @id and Bill_Status = 'Open') --- оцйаъ ъашйк дзщберйъ тм фй ъ.ж мчез есиеис зщберйъ фъезд
-	DECLARE @date as date = GETDATE() --  дщвъ дъашйк дрелзй
+	DECLARE @Bill_Date as date = (select Bill_Date from Bill where Customer_ID = @id and Bill_Status = 'Open') --- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ.пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	DECLARE @date as date = GETDATE() --  пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
-	if (@Bill_Date is null)--- тглеп фшийн бзщберйъ фъезд бойгд ечййоъ азшъ йцйшъ зщберйъ згщд ммчез
+	if (@Bill_Date is null)--- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		exec AddNewBill @Employee_ID, @id,@Credit_Card_Number ,@date,'Open'
 
 
-	set @Bill_Date = (select Bill_Date from Bill where Customer_ID = @id and Bill_Status = 'Open')--- оцйаъ ъашйк дзщберйъ тм фй ъ.ж мчез есиеис зщберйъ фъезд
-	DECLARE @bill_number as int = (select Bill_Number from Bill where Customer_ID = @id and Bill_Status = 'Open') --- оцйаъ осфш дзщберйъ тм фй ъ.ж мчез есиеис зщберйъ фъезд
+	set @Bill_Date = (select Bill_Date from Bill where Customer_ID = @id and Bill_Status = 'Open')--- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ.пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	DECLARE @bill_number as int = (select Bill_Number from Bill where Customer_ID = @id and Bill_Status = 'Open') --- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ.пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	DECLARE @room_number as int
 
 
-	while @Counter_Single > 0    -----   дчцад ещойшд щм згшйн ммчез мфй лоеъ дзгшйн щотерййп , сев ,лоеъ ебан сииес дзгш фрей 
+	while @Counter_Single > 0    -----   пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅ ,пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
 
 		begin
-		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Single room') --- оцйаъ осфш дзгш длй роек оъек шщйод щм згшйн мйзйг щфреййн
-		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number) --- ан дзгш айре оефйт бшщйоъ дзгшйн щм мчезеъ бцт
-			exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' ---  дфтм аъ дфшецгешд оесйфд аеъе мибмд
+		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Single room') --- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number) --- пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+			exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' ---  пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		else
-			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' -- азшъ дфтм аъ дфшецгешд дощрд аъ дфшийн щме
+			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 		set @Counter_Single = @Counter_Single - 1
 		end
 
-	while @Counter_Double > 0  -----   дчцад ещойшд щм згшйн ммчез мфй лоеъ дзгшйн щотерййп , сев ,лоеъ ебан сииес дзгш фрей 
+	while @Counter_Double > 0  -----   пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅ ,пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
 		begin
-		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Double room')--- оцйаъ осфш дзгш длй роек оъек шщйод щм згшйн мжев щфреййн
-		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number)--- ан дзгш айре оефйт бшщйоъ дзгшйн щм мчезеъ бцт
-	exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' ---  дфтм аъ дфшецгешд оесйфд аеъе мибмд
+		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Double room')--- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number)--- пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+	exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved' ---  пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		else
-			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'-- азшъ дфтм аъ дфшецгешд дощрд аъ дфшийн щме
+			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 		set @Counter_Double = @Counter_Double - 1
 		end
 
-	while @Counter_Suite > 0  -----   дчцад ещойшд щм згшйн ммчез мфй лоеъ дзгшйн щотерййп , сев ,лоеъ ебан сииес дзгш фрей 
+	while @Counter_Suite > 0  -----   пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅ ,пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
 		begin
-		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Suite')--- оцйаъ осфш дзгш длй роек оъек шщйод щм згшйн сеейид щфреййн
-		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number)--- ан дзгш айре оефйт бшщйоъ дзгшйн щм мчезеъ бцт
-	exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'---  дфтм аъ дфшецгешд оесйфд аеъе мибмд
+		set @room_number = (SELECT MIN(Room_Number) AS Room_Number FROM dbo.AvailableRooms() WHERE  Room_Type = 'Suite')--- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		IF NOT EXISTS(select Room_Number from [dbo].[Customers_Rooms] where Room_Number = @room_number)--- пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+	exec AddNewCustomerRooms @room_number, @bill_number,@id,@Bill_Date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'---  пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		else
-			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'-- азшъ дфтм аъ дфшецгешд дощрд аъ дфшийн щме
+			exec AlterCustomerRoom @room_number, @bill_number,@id,@date,@Entry_Date,@Exit_Date,@Amount_Of_People,@Breakfast,'Reserved'-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 		set @Counter_Suite = @Counter_Suite - 1
 		end
 
-	if (@@error !=0) ----дцвъ дегтъ щвйад бойгд еоъчбмъ щвйад  
+	if (@@error !=0) ----пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ  
 	begin
 		rollback tran
 		print 'error'
@@ -2177,12 +2177,12 @@ DELETE FROM Purchases_Documentation
 WHERE Customer_ID = 206055899
 
 
-create trigger AddRoomToDetails  ---- (ишйвш мдлрсъ шщеод зйеб тм згш згщд мибмъ фший зщберйъ щм мчез , оефтм лащш ссиес згш бибмъ дджореъ ощърд моаелмс (мчез бйцт ц'ч айп  
-on [Customers_Rooms] for update -- лащш оефтмъ фтемъ тйглеп тм дибмд "згшй мчезеъ" бцт
+create trigger AddRoomToDetails  ---- (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ , пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ'пїЅ пїЅпїЅпїЅ  
+on [Customers_Rooms] for update -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅ
 as
-	if exists (select Room_Number from inserted where [Room_Status] = 'Occupied') --  ан чййн осфш згш щдсииес щме фрей бцт
+	if exists (select Room_Number from inserted where [Room_Status] = 'Occupied') --  пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	begin
-		insert [dbo].[Bill_Details]  --- десу мибмъ "фйший дзщберйъ" аъ дщгеъ дшмеерийн 
+		insert [dbo].[Bill_Details]  --- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 			select Bill_Number, Customer_ID, Bill_Date, Room_Number,Entry_Date,8,1,getdate(),Breakfast ,'Credit'
 			 from inserted
 	end
@@ -2191,8 +2191,8 @@ go
 
 
 
---  фшецгешд тбеш цач айп
---мтглп фшецгешд щъбгеч ан дъашйк  лрйсд щеед мъашйк щбе ртщд дцач айп 
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ
+--пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 
 create proc CheckIn
 @id int,
 @entry_date date
@@ -2322,7 +2322,7 @@ go
 
 
 
---  фшецгешд мщойшъ дръерй дшлйщеъ
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 alter proc AddPurchases_Documentation
 as
 --print(@id)
@@ -2338,17 +2338,17 @@ exec GetTask_ById 444
 
 create proc CheckOut      
 @id int,
-@Exit_Date date              --------- йцйшъ фшоишйн дгшещйн мбйцет ц'ч ааеи ммчез  
+@Exit_Date date              --------- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ'пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ  
 as
 begin tran		
-	exec AddPurchases_Documentation @id -----дшцд щм фшецгешд дщеошъ аъ лм дшлйщеъ щм дмчез мфй ъ.ж бибмъ ъйтег шлйщеъ  
+	exec AddPurchases_Documentation @id -----пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ.пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ  
 	DECLARE @bill_Number AS int = (select Bill_Number from [dbo].[Customers_Rooms]
-	where [Customer_ID] = @id and Exit_Date = @Exit_Date GROUP BY Bill_Number)  --- дцмбд щм дръерйн щдъчбме лчми ам оем дръерйн дщоешйн босг дръерйн етглеп щм сииес зщберйъ свеш ан аеоъе
+	where [Customer_ID] = @id and Exit_Date = @Exit_Date GROUP BY Bill_Number)  --- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	UPDATE [dbo].[Bill] SET Bill_Status = 'Close'
 	where Customer_ID=@id and Bill_Number = @bill_Number and Bill_Status = 'Open'
-    exec DeleteBill_Detail @id,@bill_Number      ---- дшцд щм фшецгешеъ доезчеъ ръерй мчез бибмаеъ дшмеерийеъ
+    exec DeleteBill_Detail @id,@bill_Number      ---- пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	exec DeleteCustomerRoom @id , @bill_Number
-	if (@@error !=0) ----дцвъ дегтъ щвйад бойгд еоъчбмъ щвйад
+	if (@@error !=0) ----пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	begin
 		rollback tran
 		print 'error'
@@ -2366,7 +2366,7 @@ go
 
 
 
---  фшецгешеъ фший шлйщеъ
+--  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 create proc GetAllBill_Details
 as
 begin tran	
@@ -2581,7 +2581,7 @@ exec AddNewTask 333,'ccc',6,'Room Service','2022-11-21','09:51','','Open','Pizza
 
 
 -- ======================================================================
--- ----------------------- гезеъ ---------------------------------------
+-- ----------------------- пїЅпїЅпїЅпїЅпїЅ ---------------------------------------
 -- ======================================================================
 
 
