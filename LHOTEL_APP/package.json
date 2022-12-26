@@ -78,7 +78,8 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-virtualized-view": "^1.0.0",
     "react-native-web": "0.17.7",
-    "rn-credit-card": "^0.1.1"
+    "rn-credit-card": "^0.1.1",
+    "expo-updates": "~0.13.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
