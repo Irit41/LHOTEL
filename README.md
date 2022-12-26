@@ -3,9 +3,9 @@
 Hotel management application - booking rooms and managing room service employees
 
 # Tech Stack 
-*Client side :* JavaScript , React Native <br />
+*Client side :* JavaScript , React Native(Hooks) <br />
 *Server side :* C# <br />
-*Database :* T-SQL, SQL <br />
+*Database :* SQL <br />
 
 # Screenshots
 <b> Home Screen + Customers Area</b><br/><br/>
