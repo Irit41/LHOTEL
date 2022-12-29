@@ -8,8 +8,8 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/bar.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
