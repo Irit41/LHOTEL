@@ -9,7 +9,12 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/icon.png",
-      "resizeMode": "cover",
+ 
+ "height": "100%",
+"background-position": "center",
+  "background-repeat": "no-repeat",
+  "background-size": "cover",
+ 
       "backgroundColor": "#0b0071"
     },
     "updates": {
