@@ -2,7 +2,6 @@
   "expo": {
     "name": "LHOTEL",
     "slug": "LHOTEL_APP",
-    "privacy": "public",
     "description": "Booking rooms at LHotel",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,7 +9,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {

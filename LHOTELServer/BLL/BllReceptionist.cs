@@ -7,7 +7,7 @@ using DAL;
 
 namespace BLL
 {
-    public abstract class BllReceptionist
+    public static class BllReceptionist
     {
         public static List<BookedRoom> GetBookedRooms()
         {
